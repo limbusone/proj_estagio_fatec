@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nome:</b>
+  <%= @interveniente.nome %>
+</p>
+
+<p>
+  <b>Cnpj:</b>
+  <%= @interveniente.cnpj %>
+</p>
+
+<p>
+  <b>Telefone:</b>
+  <%= @interveniente.telefone %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @interveniente.email %>
+</p>
+
+<p>
+  <b>Cep:</b>
+  <%= @interveniente.cep %>
+</p>
+
+<p>
+  <b>Logradouro:</b>
+  <%= @interveniente.logradouro %>
+</p>
+
+<p>
+  <b>Numero:</b>
+  <%= @interveniente.numero %>
+</p>
+
+<p>
+  <b>Bairro:</b>
+  <%= @interveniente.bairro %>
+</p>
+
+<p>
+  <b>Cidade:</b>
+  <%= @interveniente.cidade %>
+</p>
+
+<p>
+  <b>Estado:</b>
+  <%= @interveniente.estado %>
+</p>
+
+
+<%= link_to 'Edit', edit_interveniente_path(@interveniente) %> |
+<%= link_to 'Back', intervenientes_path %>
