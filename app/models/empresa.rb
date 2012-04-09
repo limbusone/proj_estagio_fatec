@@ -1,3 +1,3 @@
 class Empresa < ActiveRecord::Base
-  attr_accessible :bairro, :cep, :cidade, :email, :estado, :lougradouro, :nome, :numero, :telefone
+  attr_accessible :bairro, :cep, :cidade, :cnpj, :email, :estado, :logradouro, :nome, :numero, :telefone
 end

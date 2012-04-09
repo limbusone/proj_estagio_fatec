@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  empresa_id: 1
+  interveniente_id: 1
+  vigencia: 1
+  rescidido: false
+
+two:
+  empresa_id: 1
+  interveniente_id: 1
+  vigencia: 1
+  rescidido: false

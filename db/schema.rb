@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120408070059) do
+ActiveRecord::Schema.define(:version => 20120409021504) do
+
+  create_table "convenios", :force => true do |t|
+    t.integer  "empresa_id",                          :null => false
+    t.integer  "interveniente_id",                    :null => false
+    t.integer  "vigencia"
+    t.boolean  "rescidido",        :default => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
+
+  add_index "convenios", ["empresa_id"], :name => "fk_convenios_empresas"
+  add_index "convenios", ["interveniente_id"], :name => "fk_convenios_intervenientes"
 
   create_table "empresas", :force => true do |t|
     t.string   "nome",       :limit => 50,  :null => false

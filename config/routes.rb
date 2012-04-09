@@ -1,4 +1,8 @@
 Estagio::Application.routes.draw do
+  resources :empresas
+
+  resources :convenios
+
   resources :intervenientes
 
   # The priority is based upon order of creation:

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Empresa:</b>
+  <%= @convenio.empresa_id %>
+</p>
+
+<p>
+  <b>Interveniente:</b>
+  <%= @convenio.interveniente_id %>
+</p>
+
+<p>
+  <b>Vigencia:</b>
+  <%= @convenio.vigencia %>
+</p>
+
+<p>
+  <b>Rescidido:</b>
+  <%= @convenio.rescidido %>
+</p>
+
+
+<%= link_to 'Edit', edit_convenio_path(@convenio) %> |
+<%= link_to 'Back', convenios_path %>

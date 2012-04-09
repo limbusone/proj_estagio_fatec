@@ -2,22 +2,24 @@
 
 one:
   nome: MyString
+  cnpj: MyString
   telefone: MyString
   email: MyString
   cep: MyString
-  lougradouro: MyString
-  numero: 1
+  logradouro: MyString
+  numero: 
   bairro: MyString
   cidade: MyString
   estado: MyString
 
 two:
   nome: MyString
+  cnpj: MyString
   telefone: MyString
   email: MyString
   cep: MyString
-  lougradouro: MyString
-  numero: 1
+  logradouro: MyString
+  numero: 
   bairro: MyString
   cidade: MyString
   estado: MyString

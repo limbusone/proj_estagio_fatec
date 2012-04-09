@@ -1,0 +1,23 @@
+class CreateConvenios < ActiveRecord::Migration
+	def change
+		create_table :convenios do |t|
+			t.integer :empresa_id, :null => false, :unique => true
+			t.integer :interveniente_id, :null => false
+			t.integer :vigencia
+			t.boolean :rescidido, :default => false
+			t.timestamps
+		end
+		execute <<-SQL
+			ALTER TABLE convenios
+				ADD CONSTRAINT fk_convenios_empresas
+				FOREIGN KEY (empresa_id)
+				REFERENCES empresas(id)
+		SQL
+		execute <<-SQL
+			ALTER TABLE convenios
+				ADD CONSTRAINT fk_convenios_intervenientes
+				FOREIGN KEY (interveniente_id)
+				REFERENCES intervenientes(id)
+		SQL
+	end
+end
