@@ -5,8 +5,12 @@ gem 'rails', '3.2.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
-
+if RUBY_ENGINE == 'jruby'
+  gem 'jruby-openssl'
+  gem 'activerecord-jdbcsqlite3-adapter'
+else
+  gem 'sqlite3'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
