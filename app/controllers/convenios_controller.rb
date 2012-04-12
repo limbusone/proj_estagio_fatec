@@ -39,7 +39,7 @@ class ConveniosController < ApplicationController
   # GET /convenios/1/edit
   def edit
     @convenio 		= 	Convenio.find(params[:id])
-	@empresas 		= 	Empresa.find_by_sql("SELECT empresas.id, empresas.nome FROM empresas WHERE 							empresas.id not	in (SELECT convenios.empresa_id FROM convenios WHERE 							convenios.empresa_id !=	#{@convenio.empresa_id})")
+	@empresas 		= 	Empresa.find_by_sql("SELECT empresas.id, empresas.nome FROM empresas WHERE 							empresas.id not	in (SELECT convenios.empresa_id FROM convenios WHERE convenios.empresa_id != #{@convenio.empresa_id})")
 	@intervenientes = 	Interveniente.all
   end
 

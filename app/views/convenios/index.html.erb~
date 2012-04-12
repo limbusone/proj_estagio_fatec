@@ -13,8 +13,8 @@
 
 <% @convenios.each do |convenio| %>
   <tr>
-    <td><%= convenio.empresa.nome %></td>
-    <td><%= convenio.interveniente.nome %></td>
+    <td><%= convenio.empresas.nome %></td>
+    <td><%= convenio.intervenientes.nome %></td>
     <td><%= convenio.vigencia %></td>
     <td><%= convenio.rescidido %></td>
     <td><%= link_to 'Show', convenio %></td>

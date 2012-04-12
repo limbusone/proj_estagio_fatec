@@ -1,4 +1,5 @@
-#encoding: utf-8
 class Convenio < ActiveRecord::Base
-	attr_accessible :empresa_id, :interveniente_id, :vigencia, :rescidido
+	attr_accessible :empresa_id, :interveniente_id, :rescidido, :vigencia
+	belongs_to :intervenientes
+	belongs_to :empresas
 end
