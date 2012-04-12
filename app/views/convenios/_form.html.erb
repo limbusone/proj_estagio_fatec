@@ -1,33 +1,34 @@
 <%= form_for(@convenio) do |f| %>
-  <% if @convenio.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@convenio.errors.count, "error") %> prohibited this convenio from being saved:</h2>
+	<% if @convenio.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@convenio.errors.count, "error") %> prohibited this convenio from being 				saved:</h2>
+			<ul>
+				<% @convenio.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
 
-      <ul>
-      <% @convenio.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :empresa_id %><br />
-    <%= f.number_field :empresa_id %>
-  </div>
-  <div class="field">
-    <%= f.label :interveniente_id %><br />
-    <%= f.number_field :interveniente_id %>
-  </div>
-  <div class="field">
-    <%= f.label :vigencia %><br />
-    <%= f.number_field :vigencia %>
-  </div>
-  <div class="field">
-    <%= f.label :rescidido %><br />
-    <%= f.check_box :rescidido %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<div class="field">
+		<%= f.label :empresa_id %><br />
+		<%= f.collection_select(:empresa_id, @empresas, :id, :nome) %>
+		<%# = f.number_field :empresa_id %>
+	</div>
+	<div class="field">
+		<%= f.label :interveniente_id %><br />
+		<%= f.collection_select(:interveniente_id, @intervenientes, :id, :nome) %>
+		<%# = f.number_field :interveniente_id %>
+	</div>
+	<div class="field">
+		<%= f.label :vigencia %><br />
+		<%= f.number_field :vigencia %>
+	</div>
+	<div class="field">
+		<%= f.label :rescidido %><br />
+		<%= f.check_box :rescidido %>
+	</div>
+	<div class="actions">
+		<%= f.submit %>
+	</div>
 <% end %>
