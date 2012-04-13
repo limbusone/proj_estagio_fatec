@@ -10,7 +10,7 @@ class Convenio < ActiveRecord::Base
                 "somente caracteres numéricos" }, :allow_blank => true
 
 	belongs_to :interveniente
-	belongs_to :empresa
+	belongs_to :contratante
 
 
 end
