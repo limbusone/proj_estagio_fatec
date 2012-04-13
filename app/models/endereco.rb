@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Endereco < ActiveRecord::Base
   attr_accessible :bairro, :cep, :cidade, :estado, :logradouro, :numero
 

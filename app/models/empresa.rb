@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Empresa < ActiveRecord::Base
   attr_accessible :cnpj, :email, :nome, :telefone, :endereco, :endereco_id 
   has_one :endereco
