@@ -6,9 +6,11 @@ class Empresa < ActiveRecord::Base
 	
 	validates 	:nome, :length => { :maximum => 50 }
 
-	validates 	:cnpj, :numericality => { :only_integer => true, :message => "somente caracteres 					        numéricos" }, :length => { :maximum => 14 }, :allow_blank => true
+	validates 	:cnpj, :numericality => { :only_integer => true, :message => 
+              "somente caracteres numéricos" }, :length => { :maximum => 14 }, :allow_blank => true
 
-	validates 	:telefone, :numericality => { :only_integer => true, :message => "Somente caracteres 					numéricos" }, :length => { :maximum => 14 }, :allow_blank => true
+ 	validates 	:telefone, :numericality => { :only_integer => true, :message => 
+              "Somente caracteres numéricos" }, :length => { :maximum => 14 }, :allow_blank => true
 
 	validates 	:email, :length => { :maximum => 74 }, :allow_blank => true
 
