@@ -31,15 +31,15 @@ class ConveniosController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @convenio }
-      format.json { render json: @empresas }
-      format.json { render json: @intervenientes }
+#      format.json { render json: @empresas }
+#      format.json { render json: @intervenientes }
     end
   end
 
   # GET /convenios/1/edit
   def edit
     @convenio 		= 	Convenio.find(params[:id])
-	@empresas 		= 	Empresa.find_by_sql("SELECT empresas.id, empresas.nome FROM empresas WHERE 							empresas.id not	in (SELECT convenios.empresa_id FROM convenios WHERE convenios.empresa_id != #{@convenio.empresa_id})")
+	@empresas 		= 	Empresa.find_by_sql("SELECT empresas.id, empresas.nome FROM empresas WHERE 							empresas.id not	in (SELECT convenios.empresa_id FROM convenios WHERE 							convenios.empresa_id != #{@convenio.empresa_id})")
 	@intervenientes = 	Interveniente.all
   end
 
@@ -47,7 +47,8 @@ class ConveniosController < ApplicationController
   # POST /convenios.json
   def create
     @convenio = Convenio.new(params[:convenio])
-
+	@empresas = Empresa.find_by_sql('SELECT empresas.id, empresas.nome FROM empresas WHERE empresas.id not 					in (SELECT convenios.empresa_id FROM convenios)')
+	@intervenientes = Interveniente.all
     respond_to do |format|
       if @convenio.save
         format.html { redirect_to @convenio, notice: 'Convenio was successfully created.' }
@@ -63,7 +64,8 @@ class ConveniosController < ApplicationController
   # PUT /convenios/1.json
   def update
     @convenio = Convenio.find(params[:id])
-
+	@empresas 		= 	Empresa.find_by_sql("SELECT empresas.id, empresas.nome FROM empresas WHERE 							empresas.id not	in (SELECT convenios.empresa_id FROM convenios WHERE 							convenios.empresa_id != #{@convenio.empresa_id})")
+	@intervenientes = 	Interveniente.all
     respond_to do |format|
       if @convenio.update_attributes(params[:convenio])
         format.html { redirect_to @convenio, notice: 'Convenio was successfully updated.' }

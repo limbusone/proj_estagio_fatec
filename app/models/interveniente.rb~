@@ -25,4 +25,5 @@ class Interveniente < ActiveRecord::Base
 
 	validates :estado, :length => { :maximum => 2, :minimum => 2 }, :allow_blank => true
 
+	has_many :convenios
 end
