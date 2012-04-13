@@ -1,5 +1,6 @@
 class CreateEmpresas < ActiveRecord::Migration
   def change
+	drop_table :empresas
     create_table :empresas do |t|
 		t.string   "nome",       :limit => 50,  :null => false
 		t.string   "cnpj",       :limit => 14,  :null => false

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120409022553) do
+ActiveRecord::Schema.define(:version => 20120409021504) do
 
   create_table "convenios", :force => true do |t|
     t.integer  "empresa_id",                          :null => false
@@ -22,7 +22,8 @@ ActiveRecord::Schema.define(:version => 20120409022553) do
     t.datetime "updated_at",                          :null => false
   end
 
-  add_index "convenios", ["empresa_id"], :name => "index_convenios_on_empresa_id"
+  add_index "convenios", ["empresa_id"], :name => "fk_convenios_empresas"
+  add_index "convenios", ["interveniente_id"], :name => "fk_convenios_intervenientes"
 
   create_table "empresas", :force => true do |t|
     t.string   "nome",       :limit => 50,  :null => false

@@ -1,5 +1,6 @@
 class CreateConvenios < ActiveRecord::Migration
 	def change
+		drop_table :convenios
 		create_table :convenios do |t|
 			t.integer :empresa_id, :null => false, :unique => true
 			t.integer :interveniente_id, :null => false
