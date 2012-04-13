@@ -1,4 +1,6 @@
 Estagio::Application.routes.draw do
+  resources :enderecos
+
   resources :empresas
 
   resources :convenios

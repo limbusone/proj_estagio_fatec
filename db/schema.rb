@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120409022553) do
+ActiveRecord::Schema.define(:version => 20120413211923) do
 
   create_table "convenios", :force => true do |t|
     t.integer  "empresa_id",                          :null => false
@@ -25,18 +25,23 @@ ActiveRecord::Schema.define(:version => 20120409022553) do
   add_index "convenios", ["empresa_id"], :name => "index_convenios_on_empresa_id"
 
   create_table "empresas", :force => true do |t|
-    t.string   "nome",       :limit => 50,  :null => false
-    t.string   "cnpj",       :limit => 14,  :null => false
+    t.string   "nome",       :limit => 50, :null => false
+    t.string   "cnpj",       :limit => 14, :null => false
     t.string   "telefone",   :limit => 14
     t.string   "email",      :limit => 74
-    t.string   "cep",        :limit => 8
-    t.string   "logradouro", :limit => 100
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  create_table "enderecos", :force => true do |t|
+    t.string   "cep"
+    t.string   "logradouro"
     t.integer  "numero"
-    t.string   "bairro",     :limit => 50
-    t.string   "cidade",     :limit => 50
-    t.string   "estado",     :limit => 2
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.string   "bairro"
+    t.string   "cidade"
+    t.string   "estado"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
