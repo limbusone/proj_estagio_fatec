@@ -11,9 +11,9 @@
 	<% end %>
 
 	<div class="field">
-		<%= f.label :empresa_id %><br />
-		<%= f.collection_select(:empresa_id, @empresas, :id, :nome) %>
-		<%# = f.number_field :empresa_id %>
+		<%= f.label :concedente_id %><br />
+		<%= f.collection_select(:concedente_id, @empresas, :id, :nome) %>
+		<%# = f.number_field :concedente_id %>
 	</div>
 	<div class="field">
 		<%= f.label :interveniente_id %><br />
@@ -21,7 +21,7 @@
 		<%# = f.number_field :interveniente_id %>
 	</div>
 	<div class="field">
-		<%= f.label :vigencia, "Vigência" %><br />
+		<%= f.label :vigencia, "Vigência (Meses)" %><br />
 		<%= f.number_field :vigencia %>
 	</div>
 	<div class="field">
@@ -29,6 +29,6 @@
 		<%= f.check_box :rescidido %>
 	</div>
 	<div class="actions">
-		<%= f.submit "Criar Convênio" %>
+		<%= f.submit "Enviar Convênio" %>
 	</div>
 <% end %>

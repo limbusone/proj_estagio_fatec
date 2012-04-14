@@ -4,7 +4,7 @@
   <tr>
     <th>Empresa</th>
     <th>Interveniente</th>
-    <th>Número de vigência</th>
+    <th>Vigência (Meses)</th>
     <th>Rescidido</th>
     <th></th>
     <th></th>
@@ -13,7 +13,7 @@
 
 <% @convenios.each do |convenio| %>
   <tr>
-    <td><%= convenio.contratante.nome %></td>
+    <td><%= convenio.concedente.nome %></td>
     <td><%= convenio.interveniente.nome %></td>
     <td><%= convenio.vigencia %></td>
     <td><%= convenio.rescidido %></td>

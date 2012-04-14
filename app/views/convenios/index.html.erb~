@@ -4,7 +4,7 @@
   <tr>
     <th>Empresa</th>
     <th>Interveniente</th>
-    <th>Número de vigência</th>
+    <th>Vigência (Meses)</th>
     <th>Rescidido</th>
     <th></th>
     <th></th>
@@ -13,13 +13,13 @@
 
 <% @convenios.each do |convenio| %>
   <tr>
-    <td><%= convenio.contratante.nome %></td>
+    <td><%#= convenio.concedente.nome %></td>
     <td><%= convenio.interveniente.nome %></td>
     <td><%= convenio.vigencia %></td>
     <td><%= convenio.rescidido %></td>
-    <td><%= link_to 'Show', convenio %></td>
-    <td><%= link_to 'Edit', edit_convenio_path(convenio) %></td>
-    <td><%= link_to 'Destroy', convenio, confirm: 'Tem certeza?', method: :delete %></td>
+    <td><%= link_to 'Ver', convenio %></td>
+    <td><%= link_to 'Editar', edit_convenio_path(convenio) %></td>
+    <td><%= link_to 'Deletar', convenio, confirm: 'Tem certeza?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

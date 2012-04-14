@@ -2,16 +2,16 @@
 
 <p>
   <b>Empresa:</b>
-  <%= @convenio.empresa_id %>
+  <%= @convenio.concedente.nome %>
 </p>
 
 <p>
   <b>Interveniente:</b>
-  <%= @convenio.interveniente_id %>
+  <%= @convenio.interveniente.nome %>
 </p>
 
 <p>
-  <b>Número de vigencia:</b>
+  <b>Vigência (Meses):</b>
   <%= @convenio.vigencia %>
 </p>
 

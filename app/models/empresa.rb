@@ -15,5 +15,11 @@ class Empresa < ActiveRecord::Base
 
 	validates 	:email, :length => { :maximum => 74 }, :allow_blank => true
 
+  validate :validar_cnpj
+
+  def validar_cnpj
+
+  end
+
 end
 
