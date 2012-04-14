@@ -1,3 +1,4 @@
+#encoding: utf-8
 class ConveniosController < ApplicationController
   # GET /convenios
   # GET /convenios.json
@@ -54,7 +55,7 @@ class ConveniosController < ApplicationController
   	@intervenientes = Interveniente.all
     respond_to do |format|
       if @convenio.save
-        format.html { redirect_to @convenio, notice: 'Convenio was successfully created.' }
+        format.html { redirect_to @convenio, notice: 'O Convênio foi celebrado com sucesso!' }
         format.json { render json: @convenio, status: :created, location: @convenio }
       else
         format.html { render action: "new" }
@@ -67,7 +68,7 @@ class ConveniosController < ApplicationController
   # PUT /convenios/1.json
   def update
     @convenio = Convenio.find(params[:id])
-	  @empresas 		= 	Contratante.find_by_sql("SELECT empresas.id, empresas.nome FROM empresas WHERE 							empresas.id not	in (SELECT convenios.empresa_id FROM convenios WHERE 							convenios.empresa_id != #{@convenio.empresa_id})")
+	  @empresas = Contratante.find_by_sql("SELECT empresas.id, empresas.nome FROM empresas WHERE 							empresas.id not	in (SELECT convenios.empresa_id FROM convenios WHERE 							convenios.empresa_id != #{@convenio.empresa_id})")
 	  @intervenientes = 	Interveniente.all
     respond_to do |format|
       if @convenio.update_attributes(params[:convenio])

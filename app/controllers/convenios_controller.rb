@@ -1,3 +1,4 @@
+#encoding: utf-8
 class ConveniosController < ApplicationController
   # GET /convenios
   # GET /convenios.json
@@ -54,7 +55,7 @@ class ConveniosController < ApplicationController
   	@intervenientes = Interveniente.all
     respond_to do |format|
       if @convenio.save
-        format.html { redirect_to @convenio, notice: 'Convenio was successfully created.' }
+        format.html { redirect_to @convenio, notice: 'O Convênio foi celebrado com sucesso!' }
         format.json { render json: @convenio, status: :created, location: @convenio }
       else
         format.html { render action: "new" }
@@ -71,7 +72,7 @@ class ConveniosController < ApplicationController
 	  @intervenientes = 	Interveniente.all
     respond_to do |format|
       if @convenio.update_attributes(params[:convenio])
-        format.html { redirect_to @convenio, notice: 'Convenio was successfully updated.' }
+        format.html { redirect_to @convenio, notice: 'O Convenio foi alterado com sucesso!' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

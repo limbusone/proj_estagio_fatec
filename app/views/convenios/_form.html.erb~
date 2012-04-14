@@ -1,7 +1,7 @@
 <%= form_for(@convenio) do |f| %>
 	<% if @convenio.errors.any? %>
 		<div id="error_explanation">
-			<h2><%= pluralize(@convenio.errors.count, "error") %> prohibited this convenio from being 				saved:</h2>
+			<h2><%= pluralize(@convenio.errors.count, "erro") %> proibiu(iram) esse convênio de ser criado:</h2>
 			<ul>
 				<% @convenio.errors.full_messages.each do |msg| %>
 					<li><%= msg %></li>
@@ -21,7 +21,7 @@
 		<%# = f.number_field :interveniente_id %>
 	</div>
 	<div class="field">
-		<%= f.label :vigencia %><br />
+		<%= f.label :vigencia, "Vigência" %><br />
 		<%= f.number_field :vigencia %>
 	</div>
 	<div class="field">
@@ -29,6 +29,6 @@
 		<%= f.check_box :rescidido %>
 	</div>
 	<div class="actions">
-		<%= f.submit %>
+		<%= f.submit "Criar Convênio" %>
 	</div>
 <% end %>
