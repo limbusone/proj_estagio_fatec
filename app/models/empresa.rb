@@ -17,12 +17,3 @@ class Empresa < ActiveRecord::Base
 
 end
 
-class Contratante < Empresa
-  attr_accessible :convenio, :convenio_id
-  has_one :convenio  
-end
-
-class Intervenientes < Empresa
-  attr_accessible :convenios
-  has_many :convenios
-end
