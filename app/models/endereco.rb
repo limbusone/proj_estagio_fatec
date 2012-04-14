@@ -9,5 +9,6 @@ class Endereco < ActiveRecord::Base
 	validates 	:numero, :numericality => { :only_integer => true, :message => "somente caracteres 					      numéricos" }, :allow_blank => true
 
 	validates 	:estado, :length => { :maximum => 2, :minimum => 2 }, :allow_blank => true
-
+  has_many :alunos
+  
 end
