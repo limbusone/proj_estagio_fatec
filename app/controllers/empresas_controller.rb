@@ -25,7 +25,7 @@ class EmpresasController < ApplicationController
   # GET /empresas/new.json
   def new
     @empresa = Empresa.new
-
+    @empresa.endereco = Endereco.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @empresa }
@@ -41,9 +41,12 @@ class EmpresasController < ApplicationController
   # POST /empresas.json
   def create
     @empresa = Empresa.new(params[:empresa])
-
+    @empresa.endereco = Endereco.new(params[:endereco])
+    v1 = @empresa.valid?
+    v2 = @empresa.endereco.valid?
     respond_to do |format|
-      if @empresa.save
+      if v1 && v2
+        @empresa.save
         format.html { redirect_to @empresa, notice: 'Empresa was successfully created.' }
         format.json { render json: @empresa, status: :created, location: @empresa }
       else
@@ -57,9 +60,12 @@ class EmpresasController < ApplicationController
   # PUT /empresas/1.json
   def update
     @empresa = Empresa.find(params[:id])
-
+    v1 = @empresa.valid?
+    v2 = @empresa.endereco.valid?
     respond_to do |format|
-      if @empresa.update_attributes(params[:empresa])
+      if v1 && v2
+        @empresa.update_attributes(params[:empresa])
+        @empresa.endereco.update_attributes(params[:endereco])
         format.html { redirect_to @empresa, notice: 'Empresa was successfully updated.' }
         format.json { head :no_content }
       else
@@ -73,6 +79,7 @@ class EmpresasController < ApplicationController
   # DELETE /empresas/1.json
   def destroy
     @empresa = Empresa.find(params[:id])
+    @empresa.endereco.destroy
     @empresa.destroy
 
     respond_to do |format|

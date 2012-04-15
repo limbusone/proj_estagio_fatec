@@ -16,19 +16,18 @@
     <th></th>
     <th></th>
   </tr>
-
 <% @empresas.each do |empresa| %>
   <tr>
     <td><%= empresa.nome %></td>
     <td><%= empresa.cnpj %></td>
     <td><%= empresa.telefone %></td>
     <td><%= empresa.email %></td>
-    <td><%= empresa.cep %></td>
-    <td><%= empresa.logradouro %></td>
-    <td><%= empresa.numero %></td>
-    <td><%= empresa.bairro %></td>
-    <td><%= empresa.cidade %></td>
-    <td><%= empresa.estado %></td>
+    <td><%= empresa.endereco.cep %></td>
+    <td><%= empresa.endereco.logradouro %></td>
+    <td><%= empresa.endereco.numero %></td>
+    <td><%= empresa.endereco.bairro %></td>
+    <td><%= empresa.endereco.cidade %></td>
+    <td><%= empresa.endereco.estado %></td>
     <td><%= link_to 'Show', empresa %></td>
     <td><%= link_to 'Edit', edit_empresa_path(empresa) %></td>
     <td><%= link_to 'Destroy', empresa, confirm: 'Are you sure?', method: :delete %></td>
@@ -37,5 +36,5 @@
 </table>
 
 <br />
+<%= link_to 'New Empresa', new_empresa_path %>  
 
-<%= link_to 'New Empresa', new_empresa_path %>

@@ -1,8 +1,7 @@
 #encoding: utf-8
 class Empresa < ActiveRecord::Base
   attr_accessible :cnpj, :email, :nome, :telefone, :endereco, :endereco_id 
-  has_one :endereco
-	validates_presence_of :nome, :message => "é necessário ser preenchido"
+  validates_presence_of :nome, :message => "é necessário ser preenchido"
 	validates_presence_of :cnpj, :message => "é necessário ser preenchido"		
 	
 	validates 	:nome, :length => { :maximum => 50 }
@@ -16,6 +15,37 @@ class Empresa < ActiveRecord::Base
 	validates 	:email, :length => { :maximum => 74 }, :allow_blank => true
 
   validate :validar_cnpj
+
+  def validar_cnpj
+
+  end
+  belongs_to :endereco
+
+
+  def self.inherited(child)
+    child.instance_eval do
+      def model_name
+        Empresa.model_name
+      end
+    end
+    super
+  end  
+  def self.select_options
+    descendants.map{ |c| c.to_s }.sort
+  end
+  @child_classes = []
+
+  def self.inherited(child)
+    @child_classes << child
+    super # important!
+  end
+
+  def self.child_classes
+    @child_classes
+  end
+
+
+
 
 end
 
