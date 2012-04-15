@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  endereco_id: 1
+  curso_id: 1
+  nome: MyString
+  num_matricula: MyString
+
+two:
+  endereco_id: 1
+  curso_id: 1
+  nome: MyString
+  num_matricula: MyString

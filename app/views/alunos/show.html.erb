@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Endereco:</b>
+  <%= @aluno.endereco_id %>
+</p>
+
+<p>
+  <b>Curso:</b>
+  <%= @aluno.curso_id %>
+</p>
+
+<p>
+  <b>Nome:</b>
+  <%= @aluno.nome %>
+</p>
+
+<p>
+  <b>Num matricula:</b>
+  <%= @aluno.num_matricula %>
+</p>
+
+<p>
+  <b>Cep:</b>
+  <%= @aluno.endereco.cep %>
+</p>
+
+<p>
+  <b>Logradouro:</b>
+  <%= @aluno.endereco.logradouro %>
+</p>
+
+<p>
+  <b>Numero:</b>
+  <%= @aluno.endereco.numero %>
+</p>
+
+<p>
+  <b>Bairro:</b>
+  <%= @aluno.endereco.bairro %>
+</p>
+
+<p>
+  <b>Cidade:</b>
+  <%= @aluno.endereco.cidade %>
+</p>
+
+<p>
+  <b>Estado:</b>
+  <%= @aluno.endereco.estado %>
+</p>
+
+<%= link_to 'Edit', edit_aluno_path(@aluno) %> |
+<%= link_to 'Back', alunos_path %>
