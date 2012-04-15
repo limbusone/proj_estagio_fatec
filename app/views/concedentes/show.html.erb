@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nome:</b>
+  <%= @concedente.nome %>
+</p>
+
+<p>
+  <b>Cnpj:</b>
+  <%= @concedente.cnpj %>
+</p>
+
+<p>
+  <b>Telefone:</b>
+  <%= @concedente.telefone %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @concedente.email %>
+</p>
+
+<p>
+  <b>Cep:</b>
+  <%= @concedente.endereco.cep %>
+</p>
+
+<p>
+  <b>Logradouro:</b>
+  <%= @concedente.endereco.logradouro %>
+</p>
+
+<p>
+  <b>Numero:</b>
+  <%= @concedente.endereco.numero %>
+</p>
+
+<p>
+  <b>Bairro:</b>
+  <%= @concedente.endereco.bairro %>
+</p>
+
+<p>
+  <b>Cidade:</b>
+  <%= @concedente.endereco.cidade %>
+</p>
+
+<p>
+  <b>Estado:</b>
+  <%= @concedente.endereco.estado %>
+</p>
+
+<%= link_to 'Edit', edit_concedente_path(@concedente) %> |
+<%= link_to 'Back', concedentes_path %>

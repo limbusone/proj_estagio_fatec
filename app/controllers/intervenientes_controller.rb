@@ -25,7 +25,7 @@ class IntervenientesController < ApplicationController
   # GET /intervenientes/new.json
   def new
     @interveniente = Interveniente.new
-
+    @interveniente.endereco = Endereco.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @interveniente }
@@ -41,9 +41,12 @@ class IntervenientesController < ApplicationController
   # POST /intervenientes.json
   def create
     @interveniente = Interveniente.new(params[:interveniente])
-
+    @interveniente.endereco = Endereco.new(params[:endereco])
+    v1 = @interveniente.valid?
+    v2 = @interveniente.endereco.valid?
     respond_to do |format|
-      if @interveniente.save
+      if v1 && v2
+        @interveniente.save
         format.html { redirect_to @interveniente, notice: 'Interveniente was successfully created.' }
         format.json { render json: @interveniente, status: :created, location: @interveniente }
       else
@@ -57,9 +60,13 @@ class IntervenientesController < ApplicationController
   # PUT /intervenientes/1.json
   def update
     @interveniente = Interveniente.find(params[:id])
-
+    v1 = @interveniente.valid?
+    v2 = @interveniente.endereco.valid?
     respond_to do |format|
-      if @interveniente.update_attributes(params[:interveniente])
+      if v1 && v2
+        @interveniente.update_attributes(params[:interveniente])
+        @interveniente.endereco.update_attributes(params[:endereco])
+
         format.html { redirect_to @interveniente, notice: 'Interveniente was successfully updated.' }
         format.json { head :no_content }
       else

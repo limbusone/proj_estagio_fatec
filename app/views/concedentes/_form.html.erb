@@ -1,19 +1,18 @@
-<%= form_for(@empresa) do |f| %>
-  <% if @empresa.errors.any? || @empresa.endereco.errors.any? %>
+<%= form_for(@concedente) do |f| %>
+  <% if @concedente.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@empresa.errors.count, "error") %> prohibited this empresa from being saved:</h2>
-      <h2><%= pluralize(@empresa.endereco.errors.count, "error") %> prohibited this endereco from being saved:</h2>
+      <h2><%= pluralize(@concedente.errors.count, "error") %> prohibited this concedente from being saved:</h2>
+      <h2><%= pluralize(@concedente.endereco.errors.count, "error") %> prohibited this concedente from being saved:</h2>
       <ul>
-      <% @empresa.errors.full_messages.each do |msg| %>
+      <% @concedente.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
-      <% @empresa.endereco.errors.full_messages.each do |msg| %>
+      <% @concedente.endereco.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.label :nome %><br />
     <%= f.text_field :nome %>
@@ -30,7 +29,7 @@
     <%= f.label :email %><br />
     <%= f.text_field :email %>
   </div>
-  <%= fields_for @empresa.endereco do |ff| %>
+  <%= fields_for @concedente.endereco do |ff| %>
     <div class="field">
       <%= ff.label :cep %><br />
       <%= ff.text_field :cep %>

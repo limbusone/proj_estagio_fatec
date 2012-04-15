@@ -2,11 +2,14 @@
   <% if @interveniente.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@interveniente.errors.count, "error") %> prohibited this interveniente from being saved:</h2>
-
+      <h2><%= pluralize(@interveniente.endereco.errors.count, "error") %> prohibited this endereco from being saved:</h2>
       <ul>
-      <% @interveniente.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @interveniente.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        <% @interveniente.endereco.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -27,30 +30,32 @@
     <%= f.label :email %><br />
     <%= f.text_field :email %>
   </div>
-  <div class="field">
-    <%= f.label :cep %><br />
-    <%= f.text_field :cep %>
-  </div>
-  <div class="field">
-    <%= f.label :logradouro %><br />
-    <%= f.text_field :logradouro %>
-  </div>
-  <div class="field">
-    <%= f.label :numero %><br />
-    <%= f.number_field :numero %>
-  </div>
-  <div class="field">
-    <%= f.label :bairro %><br />
-    <%= f.text_field :bairro %>
-  </div>
-  <div class="field">
-    <%= f.label :cidade %><br />
-    <%= f.text_field :cidade %>
-  </div>
-  <div class="field">
-    <%= f.label :estado %><br />
-    <%= f.text_field :estado %>
-  </div>
+  <%= fields_for @interveniente.endereco do |ff| %>
+    <div class="field">
+      <%= ff.label :cep %><br />
+      <%= ff.text_field :cep %>
+    </div>
+    <div class="field">
+      <%= ff.label :logradouro %><br />
+      <%= ff.text_field :logradouro %>
+    </div>
+    <div class="field">
+      <%= ff.label :numero %><br />
+      <%= ff.number_field :numero %>
+    </div>
+    <div class="field">
+      <%= ff.label :bairro %><br />
+      <%= ff.text_field :bairro %>
+    </div>
+    <div class="field">
+      <%= ff.label :cidade %><br />
+      <%= ff.text_field :cidade %>
+    </div>
+    <div class="field">
+      <%= ff.label :estado %><br />
+      <%= ff.text_field :estado %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

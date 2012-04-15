@@ -1,7 +1,7 @@
 #encoding: utf-8
 class Empresa < ActiveRecord::Base
   attr_accessible :cnpj, :email, :nome, :telefone, :endereco, :endereco_id 
-  has_one :endereco
+  belongs_to :endereco
 	validates_presence_of :nome, :message => "é necessário ser preenchido"
 	validates_presence_of :cnpj, :message => "é necessário ser preenchido"		
 	
