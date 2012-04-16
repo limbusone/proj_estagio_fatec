@@ -1,0 +1,78 @@
+    1  ssh-keygen -t rsa -C "fernandohiar@bol.com.br"
+    2  ssh -T fernandohiar@bol.com.br
+    3  mkdir projeto1
+    4  cd projeto1
+    5  git init
+    6  git remote add origin
+    7  git@github.com:ilovejavaman/projeto_engenharia_fatec
+    8  git@github.com:limbusone/proj_estagio_fatec.git
+    9  git remote add origin
+   10  git@github.com:limbusone/proj_estagio_fatec.git
+   11  git init
+   12  cd /c:/Users/Fernando
+   13  cd /Users
+   14  cd ..
+   15  cd ..
+   16  cd /Users
+   17  cd c:
+   18  cd Users
+   19  cd /Fernando
+   20  cd Fernando
+   21  cd mydocuments
+   22  ls -l
+   23  cd My Documents
+   24  cd My Documents
+   25  pwd
+   26  cd /My Documents
+   27  cd my documents
+   28  cd MyDocuments
+   29  cd My Documents
+   30  cd My Documents
+   31  cd AppData
+   32  cd ..
+   33  cd MyDocuments
+   34  ls -l
+   35  cd Documents
+   36  cd My Documents
+   37  cd MyDocuments
+   38  cd ..
+   39  cd MyDocuments
+   40  cd My Documents
+   41  cd "My Documents"
+   42  git init
+   43  cd "Aptana Studio 3 Workspace"
+   44  cd .metadata
+   45  cd .plugins
+   46  cd com.aptana.portablegit.win32
+   47  cd projeto1
+   48  cd .git
+   49  git init
+   50  git remote add origin
+   51  git@github:limbusone/proj_estagio_fatec.git
+   52  git@github.com:limbusone/proj_estagio_fatec.git
+   53  history >> skylab
+   54  history >> skylab.txt
+   55  pwd
+   56  cd ../..
+   57  pwd
+   58  rm -r projeto1
+   59  mkdir estagio_fatec
+   60  cd estagio_fatec
+   61  git init
+   62  git remote add origin
+   63  git@github:limbusone/proj_estagio_fatec.git
+   64  git branch fernando
+   65  git@github.com:limbusone/proj_estagio_fatec.git
+   66  git remote add origin git@github.com:limbusone/proj_estagio_fatec.git
+   67  git pull origin master
+   68  git branch
+   69  git branch fernando
+   70  git branch
+   71  git checkout fernando
+   72  git branch
+   73  git merge master
+   74  pwd
+   75  history >> jesuis.txt
+
+
+lolCode is the best
