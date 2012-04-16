@@ -12,4 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.maskedinput-1.1.4.pack
 //= require_tree .
