@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415205233) do
+ActiveRecord::Schema.define(:version => 20120416214622) do
 
   create_table "alunos", :force => true do |t|
     t.integer  "endereco_id"
@@ -20,11 +20,6 @@ ActiveRecord::Schema.define(:version => 20120415205233) do
     t.string   "num_matricula"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-  end
-
-  create_table "concedentes", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "convenios", :force => true do |t|
