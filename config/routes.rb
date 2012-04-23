@@ -1,4 +1,6 @@
 Estagio::Application.routes.draw do
+  devise_for :users
+
   resources :concedentes
 
   resources :alunos
@@ -10,6 +12,8 @@ Estagio::Application.routes.draw do
   resources :convenios
 
   resources :intervenientes
+
+  root :to => "devise/sessions#new"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
