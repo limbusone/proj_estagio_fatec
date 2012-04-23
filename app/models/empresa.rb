@@ -17,6 +17,7 @@ class Empresa < ActiveRecord::Base
 	validates 	:email, :length => { :maximum => 74 }, :allow_blank => true, :format => {:with => /\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\b/, :message => "formato inválido"}
 
   validate :validar_cnpj, :if => Proc.new {|o| o.cnpj }
+  validates_uniqueness_of :cnpj
 
   def validar_cnpj
     if (cnpj.length > 0)

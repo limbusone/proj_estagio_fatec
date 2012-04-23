@@ -12,6 +12,8 @@ else
   gem 'sqlite3'
 end
 
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -30,6 +32,7 @@ gem 'therubyracer'
 
 gem 'brazilian-rails'
 gem "twitter-bootstrap-rails"
+gem 'devise'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
