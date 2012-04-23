@@ -8,15 +8,15 @@ class Empresa < ActiveRecord::Base
 	validates 	:nome, :length => { :maximum => 50 }
 
 	validates 	:cnpj, :numericality => { :only_integer => true, :message => 
-              "somente caracteres numéricos" }, :length => { :maximum => 14 }, :allow_blank => true
+              "somente caracteres numéricos" }, :length => { :maximum => 14 }
 
  	validates 	:telefone, 
-#              :numericality => { :only_integer => true, :message => "Somente caracteres numéricos" }, 
+              :numericality => { :only_integer => true, :message => "Somente caracteres numéricos" }, 
               :length => { :maximum => 18 }, :allow_blank => true
 
-	validates 	:email, :length => { :maximum => 74 }, :allow_blank => true, :format => {:with => /\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\b/, :message => "formato inválido aaaa@bbbb.ccc"}
+	validates 	:email, :length => { :maximum => 74 }, :allow_blank => true, :format => {:with => /\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\b/, :message => "formato inválido"}
 
-  validate :validar_cnpj
+  validate :validar_cnpj, :if => Proc.new {|o| o.cnpj }
 
   def validar_cnpj
     if (cnpj.length > 0)
