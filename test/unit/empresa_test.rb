@@ -34,7 +34,7 @@ class EmpresaTest < ActiveSupport::TestCase
   end
 
   test "Empresa's cnpj must have 14 characters max" do
-    @empresa.cnpj = "12312311414141"
-    assert !@empresa.valid?
+    @empresa.cnpj = "1231231141414"
+    assert @empresa.valid?, "blabla"
   end
 end

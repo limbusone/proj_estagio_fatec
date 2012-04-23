@@ -8,7 +8,7 @@ class Empresa < ActiveRecord::Base
 	validates 	:nome, :length => { :maximum => 50 }
 
 	validates 	:cnpj, :numericality => { :only_integer => true, :message => 
-              "somente caracteres numéricos" }, :length => { :maximum => 14 }
+              "somente caracteres numéricos" }, :length => { :maximum => 14, :minimum => 14 }
 
  	validates 	:telefone, 
               :numericality => { :only_integer => true, :message => "Somente caracteres numéricos" }, 
@@ -36,7 +36,7 @@ class Empresa < ActiveRecord::Base
       c = [6,5,4,3,2,9,8,7,6,5,4,3,2]
       for i in 0..11
         a[i] = cnpj[i]
-        b += (a[i]) * c[i + 1]
+        b += Integer(a[i]) * c[i + 1]
       end
       a[12] = (((x = b % 11) < 2)) ? 0 : 11 - x
       b = 0
