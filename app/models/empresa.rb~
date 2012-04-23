@@ -2,26 +2,26 @@
 class Empresa < ActiveRecord::Base
   attr_accessible :cnpj, :email, :nome, :telefone, :endereco, :endereco_id 
   belongs_to :endereco
-	validates_presence_of :nome, :message => "é necessário ser preenchido"
-	validates_presence_of :cnpj, :message => "é necessário ser preenchido"		
-	
-	validates 	:nome, :length => { :maximum => 50 }
-
-	validates 	:cnpj, :numericality => { :only_integer => true, :message => 
-              "somente caracteres numéricos" }, :length => { :maximum => 14, :minimum => 14 }
-
- 	validates 	:telefone, 
-              :numericality => { :only_integer => true, :message => "Somente caracteres numéricos" }, 
-              :length => { :maximum => 18 }, :allow_blank => true
-
-	validates 	:email, :length => { :maximum => 74 }, :allow_blank => true, :format => {:with => /\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\b/, :message => "formato inválido"}
 
 <<<<<<< HEAD
-  validate :validar_cnpj
+	validates 	:cnpj, :numericality => { :only_integer => true, :message => 
+              "somente caracteres numéricos" }, :length => { :maximum => 14, :minimum => 14 }
 =======
+  validates_presence_of :nome, :message => "é necessário ser preenchido"
+  validates_presence_of :cnpj, :message => "é necessário ser preenchido"
+  validates :nome, :length => { :maximum => 50 }
+>>>>>>> renan
+
+  validates :cnpj, :numericality => { :only_integer => true, :message => "somente caracteres numéricos" }, :length => { :maximum => 14 }
+
+  validates :telefone,
+            :numericality => { :only_integer => true, :message => "Somente caracteres numéricos" },
+            :length => { :maximum => 18 }, :allow_blank => true
+
+  validates :email, :length => { :maximum => 74 }, :allow_blank => true, :format => {:with => /\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\b/, :message => "formato inválido"}
+
   validate :validar_cnpj, :if => Proc.new {|o| o.cnpj }
   validates_uniqueness_of :cnpj
->>>>>>> bd20bb7039c3f1916e111a0852addfea794af333
 
   def validar_cnpj
     if (cnpj.length > 0)
