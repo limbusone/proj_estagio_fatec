@@ -1,8 +1,8 @@
 #encoding: utf-8
 class Empresa < ActiveRecord::Base
-  attr_accessible :cnpj, :email, :nome, :telefone, :endereco, :endereco_id 
+  attr_accessible :cnpj, :email, :nome, :telefone, :endereco, :endereco_id, :endereco_attributes
   belongs_to :endereco
-
+  accepts_nested_attributes_for :endereco
 
 	validates 	:cnpj, :numericality => { :only_integer => true, :message => 
               "somente caracteres numéricos" }, :length => { :maximum => 14, :minimum => 14 }

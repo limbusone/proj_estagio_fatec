@@ -60,12 +60,12 @@ class ConcedentesController < ApplicationController
   # PUT /concedentes/1.json
   def update
     @concedente = Concedente.find(params[:id])
-    v1 = @concedente.valid?
-    v2 = @concedente.endereco.valid?
+    # v1 = @concedente.valid?
+    #v2 = @concedente.endereco.valid?
     respond_to do |format|
-      if v1 && v2
-        @concedente.update_attributes(params[:concedente])
-        @concedente.endereco.update_attributes(params[:endereco])
+      if @concedente.update_attributes(params[:concedente]) 
+       # @concedente.endereco.update_attributes(params[:endereco])
+
         format.html { redirect_to @concedente, notice: 'Concedente was successfully updated.' }
         format.json { head :no_content }
       else

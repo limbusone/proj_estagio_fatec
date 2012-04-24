@@ -2,15 +2,11 @@
 class Empresa < ActiveRecord::Base
   attr_accessible :cnpj, :email, :nome, :telefone, :endereco, :endereco_id 
   belongs_to :endereco
+  accepts_nested_attributes_for :endereco
 
-<<<<<<< HEAD
 	validates 	:cnpj, :numericality => { :only_integer => true, :message => 
               "somente caracteres numéricos" }, :length => { :maximum => 14, :minimum => 14 }
-=======
-  validates_presence_of :nome, :message => "é necessário ser preenchido"
-  validates_presence_of :cnpj, :message => "é necessário ser preenchido"
-  validates :nome, :length => { :maximum => 50 }
->>>>>>> renan
+
 
   validates :cnpj, :numericality => { :only_integer => true, :message => "somente caracteres numéricos" }, :length => { :maximum => 14 }
 
