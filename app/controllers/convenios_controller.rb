@@ -26,7 +26,7 @@ class ConveniosController < ApplicationController
   # GET /convenios/new.json
   def new
     @convenio =     Convenio.new
-	  @empresas =     Concedente.find_by_sql("SELECT empresas.id, empresas.nome FROM empresas WHERE empresas.id not 					    in (SELECT convenios.concedente_id FROM convenios) AND empresas.type = 'Concedente'")
+	  @empresas =     Concedente.all
 	  @intervenientes = Interveniente.all
 
     respond_to do |format|
@@ -40,9 +40,7 @@ class ConveniosController < ApplicationController
   # GET /convenios/1/edit
   def edit
     @convenio 		= 	Convenio.find(params[:id])
-	  @empresas 		= 	Concedente.find_by_sql("SELECT empresas.id, empresas.nome FROM empresas WHERE 
-                        empresas.id not	in (SELECT convenios.concedente_id FROM convenios WHERE convenios.concedente_id 
-                        != #{@convenio.concedente_id}) AND empresas.type = 'Concedente'")
+	  @empresas 		= 	Concedente.all
   	@intervenientes = 	Interveniente.all
   end
 
@@ -50,9 +48,8 @@ class ConveniosController < ApplicationController
   # POST /convenios.json
   def create
     @convenio = Convenio.new(params[:convenio])
-	  @empresas = Concedente.find_by_sql("SELECT empresas.id, empresas.nome FROM empresas WHERE empresas.id 
-                not in (SELECT convenios.concedente_id FROM convenios) AND empresas.type = 'Concedente'")
-  	@intervenientes = Interveniente.all
+	  @empresas = Concedente.all
+    @intervenientes = Interveniente.all
     respond_to do |format|
       if @convenio.save
         format.html { redirect_to @convenio, notice: 'O Convênio foi celebrado com sucesso!' }
@@ -68,7 +65,7 @@ class ConveniosController < ApplicationController
   # PUT /convenios/1.json
   def update
     @convenio = Convenio.find(params[:id])
-	  @empresas = Concedente.find_by_sql("SELECT empresas.id, empresas.nome FROM empresas WHERE	empresas.id not	in (SELECT convenios.concedente_id FROM convenios WHERE convenios.concedente_id != #{@convenio.concedente_id}) AND empresas.type = 'Concedente'")
+	  @empresas = Concedente.all
 	  @intervenientes = 	Interveniente.all
     respond_to do |format|
       if @convenio.update_attributes(params[:convenio])
