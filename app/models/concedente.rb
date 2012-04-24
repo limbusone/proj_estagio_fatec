@@ -1,4 +1,4 @@
 class Concedente < Empresa
 #  attr_accessible :convenio, :convenio_id
-  has_one :convenio
+  has_many :convenios
 end
