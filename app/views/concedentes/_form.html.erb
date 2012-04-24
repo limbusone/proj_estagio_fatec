@@ -30,7 +30,7 @@
     <%= f.label :email %><br />
     <%= f.text_field :email %>
   </div>
-  <%= fields_for @concedente.endereco do |ff| %>
+  <%= f.fields_for :endereco do |ff| %>
     <div class="field">
       <%= ff.label :cep %><br />
       <%= ff.text_field :cep %>
