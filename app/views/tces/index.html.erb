@@ -1,0 +1,31 @@
+<h1>Listing tces</h1>
+
+<table>
+  <tr>
+    <th>Aluno</th>
+    <th>Convenio</th>
+    <th>Detalhe termo</th>
+    <th>Rescidido</th>
+    <th>Validado</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tces.each do |tce| %>
+  <tr>
+    <td><%= tce.aluno_id %></td>
+    <td><%= tce.convenio_id %></td>
+    <td><%= tce.detalhe_termo_id %></td>
+    <td><%= tce.rescidido %></td>
+    <td><%= tce.validado %></td>
+    <td><%= link_to 'Show', tce %></td>
+    <td><%= link_to 'Edit', edit_tce_path(tce) %></td>
+    <td><%= link_to 'Destroy', tce, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tce', new_tce_path %>

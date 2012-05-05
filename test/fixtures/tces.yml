@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  aluno_id: 1
+  convenio_id: 1
+  detalhe_termo_id: 1
+  rescidido: false
+  validado: false
+
+two:
+  aluno_id: 1
+  convenio_id: 1
+  detalhe_termo_id: 1
+  rescidido: false
+  validado: false

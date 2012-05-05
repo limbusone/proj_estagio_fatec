@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Aluno:</b>
+  <%= @tce.aluno_id %>
+</p>
+
+<p>
+  <b>Convenio:</b>
+  <%= @tce.convenio_id %>
+</p>
+
+<p>
+  <b>Detalhe termo:</b>
+  <%= @tce.detalhe_termo_id %>
+</p>
+
+<p>
+  <b>Rescidido:</b>
+  <%= @tce.rescidido %>
+</p>
+
+<p>
+  <b>Validado:</b>
+  <%= @tce.validado %>
+</p>
+
+
+<%= link_to 'Edit', edit_tce_path(@tce) %> |
+<%= link_to 'Back', tces_path %>

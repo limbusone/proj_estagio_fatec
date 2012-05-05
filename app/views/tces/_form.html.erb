@@ -1,0 +1,37 @@
+<%= form_for(@tce) do |f| %>
+  <% if @tce.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tce.errors.count, "error") %> prohibited this tce from being saved:</h2>
+
+      <ul>
+      <% @tce.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :aluno_id %><br />
+    <%= f.number_field :aluno_id %>
+  </div>
+  <div class="field">
+    <%= f.label :convenio_id %><br />
+    <%= f.number_field :convenio_id %>
+  </div>
+  <div class="field">
+    <%= f.label :detalhe_termo_id %><br />
+    <%= f.number_field :detalhe_termo_id %>
+  </div>
+  <div class="field">
+    <%= f.label :rescidido %><br />
+    <%= f.check_box :rescidido %>
+  </div>
+  <div class="field">
+    <%= f.label :validado %><br />
+    <%= f.check_box :validado %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
