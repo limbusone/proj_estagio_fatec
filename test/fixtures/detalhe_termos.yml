@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  endereco_id: 1
+  seguradora_id: 1
+  data_inicio: 2012-05-05 23:24:29
+  data_termino: 2012-05-05 23:24:29
+  bolsa_auxilio: 1.5
+  data_de_rescisao: 2012-05-05 23:24:29
+  carga_horaria_semanal: 1
+  intervalo_almoco: 2012-05-05 23:24:29
+
+two:
+  endereco_id: 1
+  seguradora_id: 1
+  data_inicio: 2012-05-05 23:24:29
+  data_termino: 2012-05-05 23:24:29
+  bolsa_auxilio: 1.5
+  data_de_rescisao: 2012-05-05 23:24:29
+  carga_horaria_semanal: 1
+  intervalo_almoco: 2012-05-05 23:24:29

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  tce_id: 1
+  detalhe_termo_id: 1
+  validado: false
+  assinado_professor: false
+
+two:
+  tce_id: 1
+  detalhe_termo_id: 1
+  validado: false
+  assinado_professor: false

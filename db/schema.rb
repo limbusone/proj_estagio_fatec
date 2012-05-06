@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120505013114) do
+ActiveRecord::Schema.define(:version => 20120506025814) do
 
   create_table "alunos", :force => true do |t|
     t.integer  "endereco_id"
@@ -29,6 +29,19 @@ ActiveRecord::Schema.define(:version => 20120505013114) do
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.integer  "concedente_id"
+  end
+
+  create_table "detalhe_termos", :force => true do |t|
+    t.integer  "endereco_id"
+    t.integer  "seguradora_id"
+    t.datetime "data_inicio"
+    t.datetime "data_termino"
+    t.float    "bolsa_auxilio"
+    t.datetime "data_de_rescisao"
+    t.integer  "carga_horaria_semanal"
+    t.datetime "intervalo_almoco"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "empresas", :force => true do |t|
@@ -59,8 +72,9 @@ ActiveRecord::Schema.define(:version => 20120505013114) do
     t.integer  "detalhe_termo_id"
     t.boolean  "rescidido"
     t.boolean  "validado"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.boolean  "assinado_professor"
   end
 
   create_table "users", :force => true do |t|

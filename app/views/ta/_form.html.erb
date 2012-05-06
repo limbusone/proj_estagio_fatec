@@ -1,0 +1,33 @@
+<%= form_for(@tum) do |f| %>
+  <% if @tum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tum.errors.count, "error") %> prohibited this tum from being saved:</h2>
+
+      <ul>
+      <% @tum.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tce_id %><br />
+    <%= f.number_field :tce_id %>
+  </div>
+  <div class="field">
+    <%= f.label :detalhe_termo_id %><br />
+    <%= f.number_field :detalhe_termo_id %>
+  </div>
+  <div class="field">
+    <%= f.label :validado %><br />
+    <%= f.check_box :validado %>
+  </div>
+  <div class="field">
+    <%= f.label :assinado_professor %><br />
+    <%= f.check_box :assinado_professor %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

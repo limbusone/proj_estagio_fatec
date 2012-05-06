@@ -1,0 +1,29 @@
+<h1>Listing ta</h1>
+
+<table>
+  <tr>
+    <th>Tce</th>
+    <th>Detalhe termo</th>
+    <th>Validado</th>
+    <th>Assinado professor</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ta.each do |tum| %>
+  <tr>
+    <td><%= tum.tce_id %></td>
+    <td><%= tum.detalhe_termo_id %></td>
+    <td><%= tum.validado %></td>
+    <td><%= tum.assinado_professor %></td>
+    <td><%= link_to 'Show', tum %></td>
+    <td><%= link_to 'Edit', edit_tum_path(tum) %></td>
+    <td><%= link_to 'Destroy', tum, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ta', new_tum_path %>

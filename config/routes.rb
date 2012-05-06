@@ -1,4 +1,6 @@
 Estagio::Application.routes.draw do
+  resources :ta
+
   resources :tces
 
   devise_for :users
