@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  detalhe_termo_id: 1
+  atividade_id: 1
+
+two:
+  detalhe_termo_id: 1
+  atividade_id: 1

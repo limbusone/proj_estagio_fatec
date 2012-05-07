@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  professor_id: 1
+  alteravel_id: 1
+  alteravel_type: MyString
+  detalhe_termo_id: 1
+  comentario: MyText
+  atendido: false
+
+two:
+  professor_id: 1
+  alteravel_id: 1
+  alteravel_type: MyString
+  detalhe_termo_id: 1
+  comentario: MyText
+  atendido: false

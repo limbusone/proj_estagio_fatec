@@ -1,0 +1,33 @@
+<h1>Listing pedido_alteracaos</h1>
+
+<table>
+  <tr>
+    <th>Professor</th>
+    <th>Alteravel</th>
+    <th>Alteravel type</th>
+    <th>Detalhe termo</th>
+    <th>Comentario</th>
+    <th>Atendido</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pedido_alteracaos.each do |pedido_alteracao| %>
+  <tr>
+    <td><%= pedido_alteracao.professor_id %></td>
+    <td><%= pedido_alteracao.alteravel_id %></td>
+    <td><%= pedido_alteracao.alteravel_type %></td>
+    <td><%= pedido_alteracao.detalhe_termo_id %></td>
+    <td><%= pedido_alteracao.comentario %></td>
+    <td><%= pedido_alteracao.atendido %></td>
+    <td><%= link_to 'Show', pedido_alteracao %></td>
+    <td><%= link_to 'Edit', edit_pedido_alteracao_path(pedido_alteracao) %></td>
+    <td><%= link_to 'Destroy', pedido_alteracao, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Pedido alteracao', new_pedido_alteracao_path %>

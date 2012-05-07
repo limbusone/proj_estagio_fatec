@@ -1,4 +1,6 @@
 Estagio::Application.routes.draw do
+  resources :pedido_alteracaos
+
   resources :ta
 
   resources :tces

@@ -4,4 +4,5 @@ class Tce < ActiveRecord::Base
   belongs_to :convenio
   belongs_to :aluno
   has_many :tas
+  has_many :pedido_alteracaos, :as => :alteravel
 end
