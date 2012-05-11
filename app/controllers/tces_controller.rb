@@ -2,8 +2,16 @@ class TcesController < ApplicationController
   # GET /tces
   # GET /tces.json
   def index
-    @tces = Tce.all
-
+    @tces     = Tce.all
+    @tces_v   = Array.new
+    @tces_nv  = Array.new
+    @tces.each do |tce|
+      if tce.validado
+        @tces_v   << tce
+      else
+        @tces_nv  << tce
+      end
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tces }
@@ -25,7 +33,10 @@ class TcesController < ApplicationController
   # GET /tces/new.json
   def new
     @tce = Tce.new
-
+    @tce.detalhe_termo = DetalheTermo.new
+    @tce.detalhe_termo.endereco = Endereco.new
+    @tce.detalhe_termo.seguradora = Seguradora.new
+    @convenios_array = Convenio.all.map { |conv| ["#{conv.concedente.nome} ~ #{conv.interveniente.nome}", conv.id]}
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @tce }

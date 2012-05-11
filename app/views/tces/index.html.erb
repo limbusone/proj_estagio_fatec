@@ -1,31 +1,53 @@
-<h1>Listing tces</h1>
-
+<h1>Lista de TCEs</h1>
+<br />
+<h2>TCEs não validados</h2>
 <table>
   <tr>
     <th>Aluno</th>
     <th>Convenio</th>
     <th>Detalhe termo</th>
     <th>Rescidido</th>
-    <th>Validado</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
-
-<% @tces.each do |tce| %>
+<% @tces_nv.each do |tce| %>
   <tr>
     <td><%= tce.aluno_id %></td>
     <td><%= tce.convenio_id %></td>
     <td><%= tce.detalhe_termo_id %></td>
     <td><%= tce.rescidido %></td>
-    <td><%= tce.validado %></td>
-    <td><%= link_to 'Show', tce %></td>
-    <td><%= link_to 'Edit', edit_tce_path(tce) %></td>
-    <td><%= link_to 'Destroy', tce, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Ver', tce %></td>
+    <td><%= link_to 'Editar', edit_tce_path(tce) %></td>
+    <td><%= link_to 'Deletar', tce, confirm: 'Tem certeza?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+<h2>TCEs validados</h2>
+<table>
+  <tr>
+    <th>Aluno</th>
+    <th>Convenio</th>
+    <th>Detalhe termo</th>
+    <th>Rescidido</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @tces_v.each do |tce| %>
+  <tr>
+    <td><%= tce.aluno_id %></td>
+    <td><%= tce.convenio_id %></td>
+    <td><%= tce.detalhe_termo_id %></td>
+    <td><%= tce.rescidido %></td>
+    <td><%= link_to 'Ver', tce %></td>
+    <td><%= link_to 'Editar', edit_tce_path(tce) %></td>
+    <td><%= link_to 'Deletar', tce, confirm: 'Tem certeza?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Tce', new_tce_path %>
+<%= link_to 'Novo TCE', new_tce_path %>

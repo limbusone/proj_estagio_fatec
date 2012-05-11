@@ -15,14 +15,69 @@
     <%= f.label :aluno_id %><br />
     <%= f.number_field :aluno_id %>
   </div>
-  <div class="field">
-    <%= f.label :convenio_id %><br />
-    <%= f.number_field :convenio_id %>
-  </div>
-  <div class="field">
-    <%= f.label :detalhe_termo_id %><br />
-    <%= f.number_field :detalhe_termo_id %>
-  </div>
+	<div class="field">
+		<%= f.label :convenio_id %><br />
+		<%= f.select(:convenio_id, options_for_select(@convenios_array)) %>
+		<%# = f.number_field :concedente_id %>
+	</div>
+  <%= f.fields_for :detalhe_termo do |ff| %>
+    <%= ff.fields_for :seguradora do |fff| %>
+      <div class="field">
+        <%= fff.label :nome, "Seguradora" %><br />
+        <%= fff.text_field :nome %>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= ff.label :data_inicio %><br />
+      <%= ff.datetime_select :data_inicio %>
+    </div>
+    <div class="field">
+      <%= ff.label :data_termino %><br />
+      <%= ff.datetime_select :data_termino %>
+    </div>
+    <div class="field">
+      <%= ff.label :bolsa_auxilio %><br />
+      <%= ff.number_field :bolsa_auxilio %>
+    </div>
+    <div class="field">
+      <%= ff.label :data_de_rescisao %><br />
+      <%= ff.datetime_select :data_de_rescisao %>
+    </div>
+    <div class="field">
+      <%= ff.label :carga_horaria_semanal %><br />
+      <%= ff.number_field :carga_horaria_semanal %>
+    </div>
+    <div class="field">
+      <%= ff.label :intervalo_almoco %><br />
+      <%= ff.datetime_select :intervalo_almoco %>
+    </div>
+    <%= ff.fields_for :endereco do |fff| %>
+      <div class="field">
+        <%= fff.label :cep %><br />
+        <%= fff.text_field :cep %>
+      </div>
+      <div class="field">
+        <%= fff.label :logradouro %><br />
+        <%= fff.text_field :logradouro %>
+      </div>
+      <div class="field">
+        <%= fff.label :numero %><br />
+        <%= fff.number_field :numero %>
+      </div>
+      <div class="field">
+        <%= fff.label :bairro %><br />
+        <%= fff.text_field :bairro %>
+      </div>
+      <div class="field">
+        <%= fff.label :cidade %><br />
+        <%= fff.text_field :cidade %>
+      </div>
+      <div class="field">
+        <%= fff.label :estado %><br />
+        <%= fff.text_field :estado %>
+      </div>
+    <% end %>
+  <% end %>
   <div class="field">
     <%= f.label :rescidido %><br />
     <%= f.check_box :rescidido %>
@@ -31,6 +86,10 @@
     <%= f.label :validado %><br />
     <%= f.check_box :validado %>
   </div>
+  <div class="field">
+    <%= f.label :assinado_professor %><br />
+    <%= f.check_box :assinado_professor %>
+  </div>  
   <div class="actions">
     <%= f.submit %>
   </div>

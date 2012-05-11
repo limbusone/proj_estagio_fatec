@@ -41,12 +41,12 @@ class ConcedentesController < ApplicationController
   # POST /concedentes.json
   def create
     @concedente = Concedente.new(params[:concedente])
-    @concedente.endereco = Endereco.new(params[:endereco])
-    v1 = @concedente.valid?
-    v2 = @concedente.endereco.valid?
+    #@concedente.endereco = Endereco.new(params[:concedente[:endereco_attributes]])
+    #v1 = @concedente.valid?
+    #v2 = @concedente.endereco.valid?
     respond_to do |format|
-      if v1 && v2
-        @concedente.save
+      if @concedente.save
+        #@concedente.save
         format.html { redirect_to @concedente, notice: 'Concedente was successfully created.' }
         format.json { render json: @concedente, status: :created, location: @concedente }
       else

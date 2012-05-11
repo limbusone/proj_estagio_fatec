@@ -5,7 +5,7 @@ class Endereco < ActiveRecord::Base
   has_many :alunos
   has_one :empresa
 
-	validates 	:cep, :numericality => { :only_integer => true, :message => "somente caracteres 				      numéricos" }, :length => { :maximum => 8 }, :allow_blank => true
+	validates 	:cep, :numericality => { :only_integer => true, :message => "somente caracteres numéricos" }, :length => { :maximum => 8 }, :allow_blank => true
 
 	validates 	:logradouro, :length => { :maximum => 100 }, :allow_blank => true
 

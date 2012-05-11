@@ -1,4 +1,8 @@
 Estagio::Application.routes.draw do
+  resources :departamentos
+
+  resources :cursos
+
   resources :pedido_alteracaos
 
   resources :ta

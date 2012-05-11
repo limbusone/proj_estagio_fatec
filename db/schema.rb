@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120506025814) do
+ActiveRecord::Schema.define(:version => 20120508234922) do
 
   create_table "alunos", :force => true do |t|
     t.integer  "endereco_id"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(:version => 20120506025814) do
     t.datetime "updated_at",    :null => false
   end
 
+  create_table "atividades", :force => true do |t|
+    t.string   "nome"
+    t.text     "descricao"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "convenios", :force => true do |t|
     t.integer  "interveniente_id",                    :null => false
     t.integer  "vigencia"
@@ -29,6 +36,18 @@ ActiveRecord::Schema.define(:version => 20120506025814) do
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.integer  "concedente_id"
+  end
+
+  create_table "cursos", :force => true do |t|
+    t.string   "nome"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "departamentos", :force => true do |t|
+    t.string   "nome"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "detalhe_termos", :force => true do |t|
@@ -64,6 +83,48 @@ ActiveRecord::Schema.define(:version => 20120506025814) do
     t.string   "estado"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "hora_dia", :force => true do |t|
+    t.integer  "detalhe_termo_id"
+    t.datetime "inicio"
+    t.datetime "final"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "lista_atividades", :force => true do |t|
+    t.integer  "detalhe_termo_id"
+    t.integer  "atividade_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "pedido_alteracaos", :force => true do |t|
+    t.integer  "professor_id"
+    t.integer  "alteravel_id"
+    t.string   "alteravel_type"
+    t.integer  "detalhe_termo_id"
+    t.text     "comentario"
+    t.boolean  "atendido"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "seguradoras", :force => true do |t|
+    t.string   "nome"
+    t.integer  "apolice"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "ta", :force => true do |t|
+    t.integer  "tce_id"
+    t.integer  "detalhe_termo_id"
+    t.boolean  "validado"
+    t.boolean  "assinado_professor"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "tces", :force => true do |t|
