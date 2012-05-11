@@ -1,4 +1,6 @@
 Estagio::Application.routes.draw do
+  resources :avaliacao_estagiarios
+
   resources :pedido_alteracaos
 
   resources :ta
