@@ -36,6 +36,7 @@ class TcesController < ApplicationController
     @tce.detalhe_termo = DetalheTermo.new
     @tce.detalhe_termo.endereco = Endereco.new
     @tce.detalhe_termo.seguradora = Seguradora.new
+    @alunos = Aluno.all
     @convenios_array = Convenio.all.map { |conv| ["#{conv.concedente.nome} ~ #{conv.interveniente.nome}", conv.id]}
     respond_to do |format|
       format.html # new.html.erb
@@ -52,7 +53,8 @@ class TcesController < ApplicationController
   # POST /tces.json
   def create
     @tce = Tce.new(params[:tce])
-
+    @alunos = Aluno.all
+    @convenios_array = Convenio.all.map { |conv| ["#{conv.concedente.nome} ~ #{conv.interveniente.nome}", conv.id]}    
     respond_to do |format|
       if @tce.save
         format.html { redirect_to @tce, notice: 'Tce was successfully created.' }

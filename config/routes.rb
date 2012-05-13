@@ -1,4 +1,6 @@
 Estagio::Application.routes.draw do
+  resources :hora_dia
+
   resources :departamentos
 
   resources :cursos
@@ -7,7 +9,9 @@ Estagio::Application.routes.draw do
 
   resources :ta
 
-  resources :tces
+  resources :tces do
+    resources :hora_dia
+  end
 
   devise_for :users
 

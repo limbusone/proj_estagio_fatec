@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :aluno_id %><br />
-    <%= f.number_field :aluno_id %>
+		<%= f.collection_select(:aluno_id, @alunos, :id, :nome) %>
   </div>
 	<div class="field">
 		<%= f.label :convenio_id %><br />
