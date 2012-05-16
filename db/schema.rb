@@ -85,14 +85,6 @@ ActiveRecord::Schema.define(:version => 20120508234922) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "hora_dia", :force => true do |t|
-    t.integer  "detalhe_termo_id"
-    t.datetime "inicio"
-    t.datetime "final"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
   create_table "lista_atividades", :force => true do |t|
     t.integer  "detalhe_termo_id"
     t.integer  "atividade_id"
