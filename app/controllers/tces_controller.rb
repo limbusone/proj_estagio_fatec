@@ -57,7 +57,8 @@ class TcesController < ApplicationController
     @convenios_array = Convenio.all.map { |conv| ["#{conv.concedente.nome} ~ #{conv.interveniente.nome}", conv.id]}    
     respond_to do |format|
       if @tce.save
-        format.html { redirect_to @tce, notice: 'Tce was successfully created.' }
+        #format.html { redirect_to @tce, notice: 'Tce was successfully created.' }
+        format.html { redirect_to :action => "newHorasDias"}
         format.json { render json: @tce, status: :created, location: @tce }
       else
         format.html { render action: "new" }
@@ -66,6 +67,14 @@ class TcesController < ApplicationController
     end
   end
 
+  def newHorasDias
+    @resposta = ""
+  end
+
+  def createHorasDias
+    @resposta = params[:x]
+    render "newHorasDias"
+  end
   # PUT /tces/1
   # PUT /tces/1.json
   def update
