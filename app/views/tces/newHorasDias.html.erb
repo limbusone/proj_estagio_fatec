@@ -1,0 +1,11 @@
+<h2><%= @resposta %></h2>
+<%= form_tag({:controller => "tces", :action => "createHorasDias"}, :method => "post") do%>
+  <input type="button" value="&nbsp;&nbsp;+&nbsp;&nbsp;" id="addCampos" />
+  <div id="textfields">
+    <%= label_tag "inicio[]", "Inicio:" %><br />
+    <%= text_field_tag "inicio[]" %><br />
+    <%= label_tag "final[]", "Final:" %><br />
+    <%= text_field_tag "final[]" %><br />
+  </div>
+  <%= submit_tag "Enviar" %>
+<% end %>
