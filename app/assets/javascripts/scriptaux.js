@@ -1,7 +1,8 @@
 jQuery(function() 
 {
-  $("#addCampos").click(function(event)
+  $(".cmdAddFields").click(function(event)
   {
+    /*
     var newHorarioInicioLabel     = document.createElement("label");
     var newHorarioInicioTextField = document.createElement("input");
     
@@ -14,7 +15,12 @@ jQuery(function()
     
     newHorarioFimLabel.setAttribute("for", "final_");
     newHorarioFimTextField.setAttribute("id", "final_");
-    newHorarioFimTextField.setAttribute("name", "final[]");
-    
-  });
+    newHorarioFimTex
+    tField.setAttribute("name", "final[]");
+    */
+
+      var l
+      var segunda_inicio_hora = event.target.parentNode.getElementById("segunda_inicio__hour").cloneNode(true);
+      });ab
+
 })
