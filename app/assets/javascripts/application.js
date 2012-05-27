@@ -14,4 +14,4 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery.maskedinput-1.1.4.pack
-//= require_tree .
+//= require_directory .

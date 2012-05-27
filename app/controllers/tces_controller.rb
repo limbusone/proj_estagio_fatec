@@ -58,7 +58,7 @@ class TcesController < ApplicationController
     respond_to do |format|
       if @tce.save
         #format.html { redirect_to @tce, notice: 'Tce was successfully created.' }
-        format.html { redirect_to :action => "newHorasDias"}
+        format.html { redirect_to :action => "newHorasDias", :id => @tce.detalhe_termo.id}
         format.json { render json: @tce, status: :created, location: @tce }
       else
         format.html { render action: "new" }
@@ -68,11 +68,17 @@ class TcesController < ApplicationController
   end
 
   def newHorasDias
+    @detalhe_termo_id = params[:id]
     @resposta = ""
   end
 
   def createHorasDias
-    @resposta = params[:x]
+    @resposta = ""
+    params[:segunda_inicio].each do |hashzin|
+      @resposta << hashzin[:hour]
+    end
+    
+    #@resposta = params[:segunda_inicio][0][:hour]
     render "newHorasDias"
   end
   # PUT /tces/1

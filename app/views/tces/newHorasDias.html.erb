@@ -1,3 +1,7 @@
+<% content_for(:custom_javascript_includes) do %>
+<%= javascript_include_tag "tces/scriptaux" %>
+<% end %>
+<%= @resposta %>
 <h1>Novo Termo de Compromisso de Estágio</h1>
 <div>
   <h5>1 - Dados Gerais</h5><h2>2 - Horário de trabalho</h2><h5>3 - Atividades</h5>
@@ -6,67 +10,72 @@
 <%= form_tag({:controller => "tces", :action => "createHorasDias"}, :method => "post") do%>
   <!--<input type="button" value="&nbsp;&nbsp;+&nbsp;&nbsp;" id="addCampos" /> -->
   <h3>Opções</h3><br />
+  <input type="hidden" value="<%= @detalhe_termo_id %>" name="hidId" />
   <input type="radio" name="opcao_horario" value="0" checked="true"/> manhã e tarde <br />
   <input type="radio" name="opcao_horario" value="1" /> manhã e noite <br /><br />
   
   <h3>Segunda-feira</h3><br />
-  <div id="fields">
-  	<input type="button" class="cmdAddFields" value="&nbsp;&nbsp;+&nbsp;&nbsp;" />
+  <div id="fields" class="fields">
     <%= label_tag "segunda_inicio[]", "Inicio:" %><br />
     <%= select_time Time.now, :prefix => "segunda_inicio[]" %><br />
     <%= label_tag "segunda_final[]", "Final:" %><br />
     <%= select_time Time.now, :prefix => "segunda_final[]" %><br />
+    <div class="newFields"></div>
   </div>
   <h3>Terça-feira</h3><br />
-  <div id="fields">
+  <div id="fields" class="fields">
   	<input type="button" class="cmdAddFields" value="&nbsp;&nbsp;+&nbsp;&nbsp;" style="display: none"/>
     <%= label_tag "terca_inicio[]", "Inicio:" %><br />
     <%= select_time Time.now, :prefix => "terca_inicio[]" %><br />
     <%= label_tag "terca_final[]", "Final:" %><br />
     <%= select_time Time.now, :prefix => "terca_final[]" %><br />
+    <div class="newFields"></div>
   </div>  
   <h3>Quarta-feira</h3><br />
-  <div id="fields">
+  <div id="fields" class="fields">
   	<input type="button" class="cmdAddFields" value="&nbsp;&nbsp;+&nbsp;&nbsp;" style="display: none"/>
     <%= label_tag "quarta_inicio[]", "Inicio:" %><br />
     <%= select_time Time.now, :prefix => "quarta_inicio[]" %><br />
     <%= label_tag "quarta_final[]", "Final:" %><br />
     <%= select_time Time.now, :prefix => "quarta_final[]" %><br />
+    <div class="newFields"></div>
   </div>
   <h3>Quinta-feira</h3><br />
-  <div id="fields">
+  <div id="fields" class="fields">
   	<input type="button" class="cmdAddFields" value="&nbsp;&nbsp;+&nbsp;&nbsp;" style="display: none"/>
     <%= label_tag "quinta_inicio[]", "Inicio:" %><br />
     <%= select_time Time.now, :prefix => "quinta_inicio[]" %><br />
     <%= label_tag "quinta_final[]", "Final:" %><br />
     <%= select_time Time.now, :prefix => "quinta_final[]" %><br />
+    <div class="newFields"></div>
   </div>
   <h3>Sexta-feira</h3><br />
-  <div id="fields">
+  <div id="fields" class="fields">
   	<input type="button" class="cmdAddFields" value="&nbsp;&nbsp;+&nbsp;&nbsp;" style="display: none"/>
     <%= label_tag "sexta_inicio[]", "Inicio:" %><br />
     <%= select_time Time.now, :prefix => "sexta_inicio[]" %><br />
     <%= label_tag "sexta_final[]", "Final:" %><br />
     <%= select_time Time.now, :prefix => "sexta_final[]" %><br />
+    <div class="newFields"></div>
   </div>
   <h3>Sábado</h3><br />
-  <div id="fields">
+  <div id="fields" class="fields">
   	<input type="button" class="cmdAddFields" value="&nbsp;&nbsp;+&nbsp;&nbsp;" style="display: none"/>
     <%= label_tag "sabado_inicio[]", "Inicio:" %><br />
     <%= select_time Time.now, :prefix => "sabado_inicio[]" %><br />
     <%= label_tag "sabado_final[]", "Final:" %><br />
     <%= select_time Time.now, :prefix => "sabado_final[]" %><br />
+    <div class="newFields"></div>
   </div>
   <div id="domingoFields" style="display: none">
   	<h3>Domingo</h3><br />
-  	<div id="fields">
-  	<input type="button" class="cmdAddFields" value="&nbsp;&nbsp;+&nbsp;&nbsp;" style="display: none"/>
-      <%= label_tag "sabado_inicio[]", "Inicio:" %><br />
-      <%= select_time Time.now, :prefix => "sabado_inicio[]" %><br />
-      <%= label_tag "sabado_final[]", "Final:" %><br />
-      <%= select_time Time.now, :prefix => "sabado_final[]" %><br />
+  	<div id="fieldsDom">
+      <%= label_tag "domingo_inicio[]", "Inicio:" %><br />
+      <%= select_time Time.now, :prefix => "domingo_inicio[]" %><br />
+      <%= label_tag "domingo_final[]", "Final:" %><br />
+      <%= select_time Time.now, :prefix => "domingo_final[]" %><br />
     </div>
   </div>
-  
-  <%= submit_tag "Enviar" %>
+  <br />
+  <%= submit_tag "Próximo" %>
 <% end %>
