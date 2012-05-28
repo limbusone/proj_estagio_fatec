@@ -1,10 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Sigla:</b>
+  <%= @curso.sigla %>
+</p>
+<p>
   <b>Nome:</b>
   <%= @curso.nome %>
 </p>
 
 
-<%= link_to 'Edit', edit_curso_path(@curso) %> |
-<%= link_to 'Back', cursos_path %>
+<%= link_to 'Editar', edit_curso_path(@curso) %> |
+<%= link_to 'Voltar', cursos_path %>

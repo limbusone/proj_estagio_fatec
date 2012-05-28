@@ -18,7 +18,6 @@
 	<div class="field">
 		<%= f.label :convenio_id %><br />
 		<%= f.select(:convenio_id, options_for_select(@convenios_array)) %>
-		<%# = f.number_field :concedente_id %>
 	</div>
   <%= f.fields_for :detalhe_termo do |ff| %>
     <div class="field">
@@ -37,14 +36,6 @@
       <%= ff.label :data_de_rescisao %><br />
       <%= ff.datetime_select :data_de_rescisao %>
     </div>
-    <div class="field">
-      <%= ff.label :carga_horaria_semanal %><br />
-      <%= ff.number_field :carga_horaria_semanal %>
-    </div>
-    <div class="field">
-      <%= ff.label :intervalo_almoco %><br />
-      <%= ff.datetime_select :intervalo_almoco %>
-    </div>
     <%= ff.fields_for :seguradora do |fff| %>
       <div class="field">
         <%= fff.label :nome, "Seguradora" %><br />
@@ -61,7 +52,7 @@
         <%= fff.text_field :logradouro %>
       </div>
       <div class="field">
-        <%= fff.label :numero %><br />
+        <%= fff.label :numero, "Número" %><br />
         <%= fff.number_field :numero %>
       </div>
       <div class="field">

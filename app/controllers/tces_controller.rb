@@ -71,7 +71,7 @@ class TcesController < ApplicationController
     @detalhe_termo_id = params[:id]
     @resposta = ""
   end
-
+#les_20b@googlegroups.com
   def createHorasDias
     @resposta = ""
     params[:segunda_inicio].each do |hashzin|

@@ -26,6 +26,7 @@ class AlunosController < ApplicationController
   def new
     @aluno = Aluno.new
     @aluno.endereco = Endereco.new
+    @cursos = Curso.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @aluno }
@@ -41,13 +42,10 @@ class AlunosController < ApplicationController
   # POST /alunos.json
   def create
     @aluno = Aluno.new(params[:aluno])
-    @aluno.endereco = Endereco.new(params[:endereco])
-    v1 = @aluno.valid?
-    v2 = @aluno.endereco.valid?
+    @cursos = Curso.all
     respond_to do |format|
-      if v1 && v2
-        @aluno.save
-        format.html { redirect_to @aluno, notice: 'Aluno was successfully created.' }
+      if @aluno.save
+        format.html { redirect_to @aluno, notice: 'Aluno foi criado com sucesso!' }
         format.json { render json: @aluno, status: :created, location: @aluno }
       else
         format.html { render action: "new" }
@@ -60,13 +58,9 @@ class AlunosController < ApplicationController
   # PUT /alunos/1.json
   def update
     @aluno = Aluno.find(params[:id])
-    v1 = @aluno.valid?
-    v2 = @aluno.endereco.valid?
     respond_to do |format|
-      if v1 && v2
-        @aluno.update_attributes(params[:aluno])
-        @aluno.endereco.update_attributes(params[:endereco])
-        format.html { redirect_to @aluno, notice: 'Aluno was successfully updated.' }
+      if @aluno.update_attributes(params[:aluno])
+        format.html { redirect_to @aluno, notice: 'Aluno foi alterado com sucesso!' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -78,9 +72,9 @@ class AlunosController < ApplicationController
   # DELETE /alunos/1
   # DELETE /alunos/1.json
   def destroy
-    @aluno = Aluno.find(params[:id])
-    @aluno.endereco.destroy    
+    @aluno = Aluno.find(params[:id])    
     @aluno.destroy
+    
     respond_to do |format|
       format.html { redirect_to alunos_url }
       format.json { head :no_content }

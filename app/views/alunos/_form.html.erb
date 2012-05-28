@@ -1,8 +1,8 @@
 <%= form_for(@aluno) do |f| %>
   <% if @aluno.errors.any? || @aluno.endereco.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@aluno.errors.count, "error") %> prohibited this aluno from being saved:</h2>
-      <h2><%= pluralize(@aluno.endereco.errors.count, "error") %> prohibited this endereco from being saved:</h2>
+      <h2><%= pluralize(@aluno.errors.count, "erro") %> proibiu(iram) esse aluno de ser criado:</h2>
+      <h2><%= pluralize(@aluno.endereco.errors.count, "erro") %> proibiu(iram) esse endereço de ser criado:</h2>
 
       <ul>
       <% @aluno.errors.full_messages.each do |msg| %>
@@ -16,18 +16,20 @@
   <% end %>
 
   <div class="field">
+    <%#= f.label :curso_id %><br />
+    <%#= f.number_field :curso_id %>
     <%= f.label :curso_id %><br />
-    <%= f.number_field :curso_id %>
+    <%= f.collection_select(:curso_id, @cursos, :id, :nome) %>   
   </div>
   <div class="field">
     <%= f.label :nome %><br />
     <%= f.text_field :nome %>
   </div>
   <div class="field">
-    <%= f.label :num_matricula %><br />
+    <%= f.label :num_matricula, "Número de matrícula" %><br />
     <%= f.text_field :num_matricula %>
   </div>
-  <%= fields_for @aluno.endereco do |ff| %>
+  <%= f.fields_for :endereco do |ff| %>
     <div class="field">
       <%= ff.label :cep %><br />
       <%= ff.text_field :cep %>
@@ -37,7 +39,7 @@
       <%= ff.text_field :logradouro %>
     </div>
     <div class="field">
-      <%= ff.label :numero %><br />
+      <%= ff.label :numero, "Número"%><br />
       <%= ff.number_field :numero %>
     </div>
     <div class="field">
@@ -54,6 +56,6 @@
     </div>
   <% end %>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Enviar" %>
   </div>
 <% end %>
