@@ -1,0 +1,29 @@
+<%= form_for(@hora_dium) do |f| %>
+  <% if @hora_dium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hora_dium.errors.count, "error") %> prohibited this hora_dium from being saved:</h2>
+
+      <ul>
+      <% @hora_dium.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :detalhe_termo_id %><br />
+    <%= f.number_field :detalhe_termo_id %>
+  </div>
+  <div class="field">
+    <%= f.label :inicio %><br />
+    <%= f.datetime_select :inicio %>
+  </div>
+  <div class="field">
+    <%= f.label :final %><br />
+    <%= f.datetime_select :final %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

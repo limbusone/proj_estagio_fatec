@@ -2,10 +2,12 @@
 
 one:
   detalhe_termo_id: 1
-  inicio: 2012-05-11 18:46:50
-  final: 2012-05-11 18:46:50
+  dia_semana: 1
+  inicio: 2012-05-26 23:06:28
+  final: 2012-05-26 23:06:28
 
 two:
   detalhe_termo_id: 1
-  inicio: 2012-05-11 18:46:50
-  final: 2012-05-11 18:46:50
+  dia_semana: 1
+  inicio: 2012-05-26 23:06:28
+  final: 2012-05-26 23:06:28

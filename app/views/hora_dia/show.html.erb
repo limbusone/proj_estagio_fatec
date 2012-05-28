@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Detalhe termo:</b>
+  <%= @hora_dium.detalhe_termo_id %>
+</p>
+
+<p>
+  <b>Inicio:</b>
+  <%= @hora_dium.inicio %>
+</p>
+
+<p>
+  <b>Final:</b>
+  <%= @hora_dium.final %>
+</p>
+
+
+<%= link_to 'Edit', edit_hora_dium_path(@hora_dium) %> |
+<%= link_to 'Back', hora_dia_path %>

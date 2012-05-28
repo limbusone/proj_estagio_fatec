@@ -1,0 +1,27 @@
+<h1>Listing hora_dia</h1>
+
+<table>
+  <tr>
+    <th>Detalhe termo</th>
+    <th>Inicio</th>
+    <th>Final</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @hora_dia.each do |hora_dium| %>
+  <tr>
+    <td><%= hora_dium.detalhe_termo_id %></td>
+    <td><%= hora_dium.inicio %></td>
+    <td><%= hora_dium.final %></td>
+    <td><%= link_to 'Show', hora_dium %></td>
+    <td><%= link_to 'Edit', edit_hora_dium_path(hora_dium) %></td>
+    <td><%= link_to 'Destroy', hora_dium, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Hora dium', new_hora_dium_path %>

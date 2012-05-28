@@ -75,8 +75,13 @@ class TcesController < ApplicationController
   def createHorasDias
     @resposta = ""
     params[:segunda_inicio].each do |hashzin|
+      @hora_dia = HoraDia.new(:detalhe_termo_id => params["hidId"])
       @resposta << hashzin[:hour]
     end
+    
+    
+    
+    
     
     #@resposta = params[:segunda_inicio][0][:hour]
     render "newHorasDias"
