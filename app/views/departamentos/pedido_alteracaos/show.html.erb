@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Professor:</b>
+  <%= @pedido_alteracao.professor_id %>
+</p>
+
+<p>
+  <b>Alteravel:</b>
+  <%= @pedido_alteracao.alteravel_id %>
+</p>
+
+<p>
+  <b>Alteravel type:</b>
+  <%= @pedido_alteracao.alteravel_type %>
+</p>
+
+<p>
+  <b>Detalhe termo:</b>
+  <%= @pedido_alteracao.detalhe_termo_id %>
+</p>
+
+<p>
+  <b>Comentario:</b>
+  <%= @pedido_alteracao.comentario %>
+</p>
+
+<p>
+  <b>Atendido:</b>
+  <%= @pedido_alteracao.atendido %>
+</p>
+
+
+<%= link_to 'Edit', edit_pedido_alteracao_path(@pedido_alteracao) %> |
+<%= link_to 'Back', pedido_alteracaos_path %>

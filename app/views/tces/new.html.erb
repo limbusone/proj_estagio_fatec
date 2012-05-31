@@ -1,3 +1,6 @@
+<% content_for(:custom_css_includes) do %>
+<%= stylesheet_link_tag "tces/cascade", :media => "all" %>
+<% end %>
 <h1>Novo Termo de Compromisso de Estágio</h1>
 
 <div>
@@ -6,4 +9,4 @@
 
 <%= render 'form_tce_dados_gerais' %>
 
-<%= link_to 'Back', tces_path %>
+<%= link_to 'Voltar', tces_path %>

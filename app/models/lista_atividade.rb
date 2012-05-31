@@ -1,3 +1,4 @@
+#encoding: utf-8
 class ListaAtividade < ActiveRecord::Base
   attr_accessible :atividade_id, :detalhe_termo_id
   belongs_to :atividade

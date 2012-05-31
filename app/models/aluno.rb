@@ -7,4 +7,8 @@ class Aluno < ActiveRecord::Base
   belongs_to :endereco
   belongs_to :curso
   accepts_nested_attributes_for :endereco
+  
+  def nome_upcase
+    nome.upcase
+  end
 end

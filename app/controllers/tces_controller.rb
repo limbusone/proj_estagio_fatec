@@ -68,8 +68,9 @@ class TcesController < ApplicationController
   end
 
   def newHorasDias
+    tce = Tce.find(params[:id])
     @detalhe_termo_id = params[:id]
-    @resposta = ""
+    @resposta = tce.aluno.nome 
   end
 #les_20b@googlegroups.com
   def createHorasDias

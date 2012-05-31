@@ -4,8 +4,9 @@
 <table>
   <tr>
     <th>Aluno</th>
-    <th>Convenio</th>
-    <th>Detalhe termo</th>
+    <th>Curso</th>
+    <th>Concedente</th>
+    <th>Interveniente</th>
     <th>Rescidido</th>
     <th></th>
     <th></th>
@@ -13,9 +14,10 @@
   </tr>
 <% @tces_nv.each do |tce| %>
   <tr>
-    <td><%= tce.aluno_id %></td>
-    <td><%= tce.convenio_id %></td>
-    <td><%= tce.detalhe_termo_id %></td>
+    <td><%= tce.aluno.nome.upcase %></td>
+    <td><%= tce.aluno.curso.sigla%></td>
+    <td><%= tce.convenio.concedente.nome %></td>
+    <td><%= tce.convenio.interveniente.nome %></td>
     <td><%= tce.rescidido %></td>
     <td><%= link_to 'Ver', tce %></td>
     <td><%= link_to 'Editar', edit_tce_path(tce) %></td>
@@ -28,8 +30,9 @@
 <table>
   <tr>
     <th>Aluno</th>
-    <th>Convenio</th>
-    <th>Detalhe termo</th>
+    <th>Curso</th>
+    <th>Concedente</th>
+    <th>Interveniente</th>
     <th>Rescidido</th>
     <th></th>
     <th></th>
@@ -37,9 +40,10 @@
   </tr>
 <% @tces_v.each do |tce| %>
   <tr>
-    <td><%= tce.aluno_id %></td>
-    <td><%= tce.convenio_id %></td>
-    <td><%= tce.detalhe_termo_id %></td>
+    <td><%= tce.aluno.nome.upcase %></td>
+    <td><%= tce.aluno.curso.sigla%></td>
+    <td><%= tce.convenio.concedente.nome %></td>
+    <td><%= tce.convenio.interveniente.nome %></td>
     <td><%= tce.rescidido %></td>
     <td><%= link_to 'Ver', tce %></td>
     <td><%= link_to 'Editar', edit_tce_path(tce) %></td>

@@ -1,7 +1,7 @@
 <%= form_for(@tce) do |f| %>
   <% if @tce.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@tce.errors.count, "error") %> prohibited this tce from being saved:</h2>
+      <h2><%= pluralize(@tce.errors.count, "erro") %> proibiu(iram) esse TCE de ser criado:</h2>
 
       <ul>
       <% @tce.errors.full_messages.each do |msg| %>
@@ -13,35 +13,50 @@
 
   <div class="field">
     <%= f.label :aluno_id %><br />
-		<%= f.collection_select(:aluno_id, @alunos, :id, :nome) %>
+		<%= f.collection_select(:aluno_id, @alunos, :id, :nome_upcase) %>
   </div>
 	<div class="field">
-		<%= f.label :convenio_id %><br />
+		<%= f.label :convenio_id, "Convênio" %><br />
 		<%= f.select(:convenio_id, options_for_select(@convenios_array)) %>
 	</div>
+  <div class="field">
+    <%= f.label :responsavel_nome, "Nome do Responsável"%><br />
+    <%= f.text_field :responsavel_nome%>
+  </div>
+  <div class="field">
+    <%= f.label :responsavel_cargo, "Cargo do Responsável"%><br />
+    <%= f.text_field :responsavel_cargo%>
+  </div>  
   <%= f.fields_for :detalhe_termo do |ff| %>
     <div class="field">
-      <%= ff.label :data_inicio %><br />
-      <%= ff.datetime_select :data_inicio %>
+      <%= ff.label :data_inicio, "Data de início" %><br />
+      <%= ff.date_select :data_inicio, options = {:order => [:day, :month, :year], 
+      :use_month_names => ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]}, html_options = {:class => "selecting"} %> 
     </div>
     <div class="field">
-      <%= ff.label :data_termino %><br />
-      <%= ff.datetime_select :data_termino %>
+      <%= ff.label :data_termino, "Data de Término" %><br />
+      <%= ff.date_select :data_termino, options = {:order => [:day, :month, :year], 
+      :use_month_names => ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]}, html_options = {:class => "selecting"} %>
     </div>
     <div class="field">
-      <%= ff.label :bolsa_auxilio %><br />
+      <%= ff.label :bolsa_auxilio, "Bolsa auxílio" %><br />
       <%= ff.number_field :bolsa_auxilio %>
     </div>
     <div class="field">
-      <%= ff.label :data_de_rescisao %><br />
-      <%= ff.datetime_select :data_de_rescisao %>
+      <%= ff.label :data_de_rescisao, "Data de Rescisão" %><br />
+      <%= ff.date_select :data_de_rescisao, options = {:order => [:day, :month, :year], 
+      :use_month_names => ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]}, html_options = {:class => "selecting"} %>
     </div>
     <%= ff.fields_for :seguradora do |fff| %>
       <div class="field">
         <%= fff.label :nome, "Seguradora" %><br />
         <%= fff.text_field :nome %>
       </div>
-    <% end %>    
+    <% end %>
+
     <%= ff.fields_for :endereco do |fff| %>
       <div class="field">
         <%= fff.label :cep %><br />
@@ -65,7 +80,7 @@
       </div>
       <div class="field">
         <%= fff.label :estado %><br />
-        <%= fff.text_field :estado %>
+        <%= fff.text_field :estado, html_options = {:style => "width: 30px", :maxlength => "2"} %>
       </div>
     <% end %>
   <% end %>

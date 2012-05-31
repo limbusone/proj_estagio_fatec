@@ -1,0 +1,41 @@
+<%= form_for(@pedido_alteracao) do |f| %>
+  <% if @pedido_alteracao.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pedido_alteracao.errors.count, "error") %> prohibited this pedido_alteracao from being saved:</h2>
+
+      <ul>
+      <% @pedido_alteracao.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :professor_id %><br />
+    <%= f.number_field :professor_id %>
+  </div>
+  <div class="field">
+    <%= f.label :alteravel_id %><br />
+    <%= f.number_field :alteravel_id %>
+  </div>
+  <div class="field">
+    <%= f.label :alteravel_type %><br />
+    <%= f.text_field :alteravel_type %>
+  </div>
+  <div class="field">
+    <%= f.label :detalhe_termo_id %><br />
+    <%= f.number_field :detalhe_termo_id %>
+  </div>
+  <div class="field">
+    <%= f.label :comentario %><br />
+    <%= f.text_area :comentario %>
+  </div>
+  <div class="field">
+    <%= f.label :atendido %><br />
+    <%= f.check_box :atendido %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
