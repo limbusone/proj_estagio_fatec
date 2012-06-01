@@ -1,6 +1,7 @@
 #encoding: utf-8
 class DetalheTermo < ActiveRecord::Base
-  attr_accessible :bolsa_auxilio, :carga_horaria_semanal, :data_de_rescisao, :data_inicio, :data_termino, :endereco_id, :intervalo_almoco, :seguradora_id, :endereco_attributes, :seguradora_attributes
+  attr_accessible :bolsa_auxilio, :carga_horaria_semanal, :data_de_rescisao, :data_inicio, :data_termino, :endereco_id, 
+  :intervalo_almoco, :seguradora_id, :endereco_attributes, :seguradora_attributes, :comentario
   has_one :tce
   has_one :pedido_alteracao
   has_one :ta

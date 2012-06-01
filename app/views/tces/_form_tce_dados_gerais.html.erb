@@ -83,6 +83,10 @@
         <%= fff.text_field :estado, html_options = {:style => "width: 30px", :maxlength => "2"} %>
       </div>
     <% end %>
+    <div class="field">
+      <%= ff.label :comentario, "Comentário" %>
+      <%= ff.text_area :comentario, html_options = {:rows => "8"} %>
+    </div>
   <% end %>
   <div class="field">
     <%= f.label :rescidido %><br />
@@ -100,3 +104,4 @@
     <%= f.submit "Próximo" %>
   </div>
 <% end %>
+
