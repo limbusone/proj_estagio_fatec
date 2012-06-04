@@ -1,3 +1,22 @@
-.selecting{
+.selecting
+{
   width: 100px;
+}
+.selecting2
+{
+  width: 70px;  
+}
+.toggling
+{
+  position: relative;
+  width: 400px;
+}
+.toggling i
+{
+  position: absolute;
+  right: 10px;
+}
+.fields
+{
+  width: 390px;  
 }

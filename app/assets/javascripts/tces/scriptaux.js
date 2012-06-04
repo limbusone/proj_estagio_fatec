@@ -21,54 +21,111 @@ jQuery(function()
     fieldsDivJQueryObject.each(function(i) 
     {
       var fieldsDiv = this;
-      var newFieldsDiv = $(fieldsDiv).find("div:last");
-      $(fieldsDiv).find("label:eq(0)").clone().appendTo(newFieldsDiv);
-      newFieldsDiv.append("<br />");
-      $(fieldsDiv).find("select:eq(0)").clone().appendTo(newFieldsDiv);
-      newFieldsDiv.append(" : ");
-      $(fieldsDiv).find("select:eq(1)").clone().appendTo(newFieldsDiv);
-      $(fieldsDiv).find("label:eq(1)").clone().appendTo(newFieldsDiv);
-      newFieldsDiv.append("<br />");
-      $(fieldsDiv).find("select:eq(2)").clone().appendTo(newFieldsDiv);
-      newFieldsDiv.append(" : ");
-      $(fieldsDiv).find("select:eq(3)").clone().appendTo(newFieldsDiv);
+      var newFieldsDiv = $(fieldsDiv).find(".newFields");
+      var nFDiv = document.createElement("div");
+      $(nFDiv).addClass("f");
+      $(nFDiv).append("<br />");
+      $(fieldsDiv).find("label:eq(0)").clone().appendTo(nFDiv);
+      $(nFDiv).append(" ");
+      $(fieldsDiv).find("select:eq(0)").clone().appendTo(nFDiv).on("change", function(event)
+      {
+        $("#carga_horaria").val(calcularCargaHoraria);
+      });
+      $(nFDiv).append(" : ");
+      $(fieldsDiv).find("select:eq(1)").clone().appendTo(nFDiv).on("change", function(event)
+      {
+        $("#carga_horaria").val(calcularCargaHoraria);
+      });
+      $(nFDiv).append(" ");
+      $(fieldsDiv).find("label:eq(1)").clone().appendTo(nFDiv);
+      $(nFDiv).append(" ");
+      $(fieldsDiv).find("select:eq(2)").clone().appendTo(nFDiv).on("change", function(event)
+      {
+        $("#carga_horaria").val(calcularCargaHoraria);
+      });
+      $(nFDiv).append(" : ");
+      $(fieldsDiv).find("select:eq(3)").clone().appendTo(nFDiv).on("change", function(event)
+      {
+        $("#carga_horaria").val(calcularCargaHoraria);
+      });
+      newFieldsDiv.append(nFDiv);
     });
   }
-  function removeNovosFields()
+  function removeTodosNovosFields(fieldsDivJQueryObject)
   {
-    $(".fields .newFields").empty();
+    var newFieldsDiv = fieldsDivJQueryObject.find(".newFields");
+    newFieldsDiv.empty();
   }
-  var opc = $("[name='opcao_horario']:checked").val();
-  habilitarOpcaoAddFieldsEAddNovosFields(opc);  
-  $("[name='opcao_horario']").click(function(event)
+  function removeLastField(fieldsDivJQueryObject)
   {
-    habilitarOpcaoAddFieldsEAddNovosFields(Number($(this).val()));
+    var newFieldsDiv = fieldsDivJQueryObject.find(".newFields");
+    newFieldsDiv.find("div:last").empty();
+    newFieldsDiv.find("div:last").remove();
+  }
+  function calcularCargaHoraria()
+  {
+    var hora_em_milisegundos = 1000*60*60;
+    var vTempo_horas_total = 0;
+    $(".fields:gt(0)").each(function(i) //a partir do div de segunda-feira 
+    {
+      var divFields = this;
+      var primeiraHiddenTag = $(divFields).find("[type='hidden']:first");
+      if (Number(primeiraHiddenTag.val()))
+      {
+        $(divFields).find(".f").each(function(j)
+        {
+          var divF = this;
+          var hInicio = new Date();
+          var hFinal  = new Date();
+          hInicio.setHours($(divF).find("select:eq(0)").val()); // horas inicio
+          hInicio.setMinutes($(divF).find("select:eq(1)").val()); // minutos inicio
+          hInicio.setSeconds(0);
+          hFinal.setHours($(divF).find("select:eq(2)").val()); // horas final
+          hFinal.setMinutes($(divF).find("select:eq(3)").val()); // minutos final
+          hFinal.setSeconds(0);      
+          var vTempo_milisegundos = hFinal.getTime() - hInicio.getTime();
+          var vTempo_horas = Math.floor(vTempo_milisegundos / hora_em_milisegundos);
+          vTempo_horas_total += vTempo_horas;
+        });
+      }
+    });
+    return vTempo_horas_total;  
+  }
+  $(".cmdRemoveField").click(function(event)
+  {
+    var cDivFields = this.parentNode.parentNode;
+    removeLastField($(cDivFields));
   });
-  //adiciona novos campos caso precise
-  $(".cmdAddFields").click(function(event)
+  $(".cmdRemoveNovosFields").click(function(event)
   {
-    var cDivFields = event.target.parentNode;
-    addNovosFields($(cDivFields));
-    //$(cDivFields).find("select:last").clone().appendTo(cDivFields);    
-    //var label_select_inicio = event.target.parentNode.getElementsByTagName("label")[0].cloneNode(true);
-    //var select_inicio = event.target.parentNode.getElementsByTagName("select")[0].cloneNode(true);
-    /*
-    var newHorarioInicioLabel     = document.createElement("label");
-    var newHorarioInicioTextField = document.createElement("input");
-    
-    var newHorarioFimLabel        = document.createElement("label");
-    var newHorarioFimTextField    = document.createElement("input");
-    
-    newHorarioInicioLabel.setAttribute("for", "inicio_");
-    newHorarioInicioTextField.setAttribute("id", "inicio_");
-    newHorarioInicioTextField.setAttribute("name", "inicio[]");
-    
-    newHorarioFimLabel.setAttribute("for", "final_");
-    newHorarioFimTextField.setAttribute("id", "final_");
-    newHorarioFimTex
-    tField.setAttribute("name", "final[]");
-    */
+    var cDivFields = this.parentNode.parentNode;
+    removeTodosNovosFields($(cDivFields));
+  });
+  $(".toggling").click(function(event)
+  {
+    var cDivFieldsJQuery = $(this).next().next().next();
+    var primeiraHiddenTag = cDivFieldsJQuery.find("[type='hidden']:first");
+    if (Number(primeiraHiddenTag.val()))
+      primeiraHiddenTag.val("0");
+    else
+      primeiraHiddenTag.val("1");
+    cDivFieldsJQuery.slideToggle("normal"); 
+    $(this).find(":first").toggleClass("icon-chevron-down");
+    $("#carga_horaria").val(calcularCargaHoraria);
   });
 
+  $(".cmdAddFields").click(function(event)
+  {
+    var cDivFields = this.parentNode.parentNode;
+    addNovosFields($(cDivFields));
+  });
+  $(".cmdCalcularCargaHoraria").click(function(event)
+  {
+    $("#carga_horaria").val(calcularCargaHoraria);
+  });
+  $("select:gt(3)").change(function(event)
+  {
+    $("#carga_horaria").val(calcularCargaHoraria);
+  });
 })
 

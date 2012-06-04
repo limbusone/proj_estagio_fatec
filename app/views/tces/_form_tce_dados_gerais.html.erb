@@ -1,7 +1,7 @@
 <%= form_for(@tce) do |f| %>
   <% if @tce.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@tce.errors.count, "erro") %> proibiu(iram) esse TCE de ser criado:</h2>
+    <div class="alert alert-error">
+      <strong><%= pluralize(@tce.errors.count, "erro") %> proibiu(iram) esse TCE de ser criado:</strong>
 
       <ul>
       <% @tce.errors.full_messages.each do |msg| %>
@@ -21,12 +21,13 @@
 	</div>
   <div class="field">
     <%= f.label :responsavel_nome, "Nome do Responsável"%><br />
-    <%= f.text_field :responsavel_nome%>
+    <%= f.text_field :responsavel_nome %>
   </div>
   <div class="field">
     <%= f.label :responsavel_cargo, "Cargo do Responsável"%><br />
-    <%= f.text_field :responsavel_cargo%>
-  </div>  
+    <%= f.text_field :responsavel_cargo %>
+  </div>
+    
   <%= f.fields_for :detalhe_termo do |ff| %>
     <div class="field">
       <%= ff.label :data_inicio, "Data de início" %><br />
@@ -56,11 +57,14 @@
         <%= fff.text_field :nome %>
       </div>
     <% end %>
-
+    <div class="field">
+      <%= ff.label :apolice, "Apólice"%><br />
+      <%= ff.number_field :apolice %>
+    </div>      
     <%= ff.fields_for :endereco do |fff| %>
       <div class="field">
         <%= fff.label :cep %><br />
-        <%= fff.text_field :cep %>
+        <%= fff.text_field :cep, :maxlength => "8" %>
       </div>
       <div class="field">
         <%= fff.label :logradouro %><br />
@@ -100,8 +104,8 @@
     <%= f.label :assinado_professor %><br />
     <%= f.check_box :assinado_professor %>
   </div>  
-  <div class="actions">
-    <%= f.submit "Próximo" %>
+  <div class="form-actions">
+    <%= f.submit "Próximo", :class => "btn btn-primary" %>
   </div>
 <% end %>
 

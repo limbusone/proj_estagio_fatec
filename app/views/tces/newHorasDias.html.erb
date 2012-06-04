@@ -1,81 +1,235 @@
 <% content_for(:custom_javascript_includes) do %>
 <%= javascript_include_tag "tces/scriptaux" %>
 <% end %>
-<%= @resposta %>
+<% content_for(:custom_css_includes) do %>
+<%= stylesheet_link_tag "tces/cascade", :media => "all" %>
+<% end %>
+<% if @detalhe_termo.errors.any? %>
+  <div class="alert alert-error">
+    <strong><%= pluralize(@detalhe_termo.errors.count, "Erro") %></strong>
+
+    <ul>
+    <% @detalhe_termo.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 <h1>Novo Termo de Compromisso de Estágio</h1>
 <div>
   <h5>1 - Dados Gerais</h5><h2>2 - Horário de trabalho</h2><h5>3 - Atividades</h5>
 </div>
 <br />
-<%= form_tag({:controller => "tces", :action => "createHorasDias"}, :method => "post") do%>
+<%= form_tag({:controller => "tces", :action => "createHorasDias"}, :method => "post", :class => "form-inline") do%>
   <!--<input type="button" value="&nbsp;&nbsp;+&nbsp;&nbsp;" id="addCampos" /> -->
-  <h3>Opções</h3><br />
   <input type="hidden" value="<%= @detalhe_termo_id %>" name="hidId" />
+  <!--
   <input type="radio" name="opcao_horario" value="0" checked="true"/> manhã e tarde <br />
   <input type="radio" name="opcao_horario" value="1" /> manhã e noite <br /><br />
-  
-  <h3>Segunda-feira</h3><br />
-  <div id="fields" class="fields">
-    <%= label_tag "segunda_inicio[]", "Inicio:" %><br />
-    <%= select_time Time.now, :prefix => "segunda_inicio[]" %><br />
-    <%= label_tag "segunda_final[]", "Final:" %><br />
-    <%= select_time Time.now, :prefix => "segunda_final[]" %><br />
+  -->
+  <h3>Horário de almoço</h3><br />
+  <div class="fields well">
+    <%= label_tag "horario_almoco_inicio", "Inicio:" %>
+    <%= select_time Time.now, options = { :prefix => "horario_almoco_inicio" }, 
+    html_options = { :class => "selecting2", :tipo => "inicio" } %>
+    <%= label_tag "horario_almoco_final", "Final:" %>
+    <%= select_time Time.now, options = { :prefix => "horario_almoco_final" }, 
+    html_options = { :class => "selecting2", :tipo => "final" }  %>
+  </div>
+  <br />
+  <h3>Horários</h3><br />
+  <a class="toggling btn btn-large" href="javascript:void;">
+    Segunda-feira
+    <i class="icon-chevron-up"></i>
+  </a><br /><br />
+  <div class="fields well">
+    <input type="hidden" value="1" name="campos_dia_semana[]" />
+    <div class="f">
+      <%= label_tag "dias_semana[segunda][inicio][]", "Inicio:" %>
+      <%= select_time Time.now, options = { :prefix => "dias_semana[segunda][inicio][]" }, 
+      html_options = { :class => "selecting2", :tipo => "inicio" } %>
+      <%= label_tag "dias_semana[segunda][final][]", "Final:" %>
+      <%= select_time Time.now, options = { :prefix => "dias_semana[segunda][final][]" }, 
+      html_options = { :class => "selecting2", :tipo => "final" }  %>
+    </div>
     <div class="newFields"></div>
   </div>
-  <h3>Terça-feira</h3><br />
-  <div id="fields" class="fields">
-  	<input type="button" class="cmdAddFields" value="&nbsp;&nbsp;+&nbsp;&nbsp;" style="display: none"/>
-    <%= label_tag "terca_inicio[]", "Inicio:" %><br />
-    <%= select_time Time.now, :prefix => "terca_inicio[]" %><br />
-    <%= label_tag "terca_final[]", "Final:" %><br />
-    <%= select_time Time.now, :prefix => "terca_final[]" %><br />
+  <br />
+  <a class="toggling btn btn-large" href="javascript:void;">
+    Terça-feira
+    <i class="icon-chevron-up"></i>
+  </a><br /><br />
+  <div class="fields well">
+    <div class="btn-group">
+    	<a class="btn cmdAddFields" href="javascript:void;">
+    	  <i class="icon-plus"></i>
+    	</a>
+      <a class="btn cmdRemoveField" href="javascript:void;">
+        <i class="icon-minus"></i>
+      </a>    	
+      <a class="btn cmdRemoveNovosFields" href="javascript:void;">
+        <i class="icon-remove"></i>
+      </a>
+  	</div>
+  	<br /><br />
+    <input type="hidden" value="1" name="campos_dia_semana[]" />
+    <div class="f">    
+      <%= label_tag "dias_semana[terca][inicio][]", "Inicio:" %>
+      <%= select_time Time.now, options = { :prefix => "dias_semana[terca][inicio][]" }, 
+      html_options = { :class => "selecting2", :tipo => "inicio" } %>
+      <%= label_tag "dias_semana[terca][final][]", "Final:" %>
+      <%= select_time Time.now, options = { :prefix => "dias_semana[terca][final][]" }, 
+      html_options = { :class => "selecting2", :tipo => "final" } %>
+    </div>
     <div class="newFields"></div>
   </div>  
-  <h3>Quarta-feira</h3><br />
-  <div id="fields" class="fields">
-  	<input type="button" class="cmdAddFields" value="&nbsp;&nbsp;+&nbsp;&nbsp;" style="display: none"/>
-    <%= label_tag "quarta_inicio[]", "Inicio:" %><br />
-    <%= select_time Time.now, :prefix => "quarta_inicio[]" %><br />
-    <%= label_tag "quarta_final[]", "Final:" %><br />
-    <%= select_time Time.now, :prefix => "quarta_final[]" %><br />
+  <br />
+  <a class="toggling btn btn-large" href="javascript:void;">
+    Quarta-feira
+    <i class="icon-chevron-up"></i>
+  </a><br /><br />
+  <div class="fields well">
+    <div class="btn-group">
+      <a class="btn cmdAddFields" href="javascript:void;">
+        <i class="icon-plus"></i>
+      </a>
+      <a class="btn cmdRemoveField" href="javascript:void;">
+        <i class="icon-minus"></i>
+      </a>      
+      <a class="btn cmdRemoveNovosFields" href="javascript:void;">
+        <i class="icon-remove"></i>
+      </a>
+    </div>
+    <br /><br />
+    <input type="hidden" value="1" name="campos_dia_semana[]" />
+    <div class="f">
+      <%= label_tag "dias_semana[quarta][inicio][]", "Inicio:" %>
+      <%= select_time Time.now, options = { :prefix => "dias_semana[quarta][inicio][]" }, 
+      html_options = { :class => "selecting2", :tipo => "inicio" } %>
+      <%= label_tag "dias_semana[quarta][final][]", "Final:" %>
+      <%= select_time Time.now, options = { :prefix => "dias_semana[quarta][final][]" }, 
+      html_options = { :class => "selecting2", :tipo => "final" } %>
+    </div>
     <div class="newFields"></div>
   </div>
-  <h3>Quinta-feira</h3><br />
-  <div id="fields" class="fields">
-  	<input type="button" class="cmdAddFields" value="&nbsp;&nbsp;+&nbsp;&nbsp;" style="display: none"/>
-    <%= label_tag "quinta_inicio[]", "Inicio:" %><br />
-    <%= select_time Time.now, :prefix => "quinta_inicio[]" %><br />
-    <%= label_tag "quinta_final[]", "Final:" %><br />
-    <%= select_time Time.now, :prefix => "quinta_final[]" %><br />
+  <br />
+  <a class="toggling btn btn-large" href="javascript:void;">
+    Quinta-feira
+    <i class="icon-chevron-up"></i>
+  </a><br /><br />
+  <div class="fields well">
+    <div class="btn-group">
+      <a class="btn cmdAddFields" href="javascript:void;">
+        <i class="icon-plus"></i>
+      </a>
+      <a class="btn cmdRemoveField" href="javascript:void;">
+        <i class="icon-minus"></i>
+      </a>      
+      <a class="btn cmdRemoveNovosFields" href="javascript:void;">
+        <i class="icon-remove"></i>
+      </a>
+    </div>
+    <br /><br />
+    <input type="hidden" value="1" name="campos_dia_semana[]" />
+    <div class="f">
+      <%= label_tag "dias_semana[quinta][inicio][]", "Inicio:" %>
+      <%= select_time Time.now, options = { :prefix => "dias_semana[quinta][inicio][]" }, 
+      html_options = { :class => "selecting2", :tipo => "inicio" } %>
+      <%= label_tag "dias_semana[quinta][final][]", "Final:" %>
+      <%= select_time Time.now, options = { :prefix => "dias_semana[quinta][final][]" }, 
+      html_options = { :class => "selecting2", :tipo => "final" } %>
+    </div>
     <div class="newFields"></div>
   </div>
-  <h3>Sexta-feira</h3><br />
-  <div id="fields" class="fields">
-  	<input type="button" class="cmdAddFields" value="&nbsp;&nbsp;+&nbsp;&nbsp;" style="display: none"/>
-    <%= label_tag "sexta_inicio[]", "Inicio:" %><br />
-    <%= select_time Time.now, :prefix => "sexta_inicio[]" %><br />
-    <%= label_tag "sexta_final[]", "Final:" %><br />
-    <%= select_time Time.now, :prefix => "sexta_final[]" %><br />
+  <br />
+  <a class="toggling btn btn-large" href="javascript:void;">
+    Sexta-feira
+    <i class="icon-chevron-up"></i>
+  </a><br /><br />
+  <div class="fields well">
+    <div class="btn-group">
+      <a class="btn cmdAddFields" href="javascript:void;">
+        <i class="icon-plus"></i>
+      </a>
+      <a class="btn cmdRemoveField" href="javascript:void;">
+        <i class="icon-minus"></i>
+      </a>      
+      <a class="btn cmdRemoveNovosFields" href="javascript:void;">
+        <i class="icon-remove"></i>
+      </a>
+    </div>
+    <br /><br />
+    <input type="hidden" value="1" name="campos_dia_semana[]" />
+    <div class="f">
+      <%= label_tag "dias_semana[sexta][inicio][]", "Inicio:" %>
+      <%= select_time Time.now, options = { :prefix => "dias_semana[sexta][inicio][]" }, 
+      html_options = { :class => "selecting2", :tipo => "inicio" } %>
+      <%= label_tag "dias_semana[sexta][final][]", "Final:" %>
+      <%= select_time Time.now, options = { :prefix => "dias_semana[sexta][final][]" }, 
+      html_options = { :class => "selecting2", :tipo => "final" } %>
+    </div>
     <div class="newFields"></div>
   </div>
-  <h3>Sábado</h3><br />
-  <div id="fields" class="fields">
-  	<input type="button" class="cmdAddFields" value="&nbsp;&nbsp;+&nbsp;&nbsp;" style="display: none"/>
-    <%= label_tag "sabado_inicio[]", "Inicio:" %><br />
-    <%= select_time Time.now, :prefix => "sabado_inicio[]" %><br />
-    <%= label_tag "sabado_final[]", "Final:" %><br />
-    <%= select_time Time.now, :prefix => "sabado_final[]" %><br />
+  <br />
+  <a class="toggling btn btn-large" href="javascript:void;">
+    Sábado
+    <i class="icon-chevron-up"></i>
+  </a><br /><br />
+  <div class="fields well">
+    <div class="btn-group">
+      <a class="btn cmdAddFields" href="javascript:void;">
+        <i class="icon-plus"></i>
+      </a>
+      <a class="btn cmdRemoveField" href="javascript:void;">
+        <i class="icon-minus"></i>
+      </a>      
+      <a class="btn cmdRemoveNovosFields" href="javascript:void;">
+        <i class="icon-remove"></i>
+      </a>
+    </div>
+    <br /><br />
+    <input type="hidden" value="1" name="campos_dia_semana[]" />    
+    <div class="f">
+      <%= label_tag "dias_semana[sabado][inicio][]", "Inicio:" %>
+      <%= select_time Time.now, options = { :prefix => "dias_semana[sabado][inicio][]" }, 
+      html_options = { :class => "selecting2", :tipo => "inicio" } %>
+      <%= label_tag "dias_semana[sabado][final][]", "Final:" %>
+      <%= select_time Time.now, options = { :prefix => "dias_semana[sabado][final][]" }, 
+      html_options = { :class => "selecting2", :tipo => "final" } %>
+    </div>
     <div class="newFields"></div>
   </div>
-  <div id="domingoFields" style="display: none">
-  	<h3>Domingo</h3><br />
-  	<div id="fieldsDom">
-      <%= label_tag "domingo_inicio[]", "Inicio:" %><br />
-      <%= select_time Time.now, :prefix => "domingo_inicio[]" %><br />
-      <%= label_tag "domingo_final[]", "Final:" %><br />
-      <%= select_time Time.now, :prefix => "domingo_final[]" %><br />
+  <br />
+  <a class="toggling btn btn-large" href="javascript:void;">
+    Domingo
+    <i class="icon-chevron-up"></i>
+  </a><br /><br />
+  <div class="fields well">
+    <input type="hidden" value="1" name="campos_dia_semana[]" />
+    <div class="f">    
+      <%= label_tag "dias_semana[domingo][inicio][]", "Inicio:" %>
+      <%= select_time Time.now, options = { :prefix => "dias_semana[domingo][inicio][]" }, 
+      html_options = { :class => "selecting2", :tipo => "inicio" } %>
+      <%= label_tag "dias_semana[domingo][final][]", "Final:" %>
+      <%= select_time Time.now, options = { :prefix => "dias_semana[domingo][final][]" }, 
+      html_options = { :class => "selecting2", :tipo => "final" } %>
     </div>
   </div>
   <br />
-  <%= submit_tag "Próximo" %>
+  <div class="fields">
+    <div class="control-group">
+      <%= label_tag "carga_horaria", "Carga horária:" %>
+      <div class="controls">
+        <%= text_field_tag "carga_horaria", "0", :class => "uneditable-input", :readonly => "readonly" %>
+        <a class="btn btn-small cmdCalcularCargaHoraria">
+          <i class="icon-check"></i>
+          Calcular
+        </a>    
+      </div>
+      
+    </div>
+  </div>
+  <div class="form-actions">
+  <%= submit_tag "Próximo", :class => "btn btn-primary" %>
+  </div>
 <% end %>

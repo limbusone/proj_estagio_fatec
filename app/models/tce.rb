@@ -9,7 +9,7 @@ class Tce < ActiveRecord::Base
   has_many :tas
   has_many :pedido_alteracaos, :as => :alteravel
   
-  validates_presence_of :convenio_id
-  validates_presence_of :aluno_id
+  validates_presence_of :convenio_id, :message => "é necessário ser preenchido"
+  validates_presence_of :aluno_id, :message => "é necessário ser preenchido"
   
 end

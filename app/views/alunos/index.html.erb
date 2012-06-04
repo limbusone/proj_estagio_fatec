@@ -1,6 +1,6 @@
 <h1>Lista de Alunos</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Curso</th>
     <th>Nome</th>
@@ -13,7 +13,7 @@
 <% @alunos.each do |aluno| %>
   <tr>
     <td><%= aluno.curso.nome %></td>
-    <td><%= aluno.nome %></td>
+    <td><%= aluno.nome.upcase %></td>
     <td><%= aluno.num_matricula %></td>
     <td><%= link_to 'Ver', aluno %></td>
     <td><%= link_to 'Editar', edit_aluno_path(aluno) %></td>

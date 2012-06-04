@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120530162106) do
+ActiveRecord::Schema.define(:version => 20120602204713) do
 
   create_table "alunos", :force => true do |t|
     t.integer  "endereco_id"
@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(:version => 20120530162106) do
     t.float    "bolsa_auxilio"
     t.datetime "data_de_rescisao"
     t.integer  "carga_horaria_semanal"
-    t.datetime "intervalo_almoco"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
     t.string   "apolice"
@@ -93,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20120530162106) do
     t.integer  "dia_semana"
     t.datetime "inicio"
     t.datetime "final"
+    t.boolean  "tipo"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end

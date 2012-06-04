@@ -1,14 +1,10 @@
 <%= form_for(@aluno) do |f| %>
   <% if @aluno.errors.any? || @aluno.endereco.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@aluno.errors.count, "erro") %> proibiu(iram) esse aluno de ser criado:</h2>
-      <h2><%= pluralize(@aluno.endereco.errors.count, "erro") %> proibiu(iram) esse endereço de ser criado:</h2>
+    <div class="alert alert-error">
+      <strong><%= pluralize(@aluno.errors.count, "erro") %> proibiu(iram) esse aluno de ser criado:</strong>
 
       <ul>
       <% @aluno.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      <% @aluno.endereco.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -32,7 +28,7 @@
   <%= f.fields_for :endereco do |ff| %>
     <div class="field">
       <%= ff.label :cep %><br />
-      <%= ff.text_field :cep %>
+      <%= ff.text_field :cep, :maxlength => "8" %>
     </div>
     <div class="field">
       <%= ff.label :logradouro %><br />
@@ -52,10 +48,10 @@
     </div>
     <div class="field">
       <%= ff.label :estado %><br />
-      <%= ff.text_field :estado %>
+      <%= ff.text_field :estado, html_options = {:style => "width: 30px", :maxlength => "2"} %>
     </div>
   <% end %>
-  <div class="actions">
-    <%= f.submit "Enviar" %>
+  <div class="form-actions">
+    <%= f.submit "Enviar", :class => "btn btn-primary" %>
   </div>
 <% end %>

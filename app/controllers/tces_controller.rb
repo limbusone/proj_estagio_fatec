@@ -68,24 +68,72 @@ class TcesController < ApplicationController
   end
 
   def newHorasDias
-    tce = Tce.find(params[:id])
-    @detalhe_termo_id = params[:id]
-    @resposta = tce.aluno.nome 
+    @detalhe_termo = DetalheTermo.find(@detalhe_termo_id = params[:id])
+    @hora_dia = HoraDia.new
+  end
+  
+  def popularArrayHorasDias(parametro_inicio, parametro_final, dia_semana, id)
+    arr = Array.new
+    for c in 0...parametro_inicio.length do
+      hora_dia      = HoraDia.new
+      cCampoInicio  = parametro_inicio[c]
+      cCampoFinal   = parametro_final[c]
+      data_inicial = DateTime.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, 
+      cCampoInicio[:hour].to_i, cCampoInicio[:minute].to_i, 0)
+      data_final = DateTime.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, 
+      cCampoFinal[:hour].to_i, cCampoFinal[:minute].to_i, 0)      
+      hora_dia.detalhe_termo_id  = id
+      hora_dia.dia_semana        = dia_semana
+      hora_dia.inicio            = data_inicial
+      hora_dia.final             = data_final
+      hora_dia.tipo              = true
+      arr << hora_dia     
+    end
+    arr
   end
 #les_20b@googlegroups.com
   def createHorasDias
-    @resposta = ""
-    params[:segunda_inicio].each do |hashzin|
-      @hora_dia = HoraDia.new(:detalhe_termo_id => params["hidId"])
-      @resposta << hashzin[:hour]
+    @detalhe_termo = DetalheTermo.find(params[:hidId])
+    @detalhe_termo_id = params[:hidId]
+    if @detalhe_termo.update_attributes(:carga_horaria_semanal => params[:carga_horaria].to_i)
+      ar_horas_dias = Array.new
+      hora_dia      = HoraDia.new
+      
+      data_inicial = DateTime.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, 
+      params[:horario_almoco_inicio][:hour].to_i, params[:horario_almoco_inicio][:minute].to_i, 0)
+      data_final = DateTime.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, 
+      params[:horario_almoco_final][:hour].to_i, params[:horario_almoco_final][:minute].to_i, 0)
+  
+      hora_dia.detalhe_termo_id  = params[:hidId]
+      hora_dia.inicio            = data_inicial
+      hora_dia.final             = data_final
+      hora_dia.tipo              = false
+      ar_horas_dias << hora_dia    
+      
+    
+      j = 0
+      params[:dias_semana].each_key do |dia_semana|
+        if (params[:campos_dia_semana][j].to_i == 1)
+          popularArrayHorasDias(params[:dias_semana][dia_semana][:inicio], 
+          params[:dias_semana][dia_semana][:final], j, params[:hidId]).each do |elem|
+            ar_horas_dias << elem
+          end        
+        end
+        j += 1
+      end
+      ada = ""
+      ar_horas_dias.each do |ar|
+        ar.save
+        ada << ar.dia_semana.to_s + "<br />"
+      end
+      render :text => ada + "carga horaria: #{params[:carga_horaria]} <br /> #{@detalhe_termo.valid?.to_s}"
+    else
+      render "newHorasDias" 
     end
-    
-    
-    
-    
-    
-    #@resposta = params[:segunda_inicio][0][:hour]
-    render "newHorasDias"
   end
   # PUT /tces/1
   # PUT /tces/1.json

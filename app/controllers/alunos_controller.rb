@@ -36,6 +36,7 @@ class AlunosController < ApplicationController
   # GET /alunos/1/edit
   def edit
     @aluno = Aluno.find(params[:id])
+    @cursos = Curso.all    
   end
 
   # POST /alunos
@@ -58,6 +59,7 @@ class AlunosController < ApplicationController
   # PUT /alunos/1.json
   def update
     @aluno = Aluno.find(params[:id])
+    @cursos = Curso.all
     respond_to do |format|
       if @aluno.update_attributes(params[:aluno])
         format.html { redirect_to @aluno, notice: 'Aluno foi alterado com sucesso!' }
