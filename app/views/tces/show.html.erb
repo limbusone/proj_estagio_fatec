@@ -50,17 +50,46 @@
   <b>Comentário:</b>
   <%= @tce.detalhe_termo.comentario %>
 </p>
+<p>
+  <b>Cep:</b>
+  <%= @tce.detalhe_termo.endereco.cep %>
+</p>
+
+<p>
+  <b>Logradouro:</b>
+  <%= @tce.detalhe_termo.endereco.logradouro %>
+</p>
+
+<p>
+  <b>Numero:</b>
+  <%= @tce.detalhe_termo.endereco.numero %>
+</p>
+
+<p>
+  <b>Bairro:</b>
+  <%= @tce.detalhe_termo.endereco.bairro %>
+</p>
+
+<p>
+  <b>Cidade:</b>
+  <%= @tce.detalhe_termo.endereco.cidade %>
+</p>
+
+<p>
+  <b>Estado:</b>
+  <%= @tce.detalhe_termo.endereco.estado %>
+</p>
 
 <p>
   <b>Rescidido:</b>
-  <%= "OK" if @tce.rescidido else "Não OK" %>
+  <%= (@tce.rescidido) ? "OK" : "Não OK" %>
 </p>
 
 <p>
   <b>Validado:</b>
-  <%= @tce.validado %>
+  <%= (@tce.validado) ? "OK" : "Não OK" %>
 </p>
 
 
-<%= link_to 'Edit', edit_tce_path(@tce) %> |
-<%= link_to 'Back', tces_path %>
+<%= link_to 'Editar', edit_tce_path(@tce) %> |
+<%= link_to 'Voltar', tces_path %>
