@@ -1,5 +1,12 @@
 jQuery(function() 
 {
+  /****************************
+  
+  
+  **********_Funcoes_**********
+  
+  
+  *****************************/  
   //habilita/desabilita botao addFields
   function habilitarOpcaoAddFieldsEAddNovosFields(opc)
   {
@@ -51,6 +58,23 @@ jQuery(function()
       newFieldsDiv.append(nFDiv);
     });
   }
+  
+  function addNovosFieldsAtividades(fieldsDivJQueryObject)
+  {
+    fieldsDivJQueryObject.each(function(i) 
+    {
+      var fieldsDiv = this;
+      var newFieldsDiv = $(fieldsDiv).find(".newFields");
+      var nFDiv = document.createElement("div");
+      $(nFDiv).addClass("f");
+      //$(nFDiv).append("<br />");
+      $(fieldsDiv).find("label:eq(0)").clone().appendTo(nFDiv);
+      $(nFDiv).append("<br />");
+      $(fieldsDiv).find("select:eq(0)").clone().appendTo(nFDiv);
+      newFieldsDiv.append(nFDiv);
+    });
+  }  
+  
   function removeTodosNovosFields(fieldsDivJQueryObject)
   {
     var newFieldsDiv = fieldsDivJQueryObject.find(".newFields");
@@ -91,6 +115,14 @@ jQuery(function()
     });
     return vTempo_horas_total;  
   }
+  
+  /****************************
+  
+  
+  **********_Eventos_**********
+  
+  
+  *****************************/
   $(".cmdRemoveField").click(function(event)
   {
     var cDivFields = this.parentNode.parentNode;
@@ -126,6 +158,15 @@ jQuery(function()
   $("select:gt(3)").change(function(event)
   {
     $("#carga_horaria").val(calcularCargaHoraria);
+  });
+  $(".cmdConclusao").click(function(event)
+  {
+    $("#hidConclusao").val(1);
+  });
+  $(".cmdAddFieldsAtividade").click(function(event)
+  {
+    var cDivFields = this.parentNode.parentNode;
+    addNovosFieldsAtividades($(cDivFields));
   });
 })
 

@@ -1,0 +1,29 @@
+<%= form_for(@atividade) do |f| %>
+  <% if @atividade.errors.any? %>
+    <div class="alert alert-error">
+      <strong><%= pluralize(@atividade.errors.count, "erro") %> proibiu(iram) essa atividade de ser criado:</strong>
+
+      <ul>
+      <% @atividade.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :curso_id %><br />
+    <%= f.collection_select(:curso_id, @cursos, :id, :nome) %>
+  </div>
+  <div class="field">
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </div>
+  <div class="field">
+    <%= f.label :descricao, "Descrição" %><br />
+    <%= f.text_area :descricao, :size => "24x6" %>
+  </div>
+  <div class="form-actions">
+    <%= f.submit "Enviar", :class => "btn btn-primary"%>
+  </div>
+<% end %>

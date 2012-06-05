@@ -1,3 +1,6 @@
+<% content_for(:custom_javascript_includes) do %>
+<%= javascript_include_tag "tces/scriptaux" %>
+<% end %>
 <%= form_for(@tce) do |f| %>
   <% if @tce.errors.any? %>
     <div class="alert alert-error">
@@ -103,9 +106,20 @@
   <div class="field">
     <%= f.label :assinado_professor %><br />
     <%= f.check_box :assinado_professor %>
-  </div>  
+  </div>
+  <input type="hidden" name="hidConclusao" id="hidConclusao" value="0" />  
   <div class="form-actions">
-    <%= f.submit "Próximo", :class => "btn btn-primary" %>
+    <button type="submit" class="btn cmdConclusao" name="commit">
+      <i class="icon-ok"></i>
+      Concluir
+    </button>  
+    <% 
+    #f.submit "Próximo", :class => "btn btn-primary" 
+    %>
+    <button type="submit" class="btn btn-primary" name="commit">
+      <i class="icon-share-alt"></i>
+      Próximo
+    </button>      
   </div>
 <% end %>
 

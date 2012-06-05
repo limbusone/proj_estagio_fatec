@@ -6,7 +6,7 @@
 <% end %>
 <% if @detalhe_termo.errors.any? %>
   <div class="alert alert-error">
-    <strong><%= pluralize(@detalhe_termo.errors.count, "Erro") %></strong>
+    <strong><%= pluralize(@detalhe_termo.errors.count, "Erro") %>:</strong>
 
     <ul>
     <% @detalhe_termo.errors.full_messages.each do |msg| %>
@@ -226,10 +226,20 @@
           Calcular
         </a>    
       </div>
-      
     </div>
   </div>
+  <input type="hidden" name="hidConclusao" id="hidConclusao" value="0" />
   <div class="form-actions">
-  <%= submit_tag "Próximo", :class => "btn btn-primary" %>
+    <button type="submit" class="btn cmdConclusao" name="commit">
+      <i class="icon-ok"></i>
+      Concluir
+    </button>      
+    <% 
+    #f.submit "Próximo", :class => "btn btn-primary" 
+    %>
+    <button type="submit" class="btn btn-primary" name="commit">
+      <i class="icon-share-alt"></i>
+      Próximo
+    </button>
   </div>
 <% end %>

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Curso:</b>
+  <%= @atividade.curso.nome %>
+</p>
+
+<p>
+  <b>Nome:</b>
+  <%= @atividade.nome %>
+</p>
+
+<p>
+  <b>Descricao:</b>
+  <%= @atividade.descricao %>
+</p>
+
+
+<%= link_to 'Editar', edit_atividade_path(@atividade) %> |
+<%= link_to 'Voltar', atividades_path %>

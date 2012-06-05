@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  curso_id: 1
   nome: MyString
   descricao: MyText
 
 two:
+  curso_id: 1
   nome: MyString
   descricao: MyText

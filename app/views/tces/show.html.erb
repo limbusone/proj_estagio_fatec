@@ -2,22 +2,58 @@
 
 <p>
   <b>Aluno:</b>
-  <%= @tce.aluno_id %>
+  <%= @tce.aluno.nome.upcase %>
 </p>
 
 <p>
   <b>Convenio:</b>
-  <%= @tce.convenio_id %>
+  <%= @tce.convenio.concedente.nome %> interveniada por <%= @tce.convenio.interveniente.nome %> 
 </p>
 
 <p>
-  <b>Detalhe termo:</b>
-  <%= @tce.detalhe_termo_id %>
+  <b>Nome do Responsável:</b>
+  <%= @tce.responsavel_nome%>
+</p>
+
+<p>
+  <b>Cargo do Responsável:</b>
+  <%= @tce.responsavel_cargo%>
+</p>
+
+<p>
+  <b>Data de início:</b>
+  <%= @tce.detalhe_termo.data_inicio.day %>/<%= @tce.detalhe_termo.data_inicio.month %>/<%= @tce.detalhe_termo.data_inicio.year %>
+</p>
+
+<p>
+  <b>Data de término:</b>
+  <%= @tce.detalhe_termo.data_termino.day %>/<%= @tce.detalhe_termo.data_termino.month %>/<%= @tce.detalhe_termo.data_termino.year %>
+</p>
+<p>
+  <b>Data de rescisão:</b>
+  <%= @tce.detalhe_termo.data_de_rescisao.day %>/<%= @tce.detalhe_termo.data_de_rescisao.month %>/<%= @tce.detalhe_termo.data_de_rescisao.year %>
+</p>
+
+<p>
+  <b>Bolsa auxílio:</b>
+  <%= @tce.detalhe_termo.bolsa_auxilio %>
+</p>
+<p>
+  <b>Seguradora:</b>
+  <%= @tce.detalhe_termo.seguradora.nome %>
+</p>
+<p>
+  <b>Apólice:</b>
+  <%= @tce.detalhe_termo.apolice %>
+</p>
+<p>
+  <b>Comentário:</b>
+  <%= @tce.detalhe_termo.comentario %>
 </p>
 
 <p>
   <b>Rescidido:</b>
-  <%= @tce.rescidido %>
+  <%= "OK" if @tce.rescidido else "Não OK" %>
 </p>
 
 <p>

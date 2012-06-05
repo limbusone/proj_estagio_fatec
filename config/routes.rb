@@ -1,7 +1,11 @@
 Estagio::Application.routes.draw do
   
+  resources :atividades
+
   match 'tces/:id/newHorasDias' => 'tces#newHorasDias'
   match 'tces/createHorasDias' => 'tces#createHorasDias'
+  match 'tces/:id/newListaAtividades' => 'tces#newListaAtividades'
+  match 'tces/createListaAtividades' => 'tces#createListaAtividades'
 
   resources :hora_dia
 

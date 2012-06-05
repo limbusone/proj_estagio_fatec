@@ -57,9 +57,13 @@ class TcesController < ApplicationController
     @convenios_array = Convenio.all.map { |conv| ["#{conv.concedente.nome} ~ #{conv.interveniente.nome}", conv.id]}    
     respond_to do |format|
       if @tce.save
-        #format.html { redirect_to @tce, notice: 'Tce was successfully created.' }
-        format.html { redirect_to :action => "newHorasDias", :id => @tce.detalhe_termo.id}
-        format.json { render json: @tce, status: :created, location: @tce }
+        if params["hidConclusao"].to_i == 1
+          format.html { redirect_to :action => "index"}
+        else
+          #format.html { redirect_to @tce, notice: 'Tce was successfully created.' }
+          format.html { redirect_to :action => "newHorasDias", :id => @tce.detalhe_termo.id}
+          format.json { render json: @tce, status: :created, location: @tce }
+        end
       else
         format.html { render action: "new" }
         format.json { render json: @tce.errors, status: :unprocessable_entity }
@@ -130,10 +134,33 @@ class TcesController < ApplicationController
         ar.save
         ada << ar.dia_semana.to_s + "<br />"
       end
-      render :text => ada + "carga horaria: #{params[:carga_horaria]} <br /> #{@detalhe_termo.valid?.to_s}"
+      if params["hidConclusao"].to_i == 1
+        redirect_to :action => "index"
+      else      
+        redirect_to :action => "newListaAtividades", :id => @detalhe_termo_id
+      end
+      #render :text => ada + "carga horaria: #{params[:carga_horaria]} <br /> #{@detalhe_termo.valid?.to_s}"
     else
       render "newHorasDias" 
     end
+  end
+  
+  def newListaAtividades
+    @detalhe_termo_id = params[:id]
+    @tces = Tce.where("detalhe_termo_id = '#{@detalhe_termo_id}'")
+    @lista_atividade = ListaAtividade.new
+    @atividades = Atividade.where("curso_id = '#{@tces.first.aluno.curso_id}'")
+  end
+  
+  def createListaAtividades
+    @detalhe_termo_id = params[:hidId]
+    params[:atividade].each do |at|
+      lista_atividade = ListaAtividade.new
+      lista_atividade.atividade_id = at
+      lista_atividade.detalhe_termo_id = @detalhe_termo_id
+      lista_atividade.save
+    end
+    redirect_to :action => "index"
   end
   # PUT /tces/1
   # PUT /tces/1.json

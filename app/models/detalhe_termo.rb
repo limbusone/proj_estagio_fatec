@@ -7,8 +7,8 @@ class DetalheTermo < ActiveRecord::Base
   has_one :ta
   has_many :lista_atividades
   has_many :atividades, :through => :lista_atividade
-  has_many :hora_dias
-  belongs_to :endereco
+  has_many :hora_dias, :dependent => :destroy
+  belongs_to :endereco, :dependent => :destroy
   belongs_to :seguradora
   accepts_nested_attributes_for :endereco
   accepts_nested_attributes_for :seguradora

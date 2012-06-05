@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120602204713) do
+ActiveRecord::Schema.define(:version => 20120604193529) do
 
   create_table "alunos", :force => true do |t|
     t.integer  "endereco_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20120602204713) do
     t.text     "descricao"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "curso_id"
   end
 
   create_table "convenios", :force => true do |t|
@@ -92,9 +93,9 @@ ActiveRecord::Schema.define(:version => 20120602204713) do
     t.integer  "dia_semana"
     t.datetime "inicio"
     t.datetime "final"
-    t.boolean  "tipo"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.boolean  "tipo"
   end
 
   create_table "lista_atividades", :force => true do |t|

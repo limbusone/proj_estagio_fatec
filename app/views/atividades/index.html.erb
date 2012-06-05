@@ -1,0 +1,27 @@
+<h1>Lista de Atividades</h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>Curso</th>
+    <th>Nome</th>
+    <th>Descrição</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @atividades.each do |atividade| %>
+  <tr>
+    <td><%= atividade.curso.nome %></td>
+    <td><%= atividade.nome %></td>
+    <td><%= atividade.descricao %></td>
+    <td><%= link_to 'Ver', atividade %></td>
+    <td><%= link_to 'Editar', edit_atividade_path(atividade) %></td>
+    <td><%= link_to 'Deletar', atividade, confirm: 'Tem certeza?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nova Atividade', new_atividade_path %>
