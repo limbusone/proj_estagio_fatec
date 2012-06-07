@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<h2>Dados Gerais</h2>
+
 <p>
   <b>Aluno:</b>
   <%= @tce.aluno.nome.upcase %>
@@ -89,7 +91,29 @@
   <b>Validado:</b>
   <%= (@tce.validado) ? "OK" : "Não OK" %>
 </p>
-
+<h2>Horário de trabalho</h2>
+<p>
+  <b>Carga horária semanal:</b><br/>
+  <%= @tce.detalhe_termo.carga_horaria_semanal%> hrs
+</p>
+<%
+  dias_semana = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"] 
+  horarios = @tce.detalhe_termo.hora_dias 
+  horarios.each do |h| 
+%>
+<p>
+  <b><%= (h.tipo) ? dias_semana[h.dia_semana.to_i] + ":" : "Horário de almoço:" %></b><br/>
+  Início: <%= h.inicio.hour %> : <%= h.inicio.min %>
+  Término: <%= h.final.hour %> : <%= h.final.min %>
+</p>
+  
+<% end %>
+<h2>Atividades</h2>
+<ul>
+<% @tce.detalhe_termo.lista_atividades.each do |at| %>
+  <li><%= at.atividade.nome %></li>
+<% end %>
+</ul>
 
 <%= link_to 'Editar', edit_tce_path(@tce) %> |
 <%= link_to 'Voltar', tces_path %>

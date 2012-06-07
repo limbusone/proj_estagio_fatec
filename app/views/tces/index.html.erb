@@ -20,7 +20,20 @@
     <td><%= tce.convenio.interveniente.nome %></td>
     <td><%= tce.rescidido %></td>
     <td><%= link_to 'Ver', tce %></td>
-    <td><%= link_to 'Editar', edit_tce_path(tce) %></td>
+    <!--<td><%#= link_to 'Editar', edit_tce_path(tce) %></td>-->
+    <td>
+      <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          Editar
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><%= link_to 'Dados Gerais', edit_tce_path(tce) %></li>
+          <li><%= link_to 'Horário de trabalho', "#" %></li>
+          <li><%= link_to 'Atividades', "#" %></li>
+        </ul>
+      </div>      
+    </td>    
     <td><%= link_to 'Deletar', tce, confirm: 'Tem certeza?', method: :delete %></td>
   </tr>
 <% end %>

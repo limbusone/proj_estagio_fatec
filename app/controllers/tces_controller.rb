@@ -44,11 +44,6 @@ class TcesController < ApplicationController
     end
   end
 
-  # GET /tces/1/edit
-  def edit
-    @tce = Tce.find(params[:id])
-  end
-
   # POST /tces
   # POST /tces.json
   def create
@@ -162,6 +157,21 @@ class TcesController < ApplicationController
     end
     redirect_to :action => "index"
   end
+  
+  def editHorasDias
+    tce = Tce.find(params[:id])
+    @detalhe_termo = DetalheTermo.find(@detalhe_termo_id = tce.detalhe_termo.id)
+  end
+
+  # GET /tces/1/edit
+  def edit
+    @tce = Tce.find(params[:id])
+    @alunos = Aluno.all
+    @convenios_array = Convenio.all.map { |conv| ["#{conv.concedente.nome} ~ #{conv.interveniente.nome}", conv.id]}
+    
+    
+  end
+
   # PUT /tces/1
   # PUT /tces/1.json
   def update
