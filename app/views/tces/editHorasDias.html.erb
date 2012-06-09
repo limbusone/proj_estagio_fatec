@@ -15,12 +15,13 @@
     </ul>
   </div>
 <% end %>
-<h1>Novo Termo de Compromisso de Estágio</h1>
+<h1>Editando Termo de Compromisso de Estágio</h1>
+<br />
 <div>
-  <h5>1 - Dados Gerais</h5><h2>2 - Horário de trabalho</h2><h5>3 - Atividades</h5>
+  <h2>Horário de trabalho</h2>
 </div>
 <br />
-<%= form_tag({:controller => "tces", :action => "createHorasDias"}, :method => "post", :class => "form-inline") do%>
+<%= form_tag({:controller => "tces", :action => "updateHorasDias"}, :method => "post", :class => "form-inline") do%>
   <!--<input type="button" value="&nbsp;&nbsp;+&nbsp;&nbsp;" id="addCampos" /> -->
   <input type="hidden" value="<%= @detalhe_termo_id %>" name="hidId" />
   <!--
@@ -29,37 +30,51 @@
   -->
   <h3>Horário de almoço</h3><br />
   <div class="fields well">
+    <% al = @detalhe_termo.hora_dias.where("tipo = ?", false).first %>
+    
     <%= label_tag "horario_almoco_inicio", "Inicio:" %>
-    <%= select_time Time.now, options = { :prefix => "horario_almoco_inicio" }, 
+    <%= select_time Time.new(DateTime.now.year, DateTime.now.month, DateTime.now.day, al.inicio.hour, al.inicio.min), 
+    options = { :prefix => "horario_almoco_inicio" }, 
     html_options = { :class => "selecting2", :tipo => "inicio" } %>
     <%= label_tag "horario_almoco_final", "Final:" %>
-    <%= select_time Time.now, options = { :prefix => "horario_almoco_final" }, 
+    <%= select_time Time.new(DateTime.now.year, DateTime.now.month, DateTime.now.day, al.final.hour, al.final.min), options = { :prefix => "horario_almoco_final" }, 
     html_options = { :class => "selecting2", :tipo => "final" }  %>
   </div>
   <br />
+  <% 
+    se  = @detalhe_termo.hora_dias.where("dia_semana = ?", 0).first
+  %>  
   <h3>Horários</h3><br />
   <a class="toggling btn btn-large" href="javascript:void;">
     Segunda-feira
-    <i class="icon-chevron-up"></i>
+    <i class="<%= (se) ? "icon-chevron-up" : "icon-chevron-down"%>" 
+      classorigem="<%= (se) ? "icon-chevron-up" : "icon-chevron-down"%>"></i>
   </a><br /><br />
-  <div class="fields well">
-    <input type="hidden" value="1" name="campos_dia_semana[]" />
+  <div class="fields well" <%= (se) ? "style='display : block'" : "style='display : none'"%>>
+    <input type="hidden" value="<%= (se) ? 1 : 0%>" name="campos_dia_semana[]" />
     <div class="f">
       <%= label_tag "dias_semana[segunda][inicio][]", "Inicio:" %>
-      <%= select_time Time.now, options = { :prefix => "dias_semana[segunda][inicio][]" }, 
+      <%= select_time (se) ? Time.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, se.inicio.hour, se.inicio.min) : Time.now, options = { :prefix => "dias_semana[segunda][inicio][]" }, 
       html_options = { :class => "selecting2", :tipo => "inicio" } %>
       <%= label_tag "dias_semana[segunda][final][]", "Final:" %>
-      <%= select_time Time.now, options = { :prefix => "dias_semana[segunda][final][]" }, 
+      <%= select_time (se) ? Time.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, se.final.hour, se.final.min) : Time.now, options = { :prefix => "dias_semana[segunda][final][]" }, 
       html_options = { :class => "selecting2", :tipo => "final" }  %>
     </div>
     <div class="newFields"></div>
   </div>
   <br />
+  <% 
+    t = @detalhe_termo.hora_dias.where("dia_semana = ?", 1)
+    te = t.exists?
+  %>  
   <a class="toggling btn btn-large" href="javascript:void;">
     Terça-feira
-    <i class="icon-chevron-up"></i>
+    <i class="<%= (te) ? "icon-chevron-up" : "icon-chevron-down"%>" 
+      classorigem="<%= (te) ? "icon-chevron-up" : "icon-chevron-down"%>"></i>
   </a><br /><br />
-  <div class="fields well">
+  <div class="fields well" <%= (te) ? "style='display : block'" : "style='display : none'"%>>
     <div class="btn-group">
       <a class="btn cmdAddFields" href="javascript:void;">
         <i class="icon-plus"></i>
@@ -72,23 +87,46 @@
       </a>
     </div>
     <br /><br />
-    <input type="hidden" value="1" name="campos_dia_semana[]" />
+    <input type="hidden" value="<%= (te) ? 1 : 0%>" name="campos_dia_semana[]" />
     <div class="f">    
       <%= label_tag "dias_semana[terca][inicio][]", "Inicio:" %>
-      <%= select_time Time.now, options = { :prefix => "dias_semana[terca][inicio][]" }, 
+      <%= select_time (te) ? Time.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, t.first.inicio.hour, t.first.inicio.min) : Time.now, options = { :prefix => "dias_semana[terca][inicio][]" }, 
       html_options = { :class => "selecting2", :tipo => "inicio" } %>
       <%= label_tag "dias_semana[terca][final][]", "Final:" %>
-      <%= select_time Time.now, options = { :prefix => "dias_semana[terca][final][]" }, 
+      <%= select_time (te) ? Time.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, t.first.final.hour, t.first.final.min) : Time.now, options = { :prefix => "dias_semana[terca][final][]" }, 
       html_options = { :class => "selecting2", :tipo => "final" } %>
     </div>
-    <div class="newFields"></div>
+    <div class="newFields">
+      <% if (t.length > 1)%>
+        <% for i in 1...t.length do%>
+          <div class="f">
+            <br />
+            <%= label_tag "dias_semana[terca][inicio][]", "Inicio:" %>
+            <%= select_time Time.new(DateTime.now.year, 
+            DateTime.now.month, DateTime.now.day, t[i].inicio.hour, t[i].inicio.min), options = { :prefix => "dias_semana[terca][inicio][]" }, 
+            html_options = { :class => "selecting2", :tipo => "inicio" } %>
+            <%= label_tag "dias_semana[terca][final][]", "Final:" %>
+            <%= select_time Time.new(DateTime.now.year, 
+            DateTime.now.month, DateTime.now.day, t[i].final.hour, t[i].final.min), options = { :prefix => "dias_semana[terca][final][]" }, 
+            html_options = { :class => "selecting2", :tipo => "final" } %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>  
   <br />
+  <% 
+    qa = @detalhe_termo.hora_dias.where("dia_semana = ?", 2)
+    qae = qa.exists?
+  %>  
   <a class="toggling btn btn-large" href="javascript:void;">
     Quarta-feira
-    <i class="icon-chevron-up"></i>
+    <i class="<%= (qae) ? "icon-chevron-up" : "icon-chevron-down"%>" 
+      classorigem="<%= (qae) ? "icon-chevron-up" : "icon-chevron-down"%>"></i>
   </a><br /><br />
-  <div class="fields well">
+  <div class="fields well" <%= (qae) ? "style='display : block'" : "style='display : none'"%>>
     <div class="btn-group">
       <a class="btn cmdAddFields" href="javascript:void;">
         <i class="icon-plus"></i>
@@ -101,23 +139,46 @@
       </a>
     </div>
     <br /><br />
-    <input type="hidden" value="1" name="campos_dia_semana[]" />
+    <input type="hidden" value="<%= (qae) ? 1 : 0%>" name="campos_dia_semana[]" />
     <div class="f">
       <%= label_tag "dias_semana[quarta][inicio][]", "Inicio:" %>
-      <%= select_time Time.now, options = { :prefix => "dias_semana[quarta][inicio][]" }, 
+      <%= select_time (qae) ? Time.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, qa.first.inicio.hour, qa.first.inicio.min) : Time.now, options = { :prefix => "dias_semana[quarta][inicio][]" }, 
       html_options = { :class => "selecting2", :tipo => "inicio" } %>
       <%= label_tag "dias_semana[quarta][final][]", "Final:" %>
-      <%= select_time Time.now, options = { :prefix => "dias_semana[quarta][final][]" }, 
+      <%= select_time (qae) ? Time.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, qa.first.final.hour, qa.first.final.min) : Time.now, options = { :prefix => "dias_semana[quarta][final][]" }, 
       html_options = { :class => "selecting2", :tipo => "final" } %>
     </div>
-    <div class="newFields"></div>
+    <div class="newFields">
+      <% if (qa.length > 1)%>
+        <% for i in 1...qa.length do%>
+          <div class="f">
+            <br />
+            <%= label_tag "dias_semana[quarta][inicio][]", "Inicio:" %>
+            <%= select_time Time.new(DateTime.now.year, 
+            DateTime.now.month, DateTime.now.day, qa[i].inicio.hour, qa[i].inicio.min), options = { :prefix => "dias_semana[quarta][inicio][]" }, 
+            html_options = { :class => "selecting2", :tipo => "inicio" } %>
+            <%= label_tag "dias_semana[quarta][final][]", "Final:" %>
+            <%= select_time Time.new(DateTime.now.year, 
+            DateTime.now.month, DateTime.now.day, qa[i].final.hour, qa[i].final.min), options = { :prefix => "dias_semana[quarta][final][]" }, 
+            html_options = { :class => "selecting2", :tipo => "final" } %>            
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
   <br />
+  <% 
+    qi = @detalhe_termo.hora_dias.where("dia_semana = ?", 3)
+    qie = qi.exists?
+  %>
   <a class="toggling btn btn-large" href="javascript:void;">
     Quinta-feira
-    <i class="icon-chevron-up"></i>
+    <i class="<%= (qie) ? "icon-chevron-up" : "icon-chevron-down"%>" 
+      classorigem="<%= (qie) ? "icon-chevron-up" : "icon-chevron-down"%>"></i>
   </a><br /><br />
-  <div class="fields well">
+  <div class="fields well" <%= (qie) ? "style='display : block'" : "style='display : none'"%>>
     <div class="btn-group">
       <a class="btn cmdAddFields" href="javascript:void;">
         <i class="icon-plus"></i>
@@ -130,23 +191,46 @@
       </a>
     </div>
     <br /><br />
-    <input type="hidden" value="1" name="campos_dia_semana[]" />
+    <input type="hidden" value="<%= (qie) ? 1 : 0%>" name="campos_dia_semana[]" />
     <div class="f">
       <%= label_tag "dias_semana[quinta][inicio][]", "Inicio:" %>
-      <%= select_time Time.now, options = { :prefix => "dias_semana[quinta][inicio][]" }, 
+      <%= select_time (qie) ? Time.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, qi.first.inicio.hour, qi.first.inicio.min) : Time.now, options = { :prefix => "dias_semana[quinta][inicio][]" }, 
       html_options = { :class => "selecting2", :tipo => "inicio" } %>
       <%= label_tag "dias_semana[quinta][final][]", "Final:" %>
-      <%= select_time Time.now, options = { :prefix => "dias_semana[quinta][final][]" }, 
+      <%= select_time (qie) ? Time.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, qi.first.final.hour, qi.first.final.min) : Time.now, options = { :prefix => "dias_semana[quinta][final][]" }, 
       html_options = { :class => "selecting2", :tipo => "final" } %>
     </div>
-    <div class="newFields"></div>
+    <div class="newFields">
+      <% if (qi.length > 1)%>
+        <% for i in 1...qi.length do%>
+          <div class="f">
+            <br />
+            <%= label_tag "dias_semana[quinta][inicio][]", "Inicio:" %>
+            <%= select_time Time.new(DateTime.now.year, 
+            DateTime.now.month, DateTime.now.day, qi[i].inicio.hour, qi[i].inicio.min), options = { :prefix => "dias_semana[quinta][inicio][]" }, 
+            html_options = { :class => "selecting2", :tipo => "inicio" } %>
+            <%= label_tag "dias_semana[quinta][final][]", "Final:" %>
+            <%= select_time Time.new(DateTime.now.year, 
+            DateTime.now.month, DateTime.now.day, qi[i].final.hour, qi[i].final.min), options = { :prefix => "dias_semana[quinta][final][]" }, 
+            html_options = { :class => "selecting2", :tipo => "final" } %>            
+          </div>
+        <% end %>
+      <% end %>      
+    </div>
   </div>
   <br />
+  <% 
+    sx = @detalhe_termo.hora_dias.where("dia_semana = ?", 4)
+    sxe = sx.exists?
+  %>  
   <a class="toggling btn btn-large" href="javascript:void;">
     Sexta-feira
-    <i class="icon-chevron-up"></i>
+    <i class="<%= (sxe) ? "icon-chevron-up" : "icon-chevron-down"%>" 
+      classorigem="<%= (sxe) ? "icon-chevron-up" : "icon-chevron-down"%>"></i>
   </a><br /><br />
-  <div class="fields well">
+  <div class="fields well" <%= (sxe) ? "style='display : block'" : "style='display : none'"%>>
     <div class="btn-group">
       <a class="btn cmdAddFields" href="javascript:void;">
         <i class="icon-plus"></i>
@@ -159,23 +243,46 @@
       </a>
     </div>
     <br /><br />
-    <input type="hidden" value="1" name="campos_dia_semana[]" />
+    <input type="hidden" value="<%= (sxe) ? 1 : 0%>" name="campos_dia_semana[]" />
     <div class="f">
       <%= label_tag "dias_semana[sexta][inicio][]", "Inicio:" %>
-      <%= select_time Time.now, options = { :prefix => "dias_semana[sexta][inicio][]" }, 
+      <%= select_time (sxe) ? Time.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, sx.first.inicio.hour, sx.first.inicio.min) : Time.now, options = { :prefix => "dias_semana[sexta][inicio][]" }, 
       html_options = { :class => "selecting2", :tipo => "inicio" } %>
       <%= label_tag "dias_semana[sexta][final][]", "Final:" %>
-      <%= select_time Time.now, options = { :prefix => "dias_semana[sexta][final][]" }, 
+      <%= select_time (sxe) ? Time.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, sx.first.final.hour, sx.first.final.min) : Time.now, options = { :prefix => "dias_semana[sexta][final][]" }, 
       html_options = { :class => "selecting2", :tipo => "final" } %>
     </div>
-    <div class="newFields"></div>
+    <div class="newFields">
+      <% if (sx.length > 1)%>
+        <% for i in 1...sx.length do%>
+          <div class="f">
+            <br />
+            <%= label_tag "dias_semana[sexta][inicio][]", "Inicio:" %>
+            <%= select_time Time.new(DateTime.now.year, 
+            DateTime.now.month, DateTime.now.day, sx[i].inicio.hour, sx[i].inicio.min), options = { :prefix => "dias_semana[sexta][inicio][]" }, 
+            html_options = { :class => "selecting2", :tipo => "inicio" } %>
+            <%= label_tag "dias_semana[sexta][final][]", "Final:" %>
+            <%= select_time Time.new(DateTime.now.year, 
+            DateTime.now.month, DateTime.now.day, sx[i].final.hour, sx[i].final.min), options = { :prefix => "dias_semana[sexta][final][]" }, 
+            html_options = { :class => "selecting2", :tipo => "final" } %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
   <br />
+  <% 
+    sb = @detalhe_termo.hora_dias.where("dia_semana = ?", 5)
+    sbe = sb.exists?
+  %>  
   <a class="toggling btn btn-large" href="javascript:void;">
     Sábado
-    <i class="icon-chevron-up"></i>
+    <i class="<%= (sbe) ? "icon-chevron-up" : "icon-chevron-down"%>" 
+      classorigem="<%= (sbe) ? "icon-chevron-up" : "icon-chevron-down"%>"></i>
   </a><br /><br />
-  <div class="fields well">
+  <div class="fields well" <%= (sbe) ? "style='display : block'" : "style='display : none'"%>>
     <div class="btn-group">
       <a class="btn cmdAddFields" href="javascript:void;">
         <i class="icon-plus"></i>
@@ -188,30 +295,56 @@
       </a>
     </div>
     <br /><br />
-    <input type="hidden" value="1" name="campos_dia_semana[]" />    
+    <input type="hidden" value="<%= (sbe) ? 1 : 0%>" name="campos_dia_semana[]" />    
     <div class="f">
       <%= label_tag "dias_semana[sabado][inicio][]", "Inicio:" %>
-      <%= select_time Time.now, options = { :prefix => "dias_semana[sabado][inicio][]" }, 
+      <%= select_time (sbe) ? Time.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, sb.first.inicio.hour, sb.first.inicio.min) : Time.now, options = { :prefix => "dias_semana[sabado][inicio][]" }, 
       html_options = { :class => "selecting2", :tipo => "inicio" } %>
       <%= label_tag "dias_semana[sabado][final][]", "Final:" %>
-      <%= select_time Time.now, options = { :prefix => "dias_semana[sabado][final][]" }, 
+      <%= select_time (sbe) ? Time.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, sb.first.final.hour, sb.first.final.min) : Time.now, options = { :prefix => "dias_semana[sabado][final][]" }, 
       html_options = { :class => "selecting2", :tipo => "final" } %>
     </div>
-    <div class="newFields"></div>
+    <div class="newFields">
+      <% if (sb.length > 1)%>
+        <% for i in 1...sb.length do%>
+          <div class="f">
+            <br />
+            <%= label_tag "dias_semana[sabado][inicio][]", "Inicio:" %>
+            <%= select_time Time.new(DateTime.now.year, 
+            DateTime.now.month, DateTime.now.day, s[i].inicio.hour, s[i].inicio.min), options = { :prefix => "dias_semana[sabado][inicio][]" }, 
+            html_options = { :class => "selecting2", :tipo => "inicio" } %>
+            <%= label_tag "dias_semana[sabado][final][]", "Final:" %>
+            <%= select_time Time.new(DateTime.now.year, 
+            DateTime.now.month, DateTime.now.day, s[i].final.hour, s[i].final.min), options = { :prefix => "dias_semana[sabado][inicio][]" }, 
+            html_options = { :class => "selecting2", :tipo => "final" } %>
+          </div>          
+        <% end %>
+      <% end %>
+    </div>
   </div>
   <br />
+  <% 
+    dom = @detalhe_termo.hora_dias.where("dia_semana = ?", 6).first
+  %>  
   <a class="toggling btn btn-large" href="javascript:void;">
     Domingo
-    <i class="icon-chevron-up"></i>
+    <i class="<%= (dom) ? "icon-chevron-up" : "icon-chevron-down"%>" 
+      classorigem="<%= (dom) ? "icon-chevron-up" : "icon-chevron-down"%>"></i>
   </a><br /><br />
-  <div class="fields well">
-    <input type="hidden" value="1" name="campos_dia_semana[]" />
+  <div class="fields well" <%= (dom) ? "style='display : block'" : "style='display : none'"%>>
+    <input type="hidden" value="<%= (dom) ? 1 : 0%>" name="campos_dia_semana[]" />
     <div class="f">    
       <%= label_tag "dias_semana[domingo][inicio][]", "Inicio:" %>
-      <%= select_time Time.now, options = { :prefix => "dias_semana[domingo][inicio][]" }, 
+      <%= select_time (dom) ? Time.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, dom.inicio.hour, dom.inicio.min) : Time.now, 
+      options = { :prefix => "dias_semana[domingo][inicio][]" }, 
       html_options = { :class => "selecting2", :tipo => "inicio" } %>
       <%= label_tag "dias_semana[domingo][final][]", "Final:" %>
-      <%= select_time Time.now, options = { :prefix => "dias_semana[domingo][final][]" }, 
+      <%= select_time (dom) ? Time.new(DateTime.now.year, 
+      DateTime.now.month, DateTime.now.day, dom.final.hour, dom.final.min) : Time.now, 
+      options = { :prefix => "dias_semana[domingo][final][]" }, 
       html_options = { :class => "selecting2", :tipo => "final" } %>
     </div>
   </div>
@@ -220,7 +353,8 @@
     <div class="control-group">
       <%= label_tag "carga_horaria", "Carga horária:" %>
       <div class="controls">
-        <%= text_field_tag "carga_horaria", "0", :class => "uneditable-input", :readonly => "readonly" %>
+        <%= text_field_tag "carga_horaria", @detalhe_termo.carga_horaria_semanal, 
+        :class => "uneditable-input", :readonly => "readonly" %>
         <a class="btn btn-small cmdCalcularCargaHoraria">
           <i class="icon-check"></i>
           Calcular
@@ -230,16 +364,9 @@
   </div>
   <input type="hidden" name="hidConclusao" id="hidConclusao" value="0" />
   <div class="form-actions">
-    <button type="submit" class="btn cmdConclusao" name="commit">
+    <button type="submit" class="btn cmdConclusao btn-primary" name="commit">
       <i class="icon-ok"></i>
-      Concluir
+      Enviar
     </button>      
-    <% 
-    #f.submit "Próximo", :class => "btn btn-primary" 
-    %>
-    <button type="submit" class="btn btn-primary" name="commit">
-      <i class="icon-share-alt"></i>
-      Próximo
-    </button>
   </div>
 <% end %>

@@ -141,8 +141,22 @@ jQuery(function()
       primeiraHiddenTag.val("0");
     else
       primeiraHiddenTag.val("1");
-    cDivFieldsJQuery.slideToggle("normal"); 
-    $(this).find(":first").toggleClass("icon-chevron-down");
+    cDivFieldsJQuery.slideToggle("normal");
+    if ($(this).find(":first").attr("classorigem") == "icon-chevron-up")
+      $(this).find(":first").toggleClass("icon-chevron-down");
+    else
+    {
+      if ($(this).find(":first").hasClass("icon-chevron-down"))
+      {
+        $(this).find(":first").addClass("icon-chevron-up");
+        $(this).find(":first").removeClass("icon-chevron-down");
+      }
+      else
+      {
+        $(this).find(":first").addClass("icon-chevron-down");
+        $(this).find(":first").removeClass("icon-chevron-up");
+      }
+    }
     $("#carga_horaria").val(calcularCargaHoraria);
   });
 

@@ -28,12 +28,25 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
+          <% 
+            vh = tce.detalhe_termo.hora_dias.empty? 
+            va = tce.detalhe_termo.lista_atividades.empty?
+          %>
           <li><%= link_to 'Dados Gerais', edit_tce_path(tce) %></li>
-          <li><%= link_to 'Horário de trabalho', "#" %></li>
-          <li><%= link_to 'Atividades', "#" %></li>
+          <li><%= link_to 'Horário de trabalho', "/tces/#{tce.detalhe_termo_id}/editHorasDias" if (!(vh)) %></li>
+          <li><%= link_to 'Atividades', "/tces/#{tce.detalhe_termo_id}/editListaAtividades" if (!(va))%></li>
+          <% if (vh || va)%>
+            <li class='divider'></li>
+          <% end %>
+          <% if (vh)%>
+            <li><%= link_to 'Criar Horário de trabalho', "/tces/#{tce.detalhe_termo_id}/newHorasDias" %></li>
+          <% end %>
+          <% if (va)%>
+            <li><%= link_to 'Criar Lista de atividades', "/tces/#{tce.detalhe_termo_id}/newListaAtividades" %></li>
+          <% end %>          
         </ul>
       </div>      
-    </td>    
+    </td>  
     <td><%= link_to 'Deletar', tce, confirm: 'Tem certeza?', method: :delete %></td>
   </tr>
 <% end %>
@@ -59,7 +72,32 @@
     <td><%= tce.convenio.interveniente.nome %></td>
     <td><%= tce.rescidido %></td>
     <td><%= link_to 'Ver', tce %></td>
-    <td><%= link_to 'Editar', edit_tce_path(tce) %></td>
+    <td>
+      <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          Editar
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <% 
+            vh = tce.detalhe_termo.hora_dias.empty? 
+            va = tce.detalhe_termo.lista_atividades.empty?
+          %>
+          <li><%= link_to 'Dados Gerais', edit_tce_path(tce) %></li>
+          <li><%= link_to 'Horário de trabalho', "/tces/#{tce.detalhe_termo_id}/editHorasDias" if (!(vh)) %></li>
+          <li><%= link_to 'Atividades', "/tces/#{tce.detalhe_termo_id}/editListaAtividades" if (!(va))%></li>
+          <% if (vh || va)%>
+            <li class='divider'></li>
+          <% end %>
+          <% if (vh)%>
+            <li><%= link_to 'Criar Horário de trabalho', "/tces/#{tce.detalhe_termo_id}/newHorasDias" %></li>
+          <% end %>
+          <% if (va)%>
+            <li><%= link_to 'Criar Lista de atividades', "/tces/#{tce.detalhe_termo_id}/newListaAtividades" %></li>
+          <% end %>          
+        </ul>
+      </div>      
+    </td>    
     <td><%= link_to 'Deletar', tce, confirm: 'Tem certeza?', method: :delete %></td>
   </tr>
 <% end %>

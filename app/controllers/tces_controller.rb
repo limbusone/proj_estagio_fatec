@@ -53,7 +53,7 @@ class TcesController < ApplicationController
     respond_to do |format|
       if @tce.save
         if params["hidConclusao"].to_i == 1
-          format.html { redirect_to :action => "index"}
+          format.html { redirect_to @tce, notice: 'Tce foi criado com sucesso.' }
         else
           #format.html { redirect_to @tce, notice: 'Tce was successfully created.' }
           format.html { redirect_to :action => "newHorasDias", :id => @tce.detalhe_termo.id}
@@ -130,7 +130,8 @@ class TcesController < ApplicationController
         ada << ar.dia_semana.to_s + "<br />"
       end
       if params["hidConclusao"].to_i == 1
-        redirect_to :action => "index"
+        format.html { redirect_to "/tces/#{Tce.where("detalhe_termo_id = ?", 
+          @detalhe_termo_id).first.id}", notice: 'Tce foi criado com sucesso.' }
       else      
         redirect_to :action => "newListaAtividades", :id => @detalhe_termo_id
       end

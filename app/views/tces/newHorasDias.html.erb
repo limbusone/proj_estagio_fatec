@@ -235,11 +235,13 @@
       Concluir
     </button>      
     <% 
-    #f.submit "Próximo", :class => "btn btn-primary" 
+      #f.submit "Próximo", :class => "btn btn-primary"
+      if (va = @detalhe_termo.lista_atividades.empty?) 
     %>
-    <button type="submit" class="btn btn-primary" name="commit">
-      <i class="icon-share-alt"></i>
-      Próximo
-    </button>
+      <button type="submit" class="btn btn-primary" name="commit">
+        <i class="icon-share-alt"></i>
+        Próximo
+      </button>
+    <% end %>
   </div>
 <% end %>
