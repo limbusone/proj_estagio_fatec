@@ -71,10 +71,9 @@ class TcesController < ApplicationController
     @hora_dia = HoraDia.new
   end
   
-  def popularArrayHorasDias(parametro_inicio, parametro_final, dia_semana, detalhe_termo_id, id)
+  def popularArrayHorasDias(parametro_inicio, parametro_final, dia_semana, detalhe_termo_id, hora_dia_ids)
     arr = Array.new
     for c in 0...parametro_inicio.length do
-      hora_dia      = HoraDia.new
       cCampoInicio  = parametro_inicio[c]
       cCampoFinal   = parametro_final[c]
       data_inicial = DateTime.new(DateTime.now.year, 
@@ -83,7 +82,7 @@ class TcesController < ApplicationController
       data_final = DateTime.new(DateTime.now.year, 
       DateTime.now.month, DateTime.now.day, 
       cCampoFinal[:hour].to_i, cCampoFinal[:minute].to_i, 0)
-      hora_dia.id                 = id if (id >= 0)
+      hora_dia = (hora_dia_ids && (hora_dia_ids[c] && !hora_dia_ids[c].blank?)) ? HoraDia.find(hora_dia_ids[c]) : HoraDia.new
       hora_dia.detalhe_termo_id   = detalhe_termo_id
       hora_dia.dia_semana         = dia_semana
       hora_dia.inicio             = data_inicial
@@ -118,7 +117,7 @@ class TcesController < ApplicationController
       params[:dias_semana].each_key do |dia_semana|
         if (params[:campos_dia_semana][j].to_i == 1)
           popularArrayHorasDias(params[:dias_semana][dia_semana][:inicio], 
-          params[:dias_semana][dia_semana][:final], j, params[:hidId], -1).each do |elem|
+          params[:dias_semana][dia_semana][:final], j, params[:hidId], nil).each do |elem|
             ar_horas_dias << elem
           end        
         end
@@ -130,8 +129,8 @@ class TcesController < ApplicationController
         ada << ar.dia_semana.to_s + "<br />"
       end
       if params["hidConclusao"].to_i == 1
-        format.html { redirect_to "/tces/#{Tce.where("detalhe_termo_id = ?", 
-          @detalhe_termo_id).first.id}", notice: 'Tce foi criado com sucesso.' }
+        redirect_to "/tces/#{Tce.where("detalhe_termo_id = ?", @detalhe_termo_id).first.id}", 
+        notice: 'Tce foi criado com sucesso.'
       else      
         redirect_to :action => "newListaAtividades", :id => @detalhe_termo_id
       end
@@ -158,7 +157,13 @@ class TcesController < ApplicationController
     end
     redirect_to :action => "index"
   end
-  
+
+  def editListaAtividades
+    @lista_atividade = ListaAtividade.new
+    @lista_atividades = ListaAtividade.where("detalhe_termo_id = ?", 
+    @detalhe_termo_id = (tce = Tce.find(params[:id])).detalhe_termo_id)
+    @atividades = Atividade.where("curso_id = ?", tce.aluno.curso_id)
+  end  
   def editHorasDias
     tce = Tce.find(params[:id])
     @detalhe_termo = DetalheTermo.find(@detalhe_termo_id = tce.detalhe_termo.id)
@@ -169,8 +174,20 @@ class TcesController < ApplicationController
     @tce = Tce.find(params[:id])
     @alunos = Aluno.all
     @convenios_array = Convenio.all.map { |conv| ["#{conv.concedente.nome} ~ #{conv.interveniente.nome}", conv.id]}
-    
-    
+  end
+
+  def updateListaAtividades
+    @detalhe_termo_id = params[:hidId]
+=begin
+    params[:atividade].each do |at|
+      lista_atividade = ListaAtividade.new
+      lista_atividade.atividade_id = at
+      lista_atividade.detalhe_termo_id = @detalhe_termo_id
+      lista_atividade.save
+    end
+=end
+    render :text => params
+    #redirect_to :action => "index"    
   end
 
   def updateHorasDias
@@ -185,39 +202,44 @@ class TcesController < ApplicationController
       data_final = DateTime.new(DateTime.now.year, 
       DateTime.now.month, DateTime.now.day, 
       params[:horario_almoco_final][:hour].to_i, params[:horario_almoco_final][:minute].to_i, 0)
-      
-      hora_dia.detalhe_termo_id  = params[:hidId]
-      hora_dia.inicio            = data_inicial
-      hora_dia.final             = data_final
-      hora_dia.tipo              = false
+      hora_dia                    = HoraDia.find(params[:hidHoraDiaIdAl])
+      hora_dia.detalhe_termo_id   = params[:hidId]
+      hora_dia.inicio             = data_inicial
+      hora_dia.final              = data_final
+      hora_dia.tipo               = false
       ar_horas_dias << hora_dia    
-      
-    
+
       j = 0
       params[:dias_semana].each_key do |dia_semana|
         if (params[:campos_dia_semana][j].to_i == 1)
-          popularArrayHorasDias(params[:dias_semana][dia_semana][:inicio], 
-          params[:dias_semana][dia_semana][:final], j, params[:hidId], params[:hidIdHoraDia][j]).each do |elem|
-            ar_horas_dias << elem
-          end        
+          ar_horas_dias += popularArrayHorasDias(params[:dias_semana][dia_semana][:inicio], 
+          params[:dias_semana][dia_semana][:final], j, params[:hidId], params[:hidHoraDiaId][dia_semana])
+        else
+          if ((hd = @detalhe_termo.hora_dias.where("dia_semana = ?", j)).exists?)
+            hd.destroy_all
+          end
         end
         j += 1
       end
+      passou = false
+      @detalhe_termo.hora_dias.all.each do |hd|
+        ar_horas_dias.each do |ar|
+          passou = true if ar.id && hd.id == ar.id          
+        end
+        hd.destroy if !passou
+        passou = false
+      end
       ada = ""
       ar_horas_dias.each do |ar|
-        
         ar.save
-        ada << ar.dia_semana.to_s + "<br />"
+        ada << ar.id.to_s + "<br />"
       end
-      if params["hidConclusao"].to_i == 1
-        format.html { redirect_to "/tces/#{Tce.where("detalhe_termo_id = ?", 
-          @detalhe_termo_id).first.id}", notice: 'Tce foi criado com sucesso.' }
-      else      
-        redirect_to :action => "newListaAtividades", :id => @detalhe_termo_id
-      end
+
+      redirect_to "/tces/#{Tce.where("detalhe_termo_id = ?", @detalhe_termo_id).first.id}", 
+      notice: 'Tce foi editado com sucesso.'
       #render :text => ada + "carga horaria: #{params[:carga_horaria]} <br /> #{@detalhe_termo.valid?.to_s}"
     else
-      render "newHorasDias" 
+      render "editHorasDias" 
     end    
   end
 
@@ -228,7 +250,7 @@ class TcesController < ApplicationController
 
     respond_to do |format|
       if @tce.update_attributes(params[:tce])
-        format.html { redirect_to @tce, notice: 'Tce was successfully updated.' }
+        format.html { redirect_to @tce, notice: 'Tce foi editado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

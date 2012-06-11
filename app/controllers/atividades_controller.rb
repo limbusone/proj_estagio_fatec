@@ -35,6 +35,7 @@ class AtividadesController < ApplicationController
   # GET /atividades/1/edit
   def edit
     @atividade = Atividade.find(params[:id])
+    @cursos = Curso.all
   end
 
   # POST /atividades

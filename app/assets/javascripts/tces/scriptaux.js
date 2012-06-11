@@ -68,7 +68,6 @@ jQuery(function()
       var nFDiv = document.createElement("div");
       $(nFDiv).addClass("f");
       //$(nFDiv).append("<br />");
-      $(fieldsDiv).find("label:eq(0)").clone().appendTo(nFDiv);
       $(nFDiv).append("<br />");
       $(fieldsDiv).find("select:eq(0)").clone().appendTo(nFDiv);
       newFieldsDiv.append(nFDiv);
@@ -127,11 +126,13 @@ jQuery(function()
   {
     var cDivFields = this.parentNode.parentNode;
     removeLastField($(cDivFields));
+    $("#carga_horaria").val(calcularCargaHoraria);
   });
   $(".cmdRemoveNovosFields").click(function(event)
   {
     var cDivFields = this.parentNode.parentNode;
     removeTodosNovosFields($(cDivFields));
+    $("#carga_horaria").val(calcularCargaHoraria);
   });
   $(".toggling").click(function(event)
   {
@@ -164,6 +165,7 @@ jQuery(function()
   {
     var cDivFields = this.parentNode.parentNode;
     addNovosFields($(cDivFields));
+    $("#carga_horaria").val(calcularCargaHoraria);
   });
   $(".cmdCalcularCargaHoraria").click(function(event)
   {

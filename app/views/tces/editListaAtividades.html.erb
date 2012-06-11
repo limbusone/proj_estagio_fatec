@@ -1,0 +1,64 @@
+<% content_for(:custom_javascript_includes) do %>
+<%= javascript_include_tag "tces/scriptaux" %>
+<% end %>
+<% content_for(:custom_css_includes) do %>
+<%= stylesheet_link_tag "tces/cascade", :media => "all" %>
+<% end %>
+<% if @lista_atividade.errors.any? %>
+  <div class="alert alert-error">
+    <strong><%= pluralize(@lista_atividade.errors.count, "Erro") %>:</strong>
+
+    <ul>
+    <% @lista_atividade.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+<h1>Editando Termo de Compromisso de Estágio</h1>
+<br />
+<h2>Atividades</h2>
+<br />
+<%= form_tag({:controller => "tces", :action => "updateListaAtividades"}, :method => "post", :class => "form-vertical") do %>
+  <!--<input type="button" value="&nbsp;&nbsp;+&nbsp;&nbsp;" id="addCampos" /> -->
+  <input type="hidden" value="<%= @detalhe_termo_id %>" name="hidId" />
+  <!--
+  <input type="radio" name="opcao_horario" value="0" checked="true"/> manhã e tarde <br />
+  <input type="radio" name="opcao_horario" value="1" /> manhã e noite <br /><br />
+  -->
+  <div class="btn-group">
+    <a class="btn cmdAddFieldsAtividade" href="javascript:void;">
+      <i class="icon-plus"></i>
+    </a>
+    <a class="btn cmdRemoveField" href="javascript:void;">
+      <i class="icon-minus"></i>
+    </a>      
+    <a class="btn cmdRemoveNovosFields" href="javascript:void;">
+      <i class="icon-remove"></i>
+    </a>
+  </div><br />
+  <div class="fields">
+    <%= fields_for @lista_atividades.first do |fla| %>
+      <div class="f">
+        <%= collection_select(:atividade, nil, @atividades, :id, :nome) %>
+      </div>
+    <% end %>
+    <div class="newFields">
+      <% for i in 1...@lista_atividades.length do %>
+        <div class="f">
+          <br />
+          <%= collection_select(:atividade, nil, @atividades, :id, :nome) %>    
+        </div>
+      <% end %>      
+    </div>
+  </div>
+  
+  <br />
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary" name="commit">
+      <i class="icon-ok"></i>
+      Concluir
+    </button>  
+  </div>
+<% end %>

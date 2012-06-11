@@ -31,7 +31,7 @@
   <h3>Horário de almoço</h3><br />
   <div class="fields well">
     <% al = @detalhe_termo.hora_dias.where("tipo = ?", false).first %>
-    
+    <input type="hidden" name="hidHoraDiaIdAl" id="hidHoraDiaIdAl" value="<%= al.id%>" />
     <%= label_tag "horario_almoco_inicio", "Inicio:" %>
     <%= select_time Time.new(DateTime.now.year, DateTime.now.month, DateTime.now.day, al.inicio.hour, al.inicio.min), 
     options = { :prefix => "horario_almoco_inicio" }, 
@@ -53,7 +53,7 @@
   <div class="fields well" <%= (se) ? "style='display : block'" : "style='display : none'"%>>
     <input type="hidden" value="<%= (se) ? 1 : 0%>" name="campos_dia_semana[]" />
     <div class="f">
-      <input type="hidden" name="hidHoraDiaId[]" id="hidHoraDia[]" value="<%= se.id%>" />
+      <input type="hidden" name="hidHoraDiaId[segunda][]" value="<%= (se) ? se.id : nil%>" />
       <%= label_tag "dias_semana[segunda][inicio][]", "Inicio:" %>
       <%= select_time (se) ? Time.new(DateTime.now.year, 
       DateTime.now.month, DateTime.now.day, se.inicio.hour, se.inicio.min) : Time.now, options = { :prefix => "dias_semana[segunda][inicio][]" }, 
@@ -90,7 +90,7 @@
     <br /><br />
     <input type="hidden" value="<%= (te) ? 1 : 0%>" name="campos_dia_semana[]" />
     <div class="f">
-      <input type="hidden" name="hidHoraDiaId[]" id="hidHoraDia[]" value="<%= t.first.id%>" />
+      <input type="hidden" name="hidHoraDiaId[terca][]" value="<%= (te) ? t.first.id : nil%>" />
       <%= label_tag "dias_semana[terca][inicio][]", "Inicio:" %>
       <%= select_time (te) ? Time.new(DateTime.now.year, 
       DateTime.now.month, DateTime.now.day, t.first.inicio.hour, t.first.inicio.min) : Time.now, options = { :prefix => "dias_semana[terca][inicio][]" }, 
@@ -105,7 +105,7 @@
         <% for i in 1...t.length do%>
           <div class="f">
             <br />
-            <input type="hidden" name="hidHoraDiaId[]" id="hidHoraDia[]" value="<%= t[i].id%>" />
+            <input type="hidden" name="hidHoraDiaId[terca][]" value="<%= t[i].id%>" />
             <%= label_tag "dias_semana[terca][inicio][]", "Inicio:" %>
             <%= select_time Time.new(DateTime.now.year, 
             DateTime.now.month, DateTime.now.day, t[i].inicio.hour, t[i].inicio.min), options = { :prefix => "dias_semana[terca][inicio][]" }, 
@@ -144,7 +144,7 @@
     <br /><br />
     <input type="hidden" value="<%= (qae) ? 1 : 0%>" name="campos_dia_semana[]" />
     <div class="f">
-      <input type="hidden" name="hidHoraDiaId[]" id="hidHoraDia[]" value="<%= qa.first.id%>" />
+      <input type="hidden" name="hidHoraDiaId[quarta][]" value="<%= (qae) ? qa.first.id : nil%>" />
       <%= label_tag "dias_semana[quarta][inicio][]", "Inicio:" %>
       <%= select_time (qae) ? Time.new(DateTime.now.year, 
       DateTime.now.month, DateTime.now.day, qa.first.inicio.hour, qa.first.inicio.min) : Time.now, options = { :prefix => "dias_semana[quarta][inicio][]" }, 
@@ -159,7 +159,7 @@
         <% for i in 1...qa.length do%>
           <div class="f">
             <br />
-            <input type="hidden" name="hidHoraDiaId[]" id="hidHoraDia[]" value="<%= qa[i].id%>" />            
+            <input type="hidden" name="hidHoraDiaId[quarta][]" value="<%= qa[i].id%>" />            
             <%= label_tag "dias_semana[quarta][inicio][]", "Inicio:" %>
             <%= select_time Time.new(DateTime.now.year, 
             DateTime.now.month, DateTime.now.day, qa[i].inicio.hour, qa[i].inicio.min), options = { :prefix => "dias_semana[quarta][inicio][]" }, 
@@ -198,7 +198,7 @@
     <br /><br />
     <input type="hidden" value="<%= (qie) ? 1 : 0%>" name="campos_dia_semana[]" />
     <div class="f">
-      <input type="hidden" name="hidHoraDiaId[]" id="hidHoraDia[]" value="<%= qi.first.id%>" />
+      <input type="hidden" name="hidHoraDiaId[quinta][]" value="<%= (qie) ? qi.first.id : nil%>" />
       <%= label_tag "dias_semana[quinta][inicio][]", "Inicio:" %>
       <%= select_time (qie) ? Time.new(DateTime.now.year, 
       DateTime.now.month, DateTime.now.day, qi.first.inicio.hour, qi.first.inicio.min) : Time.now, options = { :prefix => "dias_semana[quinta][inicio][]" }, 
@@ -213,7 +213,7 @@
         <% for i in 1...qi.length do%>
           <div class="f">
             <br />
-            <input type="hidden" name="hidHoraDiaId[]" id="hidHoraDia[]" value="<%= qi[i].id%>" />            
+            <input type="hidden" name="hidHoraDiaId[quinta][]" value="<%= qi[i].id%>" />            
             <%= label_tag "dias_semana[quinta][inicio][]", "Inicio:" %>
             <%= select_time Time.new(DateTime.now.year, 
             DateTime.now.month, DateTime.now.day, qi[i].inicio.hour, qi[i].inicio.min), options = { :prefix => "dias_semana[quinta][inicio][]" }, 
@@ -252,7 +252,7 @@
     <br /><br />
     <input type="hidden" value="<%= (sxe) ? 1 : 0%>" name="campos_dia_semana[]" />
     <div class="f">
-      <input type="hidden" name="hidHoraDiaId[]" id="hidHoraDia[]" value="<%= sx.first.id%>" />
+      <input type="hidden" name="hidHoraDiaId[sexta][]" value="<%= (sxe) ? sx.first.id : nil%>" />
       <%= label_tag "dias_semana[sexta][inicio][]", "Inicio:" %>
       <%= select_time (sxe) ? Time.new(DateTime.now.year, 
       DateTime.now.month, DateTime.now.day, sx.first.inicio.hour, sx.first.inicio.min) : Time.now, options = { :prefix => "dias_semana[sexta][inicio][]" }, 
@@ -267,7 +267,7 @@
         <% for i in 1...sx.length do%>
           <div class="f">
             <br />
-            <input type="hidden" name="hidHoraDiaId[]" id="hidHoraDia[]" value="<%= sx[i].id%>" />
+            <input type="hidden" name="hidHoraDiaId[sexta][]" value="<%= sx[i].id%>" />
             <%= label_tag "dias_semana[sexta][inicio][]", "Inicio:" %>
             <%= select_time Time.new(DateTime.now.year, 
             DateTime.now.month, DateTime.now.day, sx[i].inicio.hour, sx[i].inicio.min), options = { :prefix => "dias_semana[sexta][inicio][]" }, 
@@ -306,7 +306,7 @@
     <br /><br />
     <input type="hidden" value="<%= (sbe) ? 1 : 0%>" name="campos_dia_semana[]" />    
     <div class="f">
-      <input type="hidden" name="hidHoraDiaId[]" id="hidHoraDia[]" value="<%= sb.first.id%>" />
+      <input type="hidden" name="hidHoraDiaId[sabado][]" value="<%=(sbe) ? sb.first.id : nil%>" />
       <%= label_tag "dias_semana[sabado][inicio][]", "Inicio:" %>
       <%= select_time (sbe) ? Time.new(DateTime.now.year, 
       DateTime.now.month, DateTime.now.day, sb.first.inicio.hour, sb.first.inicio.min) : Time.now, options = { :prefix => "dias_semana[sabado][inicio][]" }, 
@@ -321,7 +321,7 @@
         <% for i in 1...sb.length do%>
           <div class="f">
             <br />
-            <input type="hidden" name="hidHoraDiaId[]" id="hidHoraDia[]" value="<%= sb[i].id%>" />
+            <input type="hidden" name="hidHoraDiaId[sabado][]"  value="<%= sb[i].id%>" />
             <%= label_tag "dias_semana[sabado][inicio][]", "Inicio:" %>
             <%= select_time Time.new(DateTime.now.year, 
             DateTime.now.month, DateTime.now.day, s[i].inicio.hour, s[i].inicio.min), options = { :prefix => "dias_semana[sabado][inicio][]" }, 
@@ -347,7 +347,7 @@
   <div class="fields well" <%= (dom) ? "style='display : block'" : "style='display : none'"%>>
     <input type="hidden" value="<%= (dom) ? 1 : 0%>" name="campos_dia_semana[]" />
     <div class="f">
-      <input type="hidden" name="hidHoraDiaId[]" id="hidHoraDia[]" value="<%= dom.id%>" />    
+      <input type="hidden" name="hidHoraDiaId[domingo][]" value="<%= (dom) ? dom.id : nil%>" />    
       <%= label_tag "dias_semana[domingo][inicio][]", "Inicio:" %>
       <%= select_time (dom) ? Time.new(DateTime.now.year, 
       DateTime.now.month, DateTime.now.day, dom.inicio.hour, dom.inicio.min) : Time.now, 
