@@ -38,11 +38,9 @@
     </a>
   </div><br />
   <div class="fields">
-    <%= fields_for @lista_atividades.first do |fla| %>
-      <div class="f">
-        <%= collection_select(:atividade, nil, @atividades, :id, :nome) %>
-      </div>
-    <% end %>
+    <div class="f">
+      <%= collection_select(:atividade, nil, @atividades, :id, :nome) %>
+    </div>
     <div class="newFields">
       <% for i in 1...@lista_atividades.length do %>
         <div class="f">

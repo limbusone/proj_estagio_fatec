@@ -6,7 +6,7 @@ class Aluno < ActiveRecord::Base
   :allow_blank => true
   validates_presence_of :num_matricula, :message => "é necessário ser preenchido"  
   validates_uniqueness_of :num_matricula, :message => "deve ser único"
-  belongs_to :endereco
+  belongs_to :endereco, :dependent => :destroy
   belongs_to :curso
   accepts_nested_attributes_for :endereco
   
