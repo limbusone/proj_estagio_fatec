@@ -114,12 +114,14 @@
       Concluir
     </button>  
     <% 
-    #f.submit "Próximo", :class => "btn btn-primary" 
+    #f.submit "Próximo", :class => "btn btn-primary"
+    if (@tce.id.nil?) 
     %>
     <button type="submit" class="btn btn-primary" name="commit">
       <i class="icon-share-alt"></i>
       Próximo
-    </button>      
+    </button>
+    <% end %>      
   </div>
 <% end %>
 

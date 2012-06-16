@@ -98,7 +98,7 @@
 </p>
 <%
   dias_semana = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"] 
-  horarios = @tce.detalhe_termo.hora_dias 
+  horarios = @tce.detalhe_termo.hora_dias.order("dia_semana ASC") 
   horarios.each do |h| 
 %>
 <p>
@@ -115,5 +115,5 @@
 <% end %>
 </ul>
 
-<%= link_to 'Editar', edit_tce_path(@tce) %> |
-<%= link_to 'Voltar', tces_path %>
+<%= link_to 'Editar', edit_tce_path(@tce), :class => "btn" %>
+<%= link_to 'Voltar', tces_path, :class => "btn" %>

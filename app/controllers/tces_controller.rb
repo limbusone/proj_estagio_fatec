@@ -1,3 +1,5 @@
+require "date"
+
 class TcesController < ApplicationController
   # GET /tces
   # GET /tces.json
@@ -210,12 +212,12 @@ class TcesController < ApplicationController
     j = 0
     params[:dias_semana].each_key do |dia_semana|
       if (params[:campos_dia_semana][j].to_i == 1)
-        ar_horas_dias += popularArrayHorasDias(params[:dias_semana][dia_semana][:inicio], 
+        @ar_horas_dias += popularArrayHorasDias(params[:dias_semana][dia_semana][:inicio], 
         params[:dias_semana][dia_semana][:final], j, params[:hidId], params[:hidHoraDiaId][dia_semana])
-      else
-        if ((hd = @detalhe_termo.hora_dias.where("dia_semana = ?", j)).exists?)
-          hd.destroy_all
-        end
+      #else
+        #if ((hd = @detalhe_termo.hora_dias.where("dia_semana = ?", j)).exists?)
+        #  hd.destroy_all
+        #end
       end
       j += 1
     end
