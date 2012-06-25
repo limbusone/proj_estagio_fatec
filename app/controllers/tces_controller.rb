@@ -124,12 +124,20 @@ class TcesController < ApplicationController
       end
       j += 1
     end
-    if @detalhe_termo.update_attributes(:carga_horaria_semanal => params[:carga_horaria].to_i)      
+    if @detalhe_termo.update_attributes(:carga_horaria_semanal => params[:carga_horaria].to_i)       
       ada = ""
+      #validando
+      @ar_horas_dias.each do |ar|
+        if !ar.valid?
+          render "newHorasDias"
+          return
+        end
+        #ada << ar.dia_semana.to_s + "<br />"
+      end
+      #salvando
       @ar_horas_dias.each do |ar|
         ar.save
-        ada << ar.dia_semana.to_s + "<br />"
-      end
+      end      
       if params["hidConclusao"].to_i == 1
         redirect_to "/tces/#{Tce.where("detalhe_termo_id = ?", @detalhe_termo_id).first.id}", 
         notice: 'Tce foi criado com sucesso.'

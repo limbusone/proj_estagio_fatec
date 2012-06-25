@@ -19,11 +19,11 @@
   </div>
   <div class="field">
     <%= f.label :cnpj %><br />
-    <%= f.text_field :cnpj %>
+    <%= f.text_field :cnpj, :maxlength => "14" %>
   </div>
   <div class="field">
     <%= f.label :telefone %><br />
-    <input id="concedente_telefone_com_mascara" type="text" value="" size="30">
+    <!--<input id="concedente_telefone_com_mascara" type="text" value="" size="30">-->
     <%= f.text_field :telefone %>
   </div>
   <div class="field">
@@ -33,7 +33,7 @@
   <%= f.fields_for :endereco do |ff| %>
     <div class="field">
       <%= ff.label :cep %><br />
-      <%= ff.text_field :cep %>
+      <%= ff.text_field :cep, :maxlength => "8" %>
     </div>
     <div class="field">
       <%= ff.label :logradouro %><br />
@@ -57,6 +57,6 @@
     </div>
   <% end %>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Enviar" %>
   </div>
 <% end %>

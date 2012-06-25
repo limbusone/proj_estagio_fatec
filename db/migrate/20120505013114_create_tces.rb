@@ -6,7 +6,6 @@ class CreateTces < ActiveRecord::Migration
       t.integer :detalhe_termo_id
       t.boolean :rescidido
       t.boolean :validado
-
       t.timestamps
     end
   end

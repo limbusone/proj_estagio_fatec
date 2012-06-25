@@ -31,14 +31,15 @@
   <b>Data de término:</b>
   <%= @tce.detalhe_termo.data_termino.day %>/<%= @tce.detalhe_termo.data_termino.month %>/<%= @tce.detalhe_termo.data_termino.year %>
 </p>
+<% if (@tce.rescidido)%>
 <p>
   <b>Data de rescisão:</b>
   <%= @tce.detalhe_termo.data_de_rescisao.day %>/<%= @tce.detalhe_termo.data_de_rescisao.month %>/<%= @tce.detalhe_termo.data_de_rescisao.year %>
 </p>
-
+<% end %>
 <p>
   <b>Bolsa auxílio:</b>
-  <%= @tce.detalhe_termo.bolsa_auxilio %>
+  <%= number_with_precision(@tce.detalhe_termo.bolsa_auxilio, :locale => :pt) %>
 </p>
 <p>
   <b>Seguradora:</b>

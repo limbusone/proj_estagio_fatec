@@ -26,7 +26,7 @@ class ConveniosController < ApplicationController
   # GET /convenios/new.json
   def new
     @convenio =     Convenio.new
-	  @empresas =     Concedente.all
+	  @concedentes =   Concedente.all
 	  @intervenientes = Interveniente.all
 
     respond_to do |format|
@@ -40,7 +40,7 @@ class ConveniosController < ApplicationController
   # GET /convenios/1/edit
   def edit
     @convenio 		= 	Convenio.find(params[:id])
-	  @empresas 		= 	Concedente.all
+	  @concedentes 		= 	Concedente.all
   	@intervenientes = 	Interveniente.all
   end
 
@@ -48,7 +48,7 @@ class ConveniosController < ApplicationController
   # POST /convenios.json
   def create
     @convenio = Convenio.new(params[:convenio])
-	  @empresas = Concedente.all
+	  @concedentes = Concedente.all
     @intervenientes = Interveniente.all
     respond_to do |format|
       if @convenio.save
@@ -65,7 +65,7 @@ class ConveniosController < ApplicationController
   # PUT /convenios/1.json
   def update
     @convenio = Convenio.find(params[:id])
-	  @empresas = Concedente.all
+	  @concedentes = Concedente.all
 	  @intervenientes = 	Interveniente.all
     respond_to do |format|
       if @convenio.update_attributes(params[:convenio])

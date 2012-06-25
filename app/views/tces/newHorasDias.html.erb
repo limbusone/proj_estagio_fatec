@@ -4,17 +4,8 @@
 <% content_for(:custom_css_includes) do %>
 <%= stylesheet_link_tag "tces/cascade", :media => "all" %>
 <% end %>
-<% if @detalhe_termo.errors.any? %>
-  <div class="alert alert-error">
-    <strong><%= pluralize(@detalhe_termo.errors.count, "Erro") %>:</strong>
-    <ul>
-    <% @detalhe_termo.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
 <%
+  e = 0
   d = Hash.new
   d['segunda'], d['terca'], d['quarta'], d['quinta'], d['sexta'], d['sabado'], d['domingo'] = [], [], [], 
   [], [], [], []
@@ -38,9 +29,25 @@
       else #domingo
         d['domingo']  << @ar_horas_dias[i]
       end
+      e += 1 if @ar_horas_dias[i].errors.any?
     end 
   end
 %>
+<% if @detalhe_termo.errors.any? || e > 0 %>
+  <div class="alert alert-error">
+    <strong>Erro:</strong>
+    <ul>
+    <% @detalhe_termo.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    <% @ar_horas_dias.each do |ar| %>
+      <% ar.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    <% end%>    
+    </ul>
+  </div>
+<% end %>
 <h1>Novo Termo de Compromisso de Estágio</h1>
 <div>
   <h5>1 - Dados Gerais</h5><h2>2 - Horário de trabalho</h2><h5>3 - Atividades</h5>

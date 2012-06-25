@@ -12,7 +12,7 @@
 
 	<div class="field">
 		<%= f.label :concedente_id %><br />
-		<%= f.collection_select(:concedente_id, @empresas, :id, :nome) %>
+		<%= f.collection_select(:concedente_id, @concedentes, :id, :nome) %>
 		<%# = f.number_field :concedente_id %>
 	</div>
 	<div class="field">

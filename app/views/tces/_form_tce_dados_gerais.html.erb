@@ -48,12 +48,6 @@
       <%= ff.label :bolsa_auxilio, "Bolsa auxílio" %><br />
       <%= ff.number_field :bolsa_auxilio %>
     </div>
-    <div class="field">
-      <%= ff.label :data_de_rescisao, "Data de Rescisão" %><br />
-      <%= ff.date_select :data_de_rescisao, options = {:order => [:day, :month, :year], 
-      :use_month_names => ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
-        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]}, html_options = {:class => "selecting"} %>
-    </div>
     <%= ff.fields_for :seguradora do |fff| %>
       <div class="field">
         <%= fff.label :nome, "Seguradora" %><br />
@@ -97,8 +91,16 @@
   <% end %>
   <div class="field">
     <%= f.label :rescidido %><br />
-    <%= f.check_box :rescidido %>
+    <%= f.check_box :rescidido, :id => "chkRes" %>
   </div>
+  <%= f.fields_for :detalhe_termo do |ff| %>
+    <div class="field" id="divDataRes" style="<%= (params) ? (params["tce"] && params["tce"]["rescidido"] && params["tce"]["rescidido"] == "1") ? "display: block;" : "display: none;" : "display: none;" %>">
+      <%= ff.label :data_de_rescisao, "Data de Rescisão" %><br />
+      <%= ff.date_select :data_de_rescisao, options = {:order => [:day, :month, :year], 
+      :use_month_names => ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]}, html_options = {:class => "selecting"} %>
+    </div>
+  <% end %>  
   <div class="field">
     <%= f.label :validado %><br />
     <%= f.check_box :validado %>

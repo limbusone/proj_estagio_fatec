@@ -7,7 +7,6 @@
 <% if @lista_atividade.errors.any? %>
   <div class="alert alert-error">
     <strong><%= pluralize(@lista_atividade.errors.count, "Erro") %>:</strong>
-
     <ul>
     <% @lista_atividade.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -44,9 +43,7 @@
     </div>
     <div class="newFields"></div>
   </div>
-  
   <br />
-
   <div class="form-actions">
     <button type="submit" class="btn btn-primary" name="commit">
       <i class="icon-ok"></i>

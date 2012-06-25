@@ -184,5 +184,12 @@ jQuery(function()
     var cDivFields = this.parentNode.parentNode;
     addNovosFieldsAtividades($(cDivFields));
   });
+  $("#chkRes").change(function(event)
+  {
+    if (!($(this).attr("checked")))
+      $("#divDataRes").hide();
+    else
+      $("#divDataRes").show();
+  });
 })
 

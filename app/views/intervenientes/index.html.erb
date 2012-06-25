@@ -1,6 +1,6 @@
-<h1>Listing intervenientes</h1>
+<h1>Lista de Intervenientes</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Nome</th>
     <th>Cnpj</th>
@@ -16,7 +16,6 @@
     <th></th>
     <th></th>
   </tr>
-
 <% @intervenientes.each do |interveniente| %>
   <tr>
     <td><%= interveniente.nome %></td>
@@ -29,13 +28,13 @@
     <td><%= interveniente.endereco.bairro %></td>
     <td><%= interveniente.endereco.cidade %></td>
     <td><%= interveniente.endereco.estado %></td>
-    <td><%= link_to 'Show', interveniente %></td>
-    <td><%= link_to 'Edit', edit_interveniente_path(interveniente) %></td>
-    <td><%= link_to 'Destroy', interveniente, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Ver', interveniente %></td>
+    <td><%= link_to 'Editar', edit_interveniente_path(interveniente) %></td>
+    <td><%= link_to 'Deletar', interveniente, confirm: 'Tem certeza?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Interveniente', new_interveniente_path %>
+<%= link_to 'Nova Interveniente', new_interveniente_path %>

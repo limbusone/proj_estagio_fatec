@@ -42,7 +42,7 @@ class AtividadesController < ApplicationController
   # POST /atividades.json
   def create
     @atividade = Atividade.new(params[:atividade])
-
+    @cursos = Curso.all
     respond_to do |format|
       if @atividade.save
         format.html { redirect_to @atividade, notice: 'Atividade was successfully created.' }

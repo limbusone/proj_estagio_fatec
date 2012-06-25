@@ -1,6 +1,6 @@
-<h1>Listing concedentes</h1>
+<h1>Lista de Concedentes</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Nome</th>
     <th>Cnpj</th>
@@ -29,13 +29,13 @@
     <td><%= concedente.endereco.bairro %></td>
     <td><%= concedente.endereco.cidade %></td>
     <td><%= concedente.endereco.estado %></td>
-    <td><%= link_to 'Show', concedente %></td>
-    <td><%= link_to 'Edit', edit_concedente_path(concedente) %></td>
-    <td><%= link_to 'Destroy', concedente, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Ver', concedente %></td>
+    <td><%= link_to 'Editar', edit_concedente_path(concedente) %></td>
+    <td><%= link_to 'Deletar', concedente, confirm: 'Tem certeza?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Concedente', new_concedente_path %>
+<%= link_to 'Nova Concedente', new_concedente_path %>
